@@ -13,14 +13,15 @@ function countryReducer(state: Country[] = [], action: Actions) {
             return state.concat({ name: action.payload });
         case "REMOVE_COUNTRY":
             return state.filter(country => country.name !== action.payload);
-            default:
-                neverReached(action);
+        default:
+            neverReached(action);
     }
+    return state;
 }
 
 function neverReached(never: never) {}
 
 //Utility-funksjon for å kombinere flere reducere
-const rootReducer = combineReducers<AppState>({
+export const rootReducer = combineReducers<AppState>({
     country: countryReducer
 });

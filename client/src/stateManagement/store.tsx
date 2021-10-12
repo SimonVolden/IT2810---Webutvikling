@@ -1,5 +1,6 @@
 import React from "react";
 import { createStore, Store } from "redux";
+import { rootReducer } from "./reducers";
 import { AppState } from "./types";
 
 
@@ -13,6 +14,3 @@ function configureStore(): Store<AppState> {
 //Oppretter en store
 export const store = configureStore();
 
-function rootReducer(rootReducer: any, undefined: undefined) {
-    throw new Error("Function not implemented.");
-}
