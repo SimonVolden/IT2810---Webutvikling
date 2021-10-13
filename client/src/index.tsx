@@ -1,9 +1,9 @@
 import {
-    ApolloClient,
-    NormalizedCacheObject,
-    ApolloProvider,
-    gql,
-    useQuery,
+  ApolloClient,
+  NormalizedCacheObject,
+  ApolloProvider,
+  gql,
+  useQuery,
 } from '@apollo/client';
 import { cache } from './cache';
 import React from 'react';
@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import Pages from './pages';
 import injectStyles from './styles';
 import Login from './pages/login';
+import MyComponent from './getAPI';
 
 export const typeDefs = gql`
   extend type Query {
@@ -26,28 +27,29 @@ const IS_LOGGED_IN = gql`
 `;
 
 function IsLoggedIn() {
-    const { data } = useQuery(IS_LOGGED_IN);
-    return data.isLoggedIn ? <Pages /> : <Login />;
+  const { data } = useQuery(IS_LOGGED_IN);
+  return data.isLoggedIn ? <Pages /> : <Login />;
 }
 
 
 
 // Initialize ApolloClient
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache,
-    uri: 'http://localhost:4000/graphql',
-    headers: {
-        authorization: localStorage.getItem("token") || "",
-    },
-    typeDefs,
+  cache,
+  uri: 'http://localhost:4000/graphql',
+  headers: {
+    authorization: localStorage.getItem("token") || "",
+  },
+  typeDefs,
 });
 
 injectStyles();
 
 // Pass the ApolloClient instance to the ApolloProvider component
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <IsLoggedIn />
-    </ApolloProvider>,
-    document.getElementById('root')
+  <ApolloProvider client={client}>
+    <MyComponent />
+    <IsLoggedIn />
+  </ApolloProvider>,
+  document.getElementById('root')
 );
