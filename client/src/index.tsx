@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom';
 import Pages from './pages';
 import injectStyles from './styles';
 import Login from './pages/login';
+import App from './components/App'
 
 export const typeDefs = gql`
   extend type Query {
@@ -47,7 +48,8 @@ injectStyles();
 // Pass the ApolloClient instance to the ApolloProvider component
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <IsLoggedIn />
+        {/*<IsLoggedIn />*/}
+        <App/>
     </ApolloProvider>,
     document.getElementById('root')
 );

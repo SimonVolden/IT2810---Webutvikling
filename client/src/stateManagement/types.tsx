@@ -7,5 +7,10 @@ export type Country = {
 
 export type AppState = {
     country: Country[];
+    theme: boolean;
 };
 
+//not in use
+export type Theme = {
+    theme: boolean;
+}

@@ -14,3 +14,9 @@ export function removeCountry(countryName: string) {
     } as const;
 }
 
+export function changeTheme(theme: boolean) {
+    return {
+        type: "CHANGE_THEME",
+        payload: theme
+    } as const;
+}
