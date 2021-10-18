@@ -1,9 +1,7 @@
 import {
-    ApolloClient,
-    NormalizedCacheObject,
-    ApolloProvider,
-    gql,
-    useQuery,
+  ApolloClient,
+  NormalizedCacheObject,
+  ApolloProvider
 } from '@apollo/client';
 import { cache } from './cache';
 import React from 'react';
@@ -13,34 +11,10 @@ import injectStyles from './styles';
 import Login from './pages/login';
 import App from './components/App'
 
-export const typeDefs = gql`
-  extend type Query {
-    isLoggedIn: Boolean!
-    cartItems: [ID!]!
-  }
-`;
 
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
-`;
-
-function IsLoggedIn() {
-    const { data } = useQuery(IS_LOGGED_IN);
-    return data.isLoggedIn ? <Pages /> : <Login />;
-}
-
-
-
-// Initialize ApolloClient
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache,
-    uri: 'http://localhost:4000/graphql',
-    headers: {
-        authorization: localStorage.getItem("token") || "",
-    },
-    typeDefs,
+  cache,
+  uri: 'http://localhost:4000/graphql'
 });
 
 injectStyles();
@@ -49,6 +23,7 @@ injectStyles();
 ReactDOM.render(
     <ApolloProvider client={client}>
         {/*<IsLoggedIn />*/}
+        <Pages />
         <App/>
     </ApolloProvider>,
     document.getElementById('root')

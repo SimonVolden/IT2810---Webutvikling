@@ -1,60 +1,73 @@
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
-  #Schema goes here
-  type Launch {
+  # Your schema will go here
+  type Beer {
     id: ID!
-    site: String
-    mission: Mission
-    rocket: Rocket
-    isBooked: Boolean!
+    name: String!
+    tagline: String
+    first_brewed: String
+    description: String
+    image_url: String
+    abv: String
+    ibu: String
+    target_fg: String
+    target_og: String
+    ebc: String
+    srm: String
+    ph: String
+    attenuation_level: String
+    volume: Volume
+    boil_volume: Volume
+    method: Method
+    ingredients: Ingredients
+    food_pairing: [String]
+    brewers_tips: String
+    contributed_by: String
   }
 
-  type Rocket {
-    id: ID!
+  type Volume {
+    value: Float
+    unit: String
+  }
+
+  type Method {
+    mash_temp: [Mash_Temp]
+    fermentation: Temperature
+    twist: String
+  }
+
+  type Mash_Temp {
+    temp: Temperature
+    duration: Int
+  }
+
+  type Temperature {
+    value: Int
+    unit: String
+  }
+
+  type Ingredients {
+    malt: [Malt]
+    hops: [Hops]
+    yeast: String
+  }
+
+  type Malt {
     name: String
-    type: String
+    amount: Volume
   }
 
-  type User {
-    id: ID!
-    email: String!
-    trips: [Launch]!
-    token: String
-  }
-
-  type Mission {
+  type Hops {
     name: String
-    missionPatch(size: PatchSize): String
-  }
-
-  enum PatchSize {
-    SMALL
-    LARGE
+    amount: Volume
+    add: String
+    attribute: String
   }
 
   type Query {
-    launches(pageSize: Int, after: String): LaunchConnection!
-    launch(id: ID!): Launch
-    me: User
-  }
-
-  type LaunchConnection {
-    cursor: String!
-    hasMore: Boolean!
-    launches: [Launch]!
-  }
-
-  type Mutation {
-    bookTrips(launchIds: [ID]!): TripUpdateResponse!
-    cancelTrip(launchId: ID!): TripUpdateResponse!
-    login(email: String): User
-  }
-
-  type TripUpdateResponse {
-    success: Boolean!
-    message: String
-    launches: [Launch]
+    beers: [Beer]
+    beer(id: ID!): Beer
   }
 `;
 
