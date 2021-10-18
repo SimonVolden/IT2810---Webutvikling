@@ -40,9 +40,22 @@ class BeerAPI extends RESTDataSource {
     };
   }
 
-  async getBeerById({ beerId }) {
-    const response = await this.get("", { id: beerId });
-    return this.beerReducer(response[0]);
+  async getBeerById({ id }) {
+    /* const response = await this.get("", { id: beerId });
+    return this.beerReducer(response[0]); */
+
+    const response = await this.getAllBeers();
+    let beers;
+    console.log(id);
+    response.map((beer) => {
+      if (beer.id == id) {
+        console.log(beer.name);
+        beers = beer;
+        //return beer;
+      }
+    });
+    //response.filter((beer) => beer.id == beerId);
+    return beers;
   }
 }
 
