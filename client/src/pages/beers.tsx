@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
-import { Header, Button, Loading } from '../components';
+import { Loading } from '../components';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import * as GetBeersListTypes from './__generated__/GetBeersList';
 
@@ -60,7 +60,7 @@ const Beers: React.FC<BeersProps> = () => {
                                     <TableCell>{beer.tagline}</TableCell>
                                     <TableCell>{beer.description}</TableCell>
                                     <TableCell>
-                                        <img src={beer.image_url} width="100" height="100"></img>
+                                        <img src={beer.image_url} alt={beer.name} width="100" height="100"></img>
                                     </TableCell>
                                 </TableRow>
                             );

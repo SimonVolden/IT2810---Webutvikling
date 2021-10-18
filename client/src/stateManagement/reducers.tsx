@@ -1,8 +1,7 @@
-import React from "react";
 import { combineReducers } from "redux";
 
 import {addCountry, removeCountry, changeTheme} from './actions'
-import {AppState, Country, Theme} from './types'
+import {AppState, Country } from './types'
 
 
 type CountryActions = ReturnType<typeof addCountry> | ReturnType<typeof removeCountry>;

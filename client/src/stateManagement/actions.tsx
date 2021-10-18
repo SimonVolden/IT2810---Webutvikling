@@ -1,4 +1,3 @@
-import React from "react";
 
 //Funksjoner som returnerer action-objekter
 export function addCountry(countryName: string) {

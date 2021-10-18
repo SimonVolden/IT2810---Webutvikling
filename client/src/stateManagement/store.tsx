@@ -1,4 +1,3 @@
-import React from "react";
 import { createStore, Store } from "redux";
 import { rootReducer } from "./reducers";
 import { AppState } from "./types";
