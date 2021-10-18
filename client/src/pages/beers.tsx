@@ -9,6 +9,7 @@ interface Beer {
     id: number
     name: string
     tagline: string
+    description: string
     image_url: string
 }
 
@@ -39,38 +40,36 @@ const Beers: React.FC<BeersProps> = () => {
     return (
         <Fragment>
             <Header />
-            <>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Tagline</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Image</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {beers.map((beer: Beer) => {
-                                return (
-                                    <TableRow key={beer.id}>
-                                        <TableCell scope="row">
-                                            {beer.id}
-                                        </TableCell>
-                                        <TableCell>{beer.name}</TableCell>
-                                        <TableCell>{beer.tagline}</TableCell>
-                                        <TableCell>
-                                            <img src={beer.image_url} width="100" height="100"></img>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </>
-
-
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Tagline</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>Image</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {beers.map((beer: Beer) => {
+                            return (
+                                <TableRow key={beer.id}>
+                                    <TableCell scope="row">
+                                        {beer.id}
+                                    </TableCell>
+                                    <TableCell>{beer.name}</TableCell>
+                                    <TableCell>{beer.tagline}</TableCell>
+                                    <TableCell>{beer.description}</TableCell>
+                                    <TableCell>
+                                        <img src={beer.image_url} width="100" height="100"></img>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Fragment>
     )
 
@@ -109,6 +108,7 @@ export const GET_BEERS = gql`
     id
     name
     tagline
+    description
     image_url
   }
 }
