@@ -7,7 +7,7 @@ class BeerAPI extends RESTDataSource {
   }
 
   async getAllBeers() {
-    const response = await this.get("");
+    const response = await this.get("?page=1&per_page=80");
     //console.log(response)
     return Array.isArray(response)
       ? response.map((beers) => this.beerReducer(beers))

@@ -2,8 +2,15 @@ import React, { Fragment, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
 import { LaunchTile, Header, Button, Loading } from '../components';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import * as GetBeersListTypes from './__generated__/GetBeersList';
 
+interface Beer {
+    id: number
+    name: string
+    tagline: string
+    image_url: string
+}
 
 export const BEERS_DATA = gql`
     fragment BeerTile on Beer {
@@ -32,7 +39,38 @@ const Beers: React.FC<BeersProps> = () => {
     return (
         <Fragment>
             <Header />
-            {beers.map((beer: any) => (console.log(beer.name)))}
+            <>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Tagline</TableCell>
+                                <TableCell>Description</TableCell>
+                                <TableCell>Image</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {beers.map((beer: Beer) => {
+                                return (
+                                    <TableRow key={beer.id}>
+                                        <TableCell scope="row">
+                                            {beer.id}
+                                        </TableCell>
+                                        <TableCell>{beer.name}</TableCell>
+                                        <TableCell>{beer.tagline}</TableCell>
+                                        <TableCell>
+                                            <img src={beer.image_url} width="100" height="100"></img>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </>
+
+
         </Fragment>
     )
 
@@ -71,6 +109,7 @@ export const GET_BEERS = gql`
     id
     name
     tagline
+    image_url
   }
 }
 `
