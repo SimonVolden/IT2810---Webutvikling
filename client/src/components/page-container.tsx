@@ -6,7 +6,6 @@ import { unit, colors } from '../styles';
 export default function PageContainer(props: any) {
   return (
     <Fragment>
-      <Bar />
       <Container>{props.children}</Container>
     </Fragment>
   );

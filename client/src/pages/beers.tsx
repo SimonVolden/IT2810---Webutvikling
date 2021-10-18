@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
-import { LaunchTile, Header, Button, Loading } from '../components';
+import { Header, Button, Loading } from '../components';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import * as GetBeersListTypes from './__generated__/GetBeersList';
 
@@ -38,8 +38,6 @@ const Beers: React.FC<BeersProps> = () => {
     const beers = data.beers;
 
     return (
-        <Fragment>
-            <Header />
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -70,7 +68,6 @@ const Beers: React.FC<BeersProps> = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Fragment>
     )
 
 

@@ -1,8 +1,10 @@
 import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-ui/core';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Beers from '../pages/beers';
 import { AppState } from '../stateManagement/types';
-import Header from './Header2';
+import Header from './header';
+import PageContainer from './page-container';
 
 function Mainpage(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
@@ -18,6 +20,9 @@ function Mainpage(): JSX.Element {
             <Paper>
                 <Grid container direction="column">
                     <Header/>
+                    <PageContainer>
+                        <Beers />
+                    </PageContainer>
                 </Grid>
             </Paper>
         </ThemeProvider>
