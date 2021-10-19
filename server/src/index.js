@@ -5,12 +5,13 @@ const BeerAPI = require("./datasources/beer");
 //const resolvers = require("./resolvers");
 const MongoClient = require("mongodb").MongoClient;
 //import { makeExecutableSchema } from "graphql-tools";
+const { makeExecutableSchema } = require("graphql-tools");
 
 require("dotenv").config();
 
 const resolvers = {
   Query: {
-    beers(_parent, _args, _cotext, _info) {
+    beers(_parent, _args, _context, _info) {
       return _context.db
         .collection("beers")
         .findOne()
@@ -21,13 +22,17 @@ const resolvers = {
   },
 };
 
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
 let db;
 const uri =
   "mongodb://it2810:it2810@it2810-44.idi.ntnu.no:27017/?authSource=it2810";
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context: async () => {
     if (!db) {
       try {
@@ -40,7 +45,7 @@ const server = new ApolloServer({
         );
 
         if (!dbClient.isConnected) await dbClient.connect();
-        db = dbClient.db("beers"); // database name
+        db = dbClient.db("it2810"); // database name
       } catch (e) {
         console.log("--->error while connecting with graphql context (db)", e);
       }

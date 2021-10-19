@@ -66,8 +66,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    beers: [Beer]
-    beer(id: ID!): Beer
+    beers: [Beer]!
+    beer(id: ID!): Beer!
   }
 `;
 
