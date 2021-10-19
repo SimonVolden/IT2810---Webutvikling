@@ -4,6 +4,7 @@ class BeerAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = "https://api.punkapi.com/v2/beers";
+    //this.baseURL = "it2810-44.idi.ntnu.no:27017/local";
   }
 
   async getAllBeers() {
