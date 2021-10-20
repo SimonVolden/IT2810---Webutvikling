@@ -3,7 +3,8 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   # Your schema will go here
   type Beer {
-    id: ID!
+    _id: ID!
+    id: ID
     name: String!
     tagline: String
     first_brewed: String
@@ -68,6 +69,7 @@ const typeDefs = gql`
   type Query {
     beers: [Beer]!
     beer(id: ID!): Beer!
+    test: String
   }
 `;
 

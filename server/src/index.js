@@ -11,13 +11,21 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
-    beers(_parent, _args, _context, _info) {
+    /* beers(_parent, _args, _context, _info) {
       return _context.db
         .collection("beers")
         .findOne()
         .then((data) => {
           return data.beers;
         });
+    }, */
+    beers(db) {
+      console.log(db);
+      return db.beers.find({});
+    },
+
+    test: () => {
+      return "Test";
     },
   },
 };
@@ -32,7 +40,8 @@ const uri =
   "mongodb://it2810:it2810@it2810-44.idi.ntnu.no:27017/?authSource=it2810";
 
 const server = new ApolloServer({
-  schema,
+  resolvers,
+  typeDefs,
   context: async () => {
     if (!db) {
       try {
