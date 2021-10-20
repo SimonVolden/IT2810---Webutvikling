@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Beers from '../pages/beers';
+import NestedList from '../pages/beer_container';
 import { AppState } from '../stateManagement/types';
 import Header from './header';
 import PageContainer from './page-container';
@@ -14,25 +15,26 @@ function Mainpage(): JSX.Element {
         }
     })
 
-    return(
+    return (
         <ThemeProvider theme={theme}>
-            <CssBaseline/>
+            <CssBaseline />
             <Paper>
                 <Grid container direction="column">
-                    <Header/>
+                    <Header />
                     <PageContainer>
+                        <NestedList />
                         <Beers />
                     </PageContainer>
                 </Grid>
             </Paper>
         </ThemeProvider>
-/*
-    <>
-        <h1>Mainpage</h1>
-        <h2>{String(pageTheme)}</h2>
-        <button onClick={() => dispatch(changeTheme(pageTheme))}></button>
-    </>        
-*/
+        /*
+            <>
+                <h1>Mainpage</h1>
+                <h2>{String(pageTheme)}</h2>
+                <button onClick={() => dispatch(changeTheme(pageTheme))}></button>
+            </>        
+        */
     )
 }
 
