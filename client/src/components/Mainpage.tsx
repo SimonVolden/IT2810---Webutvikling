@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Beers from '../pages/beers';
-import NestedList from '../pages/beer_container';
+import BeerContainer from '../pages/BeerContainer';
 import { AppState } from '../stateManagement/types';
 import Header from './header';
 import PageContainer from './page-container';
@@ -22,7 +22,7 @@ function Mainpage(): JSX.Element {
                 <Grid container direction="column">
                     <Header />
                     <PageContainer>
-                        <NestedList />
+                        <BeerContainer />
                         <Beers />
                     </PageContainer>
                 </Grid>

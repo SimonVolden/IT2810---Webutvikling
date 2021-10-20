@@ -25,7 +25,7 @@ const styles = (theme: { palette: { background: { paper: any; }; }; spacing: { u
     },
 });
 
-class NestedList extends React.Component {
+class BeerContainer extends React.Component {
     state = {
         open: true,
     };
@@ -77,4 +77,4 @@ class NestedList extends React.Component {
 
 
 
-export default NestedList;
+export default BeerContainer;
