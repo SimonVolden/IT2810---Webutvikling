@@ -29,19 +29,19 @@ export default function PageNumberCounter():JSX.Element {
         <>
         <Toolbar>
 
-            <p> Page: </p>  
-            <Button aria-label="Increment Page Number" onClick={() => {
+            <p aria-label="pageNumber,"> Page: </p>  
+            <Button aria-label="Increment Page Number," onClick={() => {
                 dispatch(incrementPageNumber(pageNumber))
                 }}> + </Button>
-            <p aria-label="Current Page Number">{pageNumber}</p>
-            <Button aria-label="Decrement Page Number" onClick={() => {
+            <p aria-label={"Current Page Number, " + pageNumber}>{pageNumber}</p>
+            <Button aria-label="Decrement Page Number," onClick={() => {
                 if (isDecPageNumberLegal(pageNumber)) {
                         dispatch(decrementPageNumber(pageNumber))
                     }
                 }}> - </Button>
             <TextField 
                 id="page-number-input" 
-                aria-label="Page Number Input Field" 
+                aria-label={"Page Number Input Field,"}
                 margin="dense"
                 label="Go to page"
                 variant="outlined" 

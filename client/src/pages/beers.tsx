@@ -49,17 +49,17 @@ const Beers: React.FC<BeersProps> = () => {
                             <TableCell>Image</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody >
                         {beers.map((beer: Beer) => {
                             return (
                                 <TableRow key={beer.id}>
-                                    <TableCell scope="row">
+                                    <TableCell scope="row" aria-label={"beer id:" + beer.id}>
                                         {beer.id}
                                     </TableCell>
-                                    <TableCell>{beer.name}</TableCell>
-                                    <TableCell>{beer.tagline}</TableCell>
-                                    <TableCell>{beer.description}</TableCell>
-                                    <TableCell>
+                                    <TableCell aria-label={"beer name:" + beer.name}>{beer.name}</TableCell>
+                                    <TableCell aria-label={"beer tagline:" + beer.tagline}>{beer.tagline}</TableCell>
+                                    <TableCell aria-label={"beer description:" + beer.description}>{beer.description}</TableCell>
+                                    <TableCell aria-label={"picture of beer"}>
                                         <img src={beer.image_url} width="100" height="100"></img>
                                     </TableCell>
                                 </TableRow>

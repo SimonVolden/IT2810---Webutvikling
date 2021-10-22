@@ -26,10 +26,8 @@ export default function Header(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
     const classes = useStyles();
+    const pageThemeAria = pageTheme ? "Page Theme toggle, current theme is dark" : "Page Theme toggle, current theme is light"
 
-
-    
-    
     return(
         <AppBar position="sticky">
           <Toolbar>
@@ -38,7 +36,7 @@ export default function Header(): JSX.Element {
             </Typography>
     
             <FormGroup>
-              <FormControlLabel control={<Switch
+              <FormControlLabel aria-label={pageThemeAria} control={<Switch
                 checked={pageTheme} onChange={() => {
                     dispatch(changeTheme(pageTheme))
                     window.localStorage.setItem('pageTheme', String(!pageTheme))
