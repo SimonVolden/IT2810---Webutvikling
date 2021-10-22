@@ -19,9 +19,11 @@ const resolvers = {
           return data.beers;
         });
     }, */
-    beers(db) {
-      console.log(db);
-      return db.beers.find({});
+    beers(_parent, _args, _context, _info) {
+      console.log(_context.db.collection("beers").find({}));
+      return _context.db.collection("beers").find({}).then((data) => {
+        return data.beers;
+      });
     },
 
     test: () => {
