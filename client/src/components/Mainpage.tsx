@@ -5,6 +5,8 @@ import Beers from '../pages/beers';
 import { AppState } from '../stateManagement/types';
 import Header from './header';
 import PageContainer from './page-container';
+import PageNumberCounter from './PageNumberCounter';
+import SearchBar from './searchBar';
 
 function Mainpage(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
@@ -21,7 +23,10 @@ function Mainpage(): JSX.Element {
                 <Grid container direction="column">
                     <Header/>
                     <PageContainer>
-                        <Beers />
+                    <PageNumberCounter/>
+                    <SearchBar />
+                    <Beers />
+                        
                     </PageContainer>
                 </Grid>
             </Paper>

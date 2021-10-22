@@ -1,13 +1,20 @@
 import React from "react";
 import { combineReducers } from "redux";
 
-import {addCountry, removeCountry, changeTheme} from './actions'
-import {AppState, Country, Theme} from './types'
+import {addCountry, removeCountry, changeTheme, addBeer, removeBeer, 
+        incrementPageNumber, decrementPageNumber, setPageNumber, setSearch} from './actions'
+import {AppState, Country, Theme, Beer} from './types'
 
 
 type CountryActions = ReturnType<typeof addCountry> | ReturnType<typeof removeCountry>;
 
+type BeerActions = ReturnType<typeof addBeer> | ReturnType<typeof removeBeer>;
+
 type ThemeActions = ReturnType<typeof changeTheme>;
+
+type PageNumberActions = ReturnType<typeof incrementPageNumber> | ReturnType<typeof decrementPageNumber> | ReturnType<typeof setPageNumber>;
+
+type SearchActions = ReturnType<typeof setSearch>;
 
 function countryReducer(state: Country[] = [], action: CountryActions) {
     switch (action.type) {
@@ -15,6 +22,22 @@ function countryReducer(state: Country[] = [], action: CountryActions) {
             return state.concat({ name: action.payload });
         case "REMOVE_COUNTRY":
             return state.filter(country => country.name !== action.payload);
+        default:
+            neverReached(action);
+    }
+    return state;
+}
+
+function beerReducer(state: Beer[] = [], action: BeerActions){
+    switch (action.type) {
+        case "ADD_BEER":
+            return {
+                ...state,
+                //state: [...state, action.payload]
+                state: state.concat(action.payload)
+            }
+        case "REMOVE_BEER":
+            return state.filter(beers => beers.id !== action.payload);
         default:
             neverReached(action);
     }
@@ -44,10 +67,36 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     }
 }
 
+function pageNumberReducer(state: number = 0, action: PageNumberActions){
+    switch (action.type) {
+        case "INCREMENT_PAGE_NUMBER":
+            return ++state;
+        case "DECREMENT_PAGE_NUMBER":
+            return --state;
+        case "SET_PAGE_NUMBER":
+            return action.payload;
+            
+        default:
+            return state;
+    }
+}
+
+function searchReducer(state: string = "", action: SearchActions){
+    switch (action.type) {
+        case "SET_SEARCH":
+            return action.payload;
+        default:
+            return state;
+    }   
+    return state
+}
 function neverReached(never: never) {}
 
 //Utility-funksjon for å kombinere flere reducere
 export const rootReducer = combineReducers<AppState>({
     country: countryReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    beers: beerReducer,
+    pageNumber: pageNumberReducer,
+    search: searchReducer,
 });
