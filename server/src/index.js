@@ -22,6 +22,15 @@ const resolvers = {
 
           return data.beers.slice(after, after + pageSize);
         });
+<<<<<<< HEAD
+=======
+    }, */
+    beers(_parent, _args, _context, _info) {
+      console.log(_context.db.collection("beers").find({}));
+      return _context.db.collection("beers").find({}).then((data) => {
+        return data.beers;
+      });
+>>>>>>> 21890797638125c5fadbe84db7d376b709e7acb9
     },
     beer(_parent, { id }, _context, _info) {
       return _context.db
