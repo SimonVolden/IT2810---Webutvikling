@@ -6,26 +6,37 @@ const BeerAPI = require("./datasources/beer");
 const MongoClient = require("mongodb").MongoClient;
 //import { makeExecutableSchema } from "graphql-tools";
 const { makeExecutableSchema } = require("graphql-tools");
-
+const { paginateResults } = require("./utils");
 require("dotenv").config();
 
 const resolvers = {
   Query: {
-    /* beers(_parent, _args, _context, _info) {
+    beers(_parent, { pageSize = 20, after = 0 }, _context, _info) {
       return _context.db
         .collection("beers")
         .findOne()
         .then((data) => {
-          return data.beers;
-        });
-    }, */
-    beers(db) {
-      console.log(db);
-      return db.beers.find({});
-    },
+          if (pageSize < 1) return [];
 
-    test: () => {
-      return "Test";
+          //if (!cursor) return data.beers.slice(0, pageSize);
+
+          return data.beers.slice(after, after + pageSize);
+        });
+    },
+    beer(_parent, { id }, _context, _info) {
+      return _context.db
+        .collection("beers")
+        .findOne()
+        .then((data) => {
+          console.log(id);
+          if (241 > id > 0) {
+            return data.beers[id - 1];
+          }
+          //console.log(data.beers.slice(0, 3));
+          else {
+            console.error("ID must be between 1 and 240");
+          }
+        });
     },
   },
 };
