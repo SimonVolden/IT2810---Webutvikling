@@ -38,36 +38,36 @@ const Beers: React.FC<BeersProps> = () => {
     const beers = data.beers;
 
     return (
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Tagline</TableCell>
-                            <TableCell>Description</TableCell>
-                            <TableCell>Image</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {beers.map((beer: Beer) => {
-                            return (
-                                <TableRow key={beer.id}>
-                                    <TableCell scope="row">
-                                        {beer.id}
-                                    </TableCell>
-                                    <TableCell>{beer.name}</TableCell>
-                                    <TableCell>{beer.tagline}</TableCell>
-                                    <TableCell>{beer.description}</TableCell>
-                                    <TableCell>
-                                        <img src={beer.image_url} width="100" height="100"></img>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Tagline</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Image</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {beers.map((beer: Beer) => {
+                        return (
+                            <TableRow key={beer.id}>
+                                <TableCell scope="row">
+                                    {beer.id}
+                                </TableCell>
+                                <TableCell>{beer.name}</TableCell>
+                                <TableCell>{beer.tagline}</TableCell>
+                                <TableCell>{beer.description}</TableCell>
+                                <TableCell>
+                                    <img src={beer.image_url} width="100" height="100"></img>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 
 
@@ -101,12 +101,13 @@ const Beers: React.FC<BeersProps> = () => {
 
 export const GET_BEERS = gql`
   query Query {
-  beers {
+  beers(pageSize: 20, after: 20) {
     id
     name
     tagline
     description
     image_url
+    first_brewed
   }
 }
 `
