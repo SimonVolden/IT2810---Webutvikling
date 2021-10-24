@@ -4,6 +4,8 @@ import { gql, useQuery } from '@apollo/client';
 import { Header, Button, Loading } from '../components';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import * as GetBeersListTypes from './__generated__/GetBeersList';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
 
 interface Beer {
     id: number
@@ -25,14 +27,19 @@ export const BEERS_DATA = gql`
 interface BeersProps extends RouteComponentProps { }
 
 const Beers: React.FC<BeersProps> = () => {
+    const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;
+    const pageSize=10;
+    const after = pageSize * pageNumber;
     const {
         data,
         loading,
         error
-    } = useQuery<any>(GET_BEERS);
+    } = useQuery<any>(GET_BEERS,{
+        variables: { pageSize, after },
+      });
 
     if (loading) return <Loading />;
-    if (error) return <p>ERROR</p>;
+    if (error) return <p>error</p>;
     if (!data) return <p>Not found</p>;
 
     const beers = data.beers;
@@ -99,14 +106,17 @@ const Beers: React.FC<BeersProps> = () => {
 
 }
 
+
+
 export const GET_BEERS = gql`
-  query Query {
-  beers {
+  query BEERS($pageSize: Int, $after: Int) {
+  beers(pageSize: $pageSize, after: $after) {
     id
     name
     tagline
     description
     image_url
+    first_brewed
   }
 }
 `

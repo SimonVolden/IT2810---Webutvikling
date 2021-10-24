@@ -66,8 +66,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    beers: [Beer]
-    beer(id: ID!): Beer
+    beers(pageSize: Int, after: Int): [Beer]!
+    beer(id: ID!): Beer!
+    test: String
   }
 `;
 
