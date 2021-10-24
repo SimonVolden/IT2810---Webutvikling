@@ -67,13 +67,24 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     }
 }
 
-function pageNumberReducer(state: number = 0, action: PageNumberActions){
+function  getSavedPageNumber(): number{
+    const savedPageNumber = sessionStorage.getItem('pageNumber');
+    if (savedPageNumber === null) {
+        return 1
+    }
+    return parseInt(savedPageNumber)
+}
+
+function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions){
     switch (action.type) {
         case "INCREMENT_PAGE_NUMBER":
+            sessionStorage.setItem('pageNumber', String(state+1))
             return ++state;
         case "DECREMENT_PAGE_NUMBER":
+            sessionStorage.setItem('pageNumber', String(state-1))
             return --state;
         case "SET_PAGE_NUMBER":
+            sessionStorage.setItem('pageNumber', String(action.payload))
             return action.payload;
             
         default:

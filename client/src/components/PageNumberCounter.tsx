@@ -12,13 +12,13 @@ export default function PageNumberCounter():JSX.Element {
 
 
     function isDecPageNumberLegal(nextPageNumber: number){
-        return nextPageNumber-1 >=0
+        return nextPageNumber-1 >=1
     }
     function legalInput(input: string): number{
         const numberInput = Number(input)
 
         if (numberInput) {
-            if (numberInput >=0) {
+            if (numberInput >=1) {
                 return numberInput; 
         }}
         return pageNumber
