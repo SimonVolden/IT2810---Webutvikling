@@ -15,7 +15,7 @@ interface BeerListCollapseProps {
 function BeerListCollapse(props: BeerListCollapseProps) {
     const [isOpened, setIsOpened] = useState(false);
 
-    function handleClick(e: any) {
+    function handleClick(e: React.MouseEvent<HTMLDivElement>) {
         e.preventDefault();
         setIsOpened(!isOpened);
     }
