@@ -20,6 +20,7 @@ function SearchBar(): JSX.Element {
                 margin="dense"
                 label="Beer search"
                 variant="outlined" 
+                placeholder={searchString}
                 style={{ marginRight: 16 }}
                 onChange={(event) => {
                     dispatch(setSearch(event.target.value))
@@ -28,7 +29,7 @@ function SearchBar(): JSX.Element {
                 <Button aria-label="Seach for beer button" style={{ marginRight: 16 }} 
                 variant="outlined" onClick={() => {}}> Search </Button>
                 <Button aria-label="Remove seach for beer"  
-                variant="outlined" onClick={() => {}}> Clear </Button>
+                variant="outlined" onClick={() => {dispatch(setSearch(""))}}> Clear </Button>
         </Toolbar>
         </>
     )

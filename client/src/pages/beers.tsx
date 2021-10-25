@@ -17,6 +17,7 @@ export interface Beer {
 interface BeersVars {
     pageSize: number
     after: number
+    search: string
 }
 
 interface BeersData {
@@ -24,12 +25,13 @@ interface BeersData {
 }
 
 function Beers(): JSX.Element {
+    const search = useSelector((state:AppState) => state.search)
     const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;
     const pageSize=10;
     const after = pageSize * pageNumber;
     const { data, loading, error} = useQuery<BeersData, BeersVars>(
         GET_BEERS,
-        { variables: { pageSize, after } }
+        { variables: { pageSize, after, search } }
     );
 
     if (loading) return <Loading />;
@@ -41,6 +43,7 @@ function Beers(): JSX.Element {
     return (
         <List
             component="nav"
+            aria-label=""
         >
         {beers.map((beer: Beer) => {
             return (
@@ -52,8 +55,8 @@ function Beers(): JSX.Element {
 }
 
 export const GET_BEERS = gql`
-  query BEERS($pageSize: Int, $after: Int) {
-  beers(pageSize: $pageSize, after: $after) {
+  query BEERS($pageSize: Int, $after: Int, $search: String) {
+  beers(pageSize: $pageSize, after: $after, search: $search) {
     id
     name
     tagline
