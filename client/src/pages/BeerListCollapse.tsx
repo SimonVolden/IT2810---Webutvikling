@@ -7,7 +7,12 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-function BeerListCollapse(props: any) {
+interface BeerListCollapseProps {
+    name: string
+    data: string
+}
+
+function BeerListCollapse(props: BeerListCollapseProps) {
     const [isOpened, setIsOpened] = useState(false);
 
     function handleClick(e: any) {

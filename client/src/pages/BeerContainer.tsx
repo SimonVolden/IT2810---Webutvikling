@@ -7,8 +7,13 @@ import Divider from '@mui/material/Divider';
 import { Typography } from '@material-ui/core';
 import { Description } from '@material-ui/icons';
 import { getCollapseUtilityClass } from '@mui/material';
+import { Beer } from './beers';
 
-function BeerContainer(props: any) {
+interface BeerContainerProps {
+    beer: Beer
+}
+
+function BeerContainer(props: BeerContainerProps) {
 
     return (
         <List
