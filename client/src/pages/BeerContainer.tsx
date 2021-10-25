@@ -23,6 +23,7 @@ function BeerContainer(props: BeerContainerProps) {
             <ListItem>
                 <img
                     aria-label="picture of beer,"
+                    alt="Image of beer"
                     src={props.beer.image_url}
                     style={{
                         width: "7%",
