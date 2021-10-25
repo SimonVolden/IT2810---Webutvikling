@@ -67,9 +67,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    beers(pageSize: Int, after: Int): [Beer]!
+    beers(pageSize: Int, after: Int, search: String): [Beer]!
     beer(id: Int!): Beer!
-    test: String
+    getBeersByName(pageSize: Int, after: Int, search: String): [Beer]
   }
 
   type Mutation {
