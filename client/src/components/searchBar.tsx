@@ -15,6 +15,7 @@ function SearchBar(): JSX.Element {
           justifyContent: "center",
         }}>
             <TextField 
+                value={searchString}
                 id="Search for beer" 
                 aria-label="Beer search input field" 
                 margin="dense"
@@ -27,8 +28,6 @@ function SearchBar(): JSX.Element {
                     dispatch(setPageNumber(1))
                 }}
                 />
-                <Button aria-label="Seach for beer button" style={{ marginRight: 16 }} 
-                variant="outlined" onClick={() => {}}> Search </Button>
                 <Button aria-label="Remove seach for beer"  
                 variant="outlined" onClick={() => {
                     dispatch(setSearch(""))
