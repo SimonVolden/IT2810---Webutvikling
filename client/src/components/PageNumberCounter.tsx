@@ -3,6 +3,8 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
 import { AppState } from "../stateManagement/types";
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
 export default function PageNumberCounter():JSX.Element {
@@ -33,11 +35,13 @@ export default function PageNumberCounter():JSX.Element {
                 if (isDecPageNumberLegal(pageNumber)) {
                         dispatch(decrementPageNumber(pageNumber))
                     }
-                }}> - </Button>
+                }}> 
+                    <NavigateBeforeIcon/>
+            </Button>
             <p aria-label={"Current Page Number, " + pageNumber}>{pageNumber}</p>
             <Button aria-label="Increment Page Number," onClick={() => {
                 dispatch(incrementPageNumber(pageNumber))
-                }}> + </Button>
+                }}> <NavigateNextIcon/> </Button>
             <TextField 
                 id="page-number-input" 
                 aria-label={"Page Number Input Field,"}
