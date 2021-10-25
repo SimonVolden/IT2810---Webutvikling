@@ -1,4 +1,4 @@
-import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/material"
+import { Button, Toolbar, TextField, createTheme, ThemeProvider, Typography } from "@mui/material"
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
@@ -52,8 +52,7 @@ export default function PageNumberCounter():JSX.Element {
         <Toolbar sx={{
             justifyContent: "center"
         }}>
-
-            <p aria-label="pageNumber,"> Page: </p>  
+            <Typography aria-label="page Number">Page:</Typography>
             <Button aria-label="Last Page button," onClick={() => {
                 if (isDecPageNumberLegal(pageNumber)) {
                         dispatch(decrementPageNumber(pageNumber))
@@ -61,7 +60,7 @@ export default function PageNumberCounter():JSX.Element {
                 }}> 
                 <NavigateBeforeIcon/>
             </Button>
-            <p aria-label={"Current Page Number " + pageNumber}>{pageNumber}</p>
+            <Typography aria-label={"Current Page Number " + pageNumber}>{pageNumber}</Typography>
             <Button aria-label=", Next Page button," onClick={() => {
                 dispatch(incrementPageNumber(pageNumber))
                 }}> 
