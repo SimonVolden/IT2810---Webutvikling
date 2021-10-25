@@ -38,8 +38,8 @@ export default function PageNumberCounter():JSX.Element {
                 }}> 
                 <NavigateBeforeIcon/>
             </Button>
-            <p aria-label={"Current Page Number, " + pageNumber}>{pageNumber}</p>
-            <Button aria-label="Next Page button," onClick={() => {
+            <p aria-label={"Current Page Number " + pageNumber}>{pageNumber}</p>
+            <Button aria-label=", Next Page button," onClick={() => {
                 dispatch(incrementPageNumber(pageNumber))
                 }}> 
                 <NavigateNextIcon/>

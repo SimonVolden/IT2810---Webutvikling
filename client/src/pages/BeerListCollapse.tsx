@@ -18,7 +18,7 @@ function BeerListCollapse(props: any) {
     return (
         <Fragment>
             <ListItemButton onClick={handleClick}>
-                <ListItemText primary={props.name} />
+                <ListItemText aria-label={"Beer info:" + props.data + " , "} primary={props.name} />
                 {isOpened ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={isOpened} timeout="auto" unmountOnExit>
