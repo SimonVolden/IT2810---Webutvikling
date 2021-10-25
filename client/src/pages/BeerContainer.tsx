@@ -26,14 +26,6 @@ mutation updateLikes($likes: Int!, $id: Int!) {
 
 function BeerContainer(props: BeerContainerProps) {
 
-    const [liked, setLiked] = useState<boolean>(false);
-    function handleLiked() {
-        setLiked(!liked);
-
-    }
-    const [updateLike] = useMutation(UPDATE_LIKES);
-    const id = props.beer.id
-
 
     return (
         <List
