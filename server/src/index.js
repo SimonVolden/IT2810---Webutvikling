@@ -13,30 +13,50 @@ const resolvers = {
   Query: {
     beers(_parent, { pageSize = 20, after = 0 }, _context, _info) {
       return _context.db
-        .collection("beers")
-        .findOne()
+        .collection("beers_test")
+        .find({
+          id: { $gt: after * pageSize, $lt: after * pageSize + pageSize + 1 },
+        })
+        .toArray()
         .then((data) => {
           if (pageSize < 1) return [];
 
           //if (!cursor) return data.beers.slice(0, pageSize);
 
-          return data.beers.slice(after, after + pageSize);
+          return data;
         });
     },
     beer(_parent, { id }, _context, _info) {
       return _context.db
-        .collection("beers")
-        .findOne()
+        .collection("beers_test")
+        .find({
+          id: id,
+        })
+        .toArray()
         .then((data) => {
-          console.log(id);
-          if (241 > id > 0) {
-            return data.beers[id - 1];
-          }
-          //console.log(data.beers.slice(0, 3));
-          else {
-            console.error("ID must be between 1 and 240");
-          }
+          //if (!cursor) return data.beers.slice(0, pageSize);
+
+          return data[0];
         });
+    },
+  },
+
+  Mutation: {
+    updateLikes(_, { likes, id }, _context, _info) {
+      return _context.db
+        .collection("beers_test")
+        .findOneAndUpdate({ id: id }, { $set: { likes: likes } })
+        .then((updatedDocument) => {
+          if (updatedDocument) {
+            console.log(`Successfully updated document: ${updatedDocument}.`);
+          } else {
+            console.log("No document matches the provided query.");
+          }
+          return updatedDocument[0];
+        })
+        .catch((err) =>
+          console.error(`Failed to find and update document: ${err}`)
+        );
     },
   },
 };

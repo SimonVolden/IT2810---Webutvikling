@@ -24,6 +24,7 @@ const typeDefs = gql`
     food_pairing: [String]
     brewers_tips: String
     contributed_by: String
+    likes: Int
   }
 
   type Volume {
@@ -67,8 +68,12 @@ const typeDefs = gql`
 
   type Query {
     beers(pageSize: Int, after: Int): [Beer]!
-    beer(id: ID!): Beer!
+    beer(id: Int!): Beer!
     test: String
+  }
+
+  type Mutation {
+    updateLikes(likes: Int!, id: Int!): Beer
   }
 `;
 

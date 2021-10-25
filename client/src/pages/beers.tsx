@@ -26,15 +26,15 @@ export const BEERS_DATA = gql`
 
 function Beers() {
     const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;
-    const pageSize=10;
-    const after = pageSize * pageNumber;
+    const pageSize = 10;
+    const after = pageNumber;
     const {
         data,
         loading,
         error
-    } = useQuery<any>(GET_BEERS,{
+    } = useQuery<any>(GET_BEERS, {
         variables: { pageSize, after },
-      });
+    });
 
     if (loading) return <Loading />;
     if (error) return <p>error</p>;
@@ -46,11 +46,11 @@ function Beers() {
         <List
             component="nav"
         >
-        {beers.map((beer: Beer) => {
-            return (
-                <BeerContainer beer={beer} key={beer.id}/>
-            );
-        })}
+            {beers.map((beer: Beer) => {
+                return (
+                    <BeerContainer beer={beer} key={beer.id} />
+                );
+            })}
         </List>
     )
 }
