@@ -1,4 +1,4 @@
-import { Button, Toolbar, TextField } from "@mui/material"
+import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/material"
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
@@ -7,10 +7,31 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
+
+
 export default function PageNumberCounter():JSX.Element {
     const pageNumber = useSelector((state: AppState) => state.pageNumber)
+    const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
 
+    const theme = createTheme({
+        components: {
+            MuiInputBase: {
+                styleOverrides: {
+                    input: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            },
+            MuiInputLabel: {
+                styleOverrides: {
+                    outlined: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            }
+        }
+    })
 
     function isDecPageNumberLegal(nextPageNumber: number){
         return nextPageNumber-1 >=1
@@ -46,16 +67,22 @@ export default function PageNumberCounter():JSX.Element {
                 }}> 
                 <NavigateNextIcon/>
             </Button>
-            <TextField 
-                id="page-number-input" 
-                aria-label={"Page Number Input Field,"}
-                margin="dense"
-                label="Go to page"
-                variant="outlined" 
-                onChange={(event) => {
-                    dispatch(setPageNumber(legalInput(event.target.value)))
-                }}
-                />
+            <ThemeProvider theme={theme}>
+                <TextField 
+                    id="page-number-input" 
+                    aria-label={"Page Number Input Field,"}
+                    margin="dense"
+                    label="Go to page"
+                    variant="outlined" 
+                    value={pageNumber}
+                    type="number"
+                    InputLabelProps={{ color: "primary" }}
+                    inputProps={{ color: "primary", inputMode: 'numeric', pattern: '[0-9]*' }} 
+                    onChange={(event) => {
+                        dispatch(setPageNumber(legalInput(event.target.value)))
+                    }}
+                    />
+                </ThemeProvider>
         </Toolbar>
         </>
     )
