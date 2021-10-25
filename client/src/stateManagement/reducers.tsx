@@ -1,9 +1,8 @@
-import React from "react";
 import { combineReducers } from "redux";
 
 import {addCountry, removeCountry, changeTheme, addBeer, removeBeer, 
         incrementPageNumber, decrementPageNumber, setPageNumber, setSearch} from './actions'
-import {AppState, Country, Theme, Beer} from './types'
+import {AppState, Country, Beer} from './types'
 
 
 type CountryActions = ReturnType<typeof addCountry> | ReturnType<typeof removeCountry>;
@@ -98,8 +97,7 @@ function searchReducer(state: string = "", action: SearchActions){
             return action.payload;
         default:
             return state;
-    }   
-    return state
+    }
 }
 function neverReached(never: never) {}
 

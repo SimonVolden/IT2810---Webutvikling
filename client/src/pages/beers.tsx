@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
-import { Header, Button, Loading } from '../components';
+import { Loading } from '../components';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import * as GetBeersListTypes from './__generated__/GetBeersList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
 
 interface Beer {

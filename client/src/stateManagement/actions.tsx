@@ -1,4 +1,3 @@
-import React from "react";
 import { Beer } from "./types";
 
 //Funksjoner som returnerer action-objekter

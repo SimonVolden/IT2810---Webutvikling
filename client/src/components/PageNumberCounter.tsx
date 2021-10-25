@@ -3,7 +3,6 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
 import { AppState } from "../stateManagement/types";
-import SearchBar from "./searchBar";
 
 
 export default function PageNumberCounter():JSX.Element {
