@@ -11,16 +11,19 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
-    beers(_parent, { pageSize = 20, after = 0 }, _context, _info) {
+    beers(_parent, { pageSize = 20, after = 0, search }, _context, _info) {
       return _context.db
-        .collection("beers")
-        .findOne()
+        .collection("beers_test")
+        .find({
+          name: { $regex: search, $options: "i" },
+        })
+        .limit(pageSize)
+        .skip(after * pageSize)
+        .toArray()
         .then((data) => {
           if (pageSize < 1) return [];
 
-          //if (!cursor) return data.beers.slice(0, pageSize);
-
-          return data.beers.slice(after, after + pageSize);
+          return data;
         });
     },
     beer(_parent, { id }, _context, _info) {
