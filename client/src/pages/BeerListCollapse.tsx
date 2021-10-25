@@ -7,7 +7,12 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-function BeerListCollapse(props: any) {
+interface BeerListCollapseProps {
+    name: string
+    data: string
+}
+
+function BeerListCollapse(props: BeerListCollapseProps) {
     const [isOpened, setIsOpened] = useState(false);
 
     function handleClick(e: any) {
@@ -18,7 +23,7 @@ function BeerListCollapse(props: any) {
     return (
         <Fragment>
             <ListItemButton onClick={handleClick}>
-                <ListItemText primary={props.name} />
+                <ListItemText aria-label={"Beer info:" + props.data + " , "} primary={props.name} />
                 {isOpened ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={isOpened} timeout="auto" unmountOnExit>

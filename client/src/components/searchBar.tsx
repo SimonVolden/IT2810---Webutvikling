@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from "../stateManagement/types";
-import { Button, Toolbar, TextField } from "@material-ui/core";
-import { setSearch } from "../stateManagement/actions";
+import { Button, Toolbar, TextField } from "@mui/material";
+import { setPageNumber, setSearch } from "../stateManagement/actions";
 
 
 function SearchBar(): JSX.Element {
@@ -11,22 +11,29 @@ function SearchBar(): JSX.Element {
 
     return(
         <>
-        <Toolbar>
+        <Toolbar sx={{
+          justifyContent: "center",
+        }}>
             <TextField 
                 id="Search for beer" 
                 aria-label="Beer search input field" 
                 margin="dense"
                 label="Beer search"
                 variant="outlined" 
+                placeholder={searchString}
                 style={{ marginRight: 16 }}
                 onChange={(event) => {
                     dispatch(setSearch(event.target.value))
+                    dispatch(setPageNumber(1))
                 }}
                 />
                 <Button aria-label="Seach for beer button" style={{ marginRight: 16 }} 
                 variant="outlined" onClick={() => {}}> Search </Button>
                 <Button aria-label="Remove seach for beer"  
-                variant="outlined" onClick={() => {}}> Clear </Button>
+                variant="outlined" onClick={() => {
+                    dispatch(setSearch(""))
+                    dispatch(setPageNumber(1))
+                }}> Clear </Button>
         </Toolbar>
         </>
     )

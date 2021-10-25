@@ -5,15 +5,24 @@ import ListItemText from '@mui/material/ListItemText';
 import BeerListCollapse from './BeerListCollapse';
 import Divider from '@mui/material/Divider';
 import { Typography } from '@material-ui/core';
+import { Description } from '@material-ui/icons';
+import { getCollapseUtilityClass } from '@mui/material';
+import { Beer } from './beers';
 
-function BeerContainer(props: any) {
+interface BeerContainerProps {
+    beer: Beer
+}
+
+function BeerContainer(props: BeerContainerProps) {
 
     return (
         <List
             component="nav"
+            aria-label=''
         >
             <ListItem>
                 <img
+                    aria-label="picture of beer,"
                     src={props.beer.image_url}
                     style={{
                         width: "7%",
@@ -24,7 +33,7 @@ function BeerContainer(props: any) {
                 <ListItemText
                     disableTypography
                     primary={
-                        <Typography variant="h6">
+                        <Typography aria-label={"beer name:, " + props.beer.name + " , "} variant="h6">
                             {props.beer.name}
                         </Typography>
                     }

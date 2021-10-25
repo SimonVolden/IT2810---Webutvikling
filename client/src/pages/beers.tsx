@@ -6,7 +6,7 @@ import { Loading } from '../components';
 import List from '@mui/material/List';
 import BeerContainer from './BeerContainer';
 
-interface Beer {
+export interface Beer {
     id: number
     name: string
     tagline: string
@@ -14,27 +14,25 @@ interface Beer {
     image_url: string
 }
 
-export const BEERS_DATA = gql`
-    fragment BeerTile on Beer {
-        __typename
-        id
-        name
-        tagline
-    }
-`;
+interface BeersVars {
+    pageSize: number
+    after: number
+    search: string
+}
 
+interface BeersData {
+    beers: Beer[]
+}
 
-function Beers() {
+function Beers(): JSX.Element {
+    const search = useSelector((state:AppState) => state.search)
     const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;
-    const pageSize = 10;
+    const pageSize=10;
     const after = pageNumber;
-    const {
-        data,
-        loading,
-        error
-    } = useQuery<any>(GET_BEERS, {
-        variables: { pageSize, after },
-    });
+    const { data, loading, error} = useQuery<BeersData, BeersVars>(
+        GET_BEERS,
+        { variables: { pageSize, after, search } }
+    );
 
     if (loading) return <Loading />;
     if (error) return <p>error</p>;
@@ -45,6 +43,7 @@ function Beers() {
     return (
         <List
             component="nav"
+            aria-label=""
         >
             {beers.map((beer: Beer) => {
                 return (
@@ -55,11 +54,9 @@ function Beers() {
     )
 }
 
-
-
 export const GET_BEERS = gql`
-  query BEERS($pageSize: Int, $after: Int) {
-  beers(pageSize: $pageSize, after: $after) {
+  query BEERS($pageSize: Int, $after: Int, $search: String) {
+  beers(pageSize: $pageSize, after: $after, search: $search) {
     id
     name
     tagline
