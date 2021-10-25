@@ -73,7 +73,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    updateLikes(likes: Int!, id: Int!): Beer
+    updateLikes(id: Int!, liked: Boolean): Beer
   }
 `;
 

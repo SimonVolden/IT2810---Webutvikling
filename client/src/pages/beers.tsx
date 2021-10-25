@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
-import { gql, useQuery } from '@apollo/client';
+import { DocumentNode, gql, useQuery } from '@apollo/client';
 import { Loading } from '../components';
 import List from '@mui/material/List';
 import BeerContainer from './BeerContainer';
@@ -12,6 +12,7 @@ export interface Beer {
     tagline: string
     description: string
     image_url: string
+    likes: number
 }
 
 interface BeersVars {
@@ -25,11 +26,11 @@ interface BeersData {
 }
 
 function Beers(): JSX.Element {
-    const search = useSelector((state:AppState) => state.search)
+    const search = useSelector((state: AppState) => state.search)
     const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;
-    const pageSize=10;
+    const pageSize = 10;
     const after = pageNumber;
-    const { data, loading, error} = useQuery<BeersData, BeersVars>(
+    const { data, loading, error } = useQuery<BeersData, BeersVars>(
         GET_BEERS,
         { variables: { pageSize, after, search } }
     );
@@ -54,7 +55,7 @@ function Beers(): JSX.Element {
     )
 }
 
-export const GET_BEERS = gql`
+export const GET_BEERS: DocumentNode = gql`
   query BEERS($pageSize: Int, $after: Int, $search: String) {
   beers(pageSize: $pageSize, after: $after, search: $search) {
     id
@@ -63,8 +64,10 @@ export const GET_BEERS = gql`
     description
     image_url
     first_brewed
+    likes
   }
 }
 `
+
 
 export default Beers;
