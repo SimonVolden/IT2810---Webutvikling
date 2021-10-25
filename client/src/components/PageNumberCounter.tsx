@@ -1,4 +1,4 @@
-import { Button, Toolbar, TextField } from "@material-ui/core";
+import { Button, Toolbar, TextField } from "@mui/material"
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
@@ -26,7 +26,9 @@ export default function PageNumberCounter():JSX.Element {
 
     return(
         <>
-        <Toolbar>
+        <Toolbar sx={{
+            justifyContent: "center"
+        }}>
 
             <p aria-label="pageNumber,"> Page: </p>  
             <Button aria-label="Increment Page Number," onClick={() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from "../stateManagement/types";
-import { Button, Toolbar, TextField } from "@material-ui/core";
+import { Button, Toolbar, TextField } from "@mui/material";
 import { setSearch } from "../stateManagement/actions";
 
 
@@ -11,7 +11,9 @@ function SearchBar(): JSX.Element {
 
     return(
         <>
-        <Toolbar>
+        <Toolbar sx={{
+          justifyContent: "center",
+        }}>
             <TextField 
                 id="Search for beer" 
                 aria-label="Beer search input field" 
