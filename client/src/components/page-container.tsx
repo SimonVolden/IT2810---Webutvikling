@@ -20,7 +20,7 @@ const Container = styled('div')({
   flexDirection: 'column',
   flexGrow: 1,
   width: '100%',
-  maxWidth: 600,
+  maxWidth: 800,
   margin: '0 auto',
   padding: unit * 3,
   paddingBottom: unit * 5,

@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-ui/core';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import Beers from '../pages/beers';
 import { AppState } from '../stateManagement/types';
 import Header from './header';
@@ -16,12 +16,12 @@ function Mainpage(): JSX.Element {
         }
     })
 
-    return(
+    return (
         <ThemeProvider theme={theme}>
-            <CssBaseline/>
+            <CssBaseline />
             <Paper>
                 <Grid container direction="column">
-                    <Header/>
+                    <Header />
                     <PageContainer>
                     <PageNumberCounter/>
                     <SearchBar />
@@ -31,13 +31,13 @@ function Mainpage(): JSX.Element {
                 </Grid>
             </Paper>
         </ThemeProvider>
-/*
-    <>
-        <h1>Mainpage</h1>
-        <h2>{String(pageTheme)}</h2>
-        <button onClick={() => dispatch(changeTheme(pageTheme))}></button>
-    </>        
-*/
+        /*
+            <>
+                <h1>Mainpage</h1>
+                <h2>{String(pageTheme)}</h2>
+                <button onClick={() => dispatch(changeTheme(pageTheme))}></button>
+            </>        
+        */
     )
 }
 
