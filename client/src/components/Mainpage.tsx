@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Beers from '../pages/beers';
+import Beers from '../pages/Beers';
 import BeerContainer from '../pages/BeerContainer';
 import { AppState } from '../stateManagement/types';
 import Header from './header';
@@ -22,7 +22,6 @@ function Mainpage(): JSX.Element {
                 <Grid container direction="column">
                     <Header />
                     <PageContainer>
-                        <BeerContainer />
                         <Beers />
                     </PageContainer>
                 </Grid>

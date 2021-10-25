@@ -1,80 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import BeerListCollapse from './BeerListCollapse';
+import Divider from '@mui/material/Divider';
+import { Typography } from '@material-ui/core';
 
-const styles = (theme: { palette: { background: { paper: any; }; }; spacing: { unit: number; }; }) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-    nested: {
-        paddingLeft: theme.spacing.unit * 4,
-    },
-});
+function BeerContainer(props: any) {
 
-class BeerContainer extends React.Component {
-    state = {
-        open: true,
-    };
-
-    handleClick = () => {
-        this.setState(state => ({ open: !this.state.open }));
-    };
-
-    render() {
-
-        return (
-            <List
-                component="nav"
-                subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
-            >
-                <ListItem button>
-                    <ListItemIcon>
-                        <SendIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Sent mail" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Drafts" />
-                </ListItem>
-                <ListItem button onClick={this.handleClick}>
-                    <ListItemIcon>
-                        <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Inbox" />
-                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button >
-                            <ListItemIcon>
-                                <StarBorder />
-                            </ListItemIcon>
-                            <ListItemText inset primary="Starred" />
-                        </ListItem>
-                    </List>
-                </Collapse>
-            </List>
-        );
-    }
+    return (
+        <List
+            component="nav"
+        >
+            <ListItem>
+                <img
+                    src={props.beer.image_url}
+                    style={{
+                        width: "7%",
+                        height: "auto",
+                        paddingRight: 10
+                    }}
+                ></img>
+                <ListItemText
+                    disableTypography
+                    primary={
+                        <Typography variant="h6">
+                            {props.beer.name}
+                        </Typography>
+                    }
+                />
+            </ListItem>
+            <BeerListCollapse name="Description" data={props.beer.description} />
+            <BeerListCollapse name="Tagline" data={props.beer.tagline} />
+            <Divider />
+        </List>
+    );
 }
-
-
 
 export default BeerContainer;
