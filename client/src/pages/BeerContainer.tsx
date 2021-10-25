@@ -37,10 +37,14 @@ function BeerContainer(props: BeerContainerProps) {
                             {props.beer.name}
                         </Typography>
                     }
+                    secondary={
+                        <Typography aria-label={"tagline:, " + props.beer.tagline + " , "} variant="subtitle2">
+                            {props.beer.tagline}
+                        </Typography>
+                    }
                 />
             </ListItem>
             <BeerListCollapse name="Description" data={props.beer.description} />
-            <BeerListCollapse name="Tagline" data={props.beer.tagline} />
             <Divider />
         </List>
     );
