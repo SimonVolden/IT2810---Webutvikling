@@ -55,7 +55,7 @@ function SearchBar(): JSX.Element {
                 />
                 </ThemeProvider>
                 <Button aria-label="Remove seach for beer"  
-                variant="outlined" onClick={() => {
+                variant="contained" onClick={() => {
                     dispatch(setSearch(""))
                     dispatch(setPageNumber(1))
                 }}> Clear </Button>
