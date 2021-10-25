@@ -5,14 +5,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Loading } from '../components';
 import List from '@mui/material/List';
 import BeerContainer from './BeerContainer';
-
-export interface Beer {
-    id: number
-    name: string
-    tagline: string
-    description: string
-    image_url: string
-}
+import { Beer } from '../interfaces/Beer';
 
 interface BeersVars {
     pageSize: number
@@ -60,6 +53,9 @@ export const GET_BEERS = gql`
     description
     image_url
     first_brewed
+    food_pairing
+    brewers_tips
+    abv
   }
 }
 `

@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import { Typography } from '@material-ui/core';
 import { Description } from '@material-ui/icons';
 import { getCollapseUtilityClass } from '@mui/material';
-import { Beer } from './beers';
+import { Beer } from '../interfaces/Beer';
 
 interface BeerContainerProps {
     beer: Beer
@@ -43,6 +43,17 @@ function BeerContainer(props: BeerContainerProps) {
                             {props.beer.tagline}
                         </Typography>
                     }
+                />
+                <ListItemText 
+                    disableTypography
+                    primary={
+                        <Typography aria-label={"alcohol by volume:, " + props.beer.abv + " , "} variant="subtitle1">
+                            ABV: {props.beer.abv}%
+                        </Typography>
+                    }
+                    sx={{
+                        textAlign: 'right'
+                    }}
                 />
             </ListItem>
             <BeerListCollapse name="Description" data={props.beer.description} />
