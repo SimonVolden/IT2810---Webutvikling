@@ -1,7 +1,7 @@
-import { Malt } from './Malt';
-import { Hop } from './Hop';
+import Malt from './Malt';
+import Hop from './Hop';
 
-export interface Ingredients {
+export default interface Ingredients {
     malt: Malt[];
     hops: Hop[];
     yeast: string;

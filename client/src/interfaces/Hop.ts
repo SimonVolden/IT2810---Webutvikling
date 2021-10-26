@@ -1,6 +1,6 @@
-import { Amount } from "./Amount";
+import Amount from "./Amount";
 
-export interface Hop {
+export default interface Hop {
     name: string;
     amount: Amount;
     add: string;

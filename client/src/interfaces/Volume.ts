@@ -1,9 +1,9 @@
-export interface Volume {
+export default interface Volume {
     value: number;
     unit: string;
 }
 
-export interface BoilVolume {
+export default interface BoilVolume {
     value: number;
     unit: string;
 }

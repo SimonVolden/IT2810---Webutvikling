@@ -1,4 +1,4 @@
-export interface Amount {
+export default interface Amount {
     value: number;
     unit: string;
 }

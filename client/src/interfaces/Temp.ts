@@ -1,9 +1,9 @@
-export interface Temp {
+export default interface Temp {
     value: number;
     unit: string;
 }
 
-export interface MashTemp {
+export default interface MashTemp {
     temp: Temp;
     duration: number;
 }

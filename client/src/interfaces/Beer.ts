@@ -1,8 +1,9 @@
-import { Volume, BoilVolume } from './Volume';
-import { Method } from './Method';
-import { Ingredients } from './Ingredients';
+import Volume from './Volume';
+import BoilVolume from './Volume';
+import Method from './Method';
+import Ingredients from './Ingredients';
 
-export interface Beer {
+export default interface Beer {
     id: number;
     name: string;
     tagline: string;
