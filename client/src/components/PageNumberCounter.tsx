@@ -6,25 +6,26 @@ import { AppState } from "../stateManagement/types";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
+export function isDecPageNumberLegal(nextPageNumber: number){
+    return (nextPageNumber-1) >=1
+}
+export function isIncPageNumberLegal(nextPageNumber: number){
+    return (nextPageNumber+1) <=24
+}
+export function legalInput(input: number): boolean{
+    const numberInput = Number(input)
+
+    if (numberInput) {
+        if (numberInput >=1 && numberInput <= 24) {
+            return true; 
+        }
+   }
+    return false
+}
 
 export default function PageNumberCounter():JSX.Element {
     const pageNumber = useSelector((state: AppState) => state.pageNumber)
     const dispatch = useDispatch();
-
-
-    function isDecPageNumberLegal(nextPageNumber: number){
-        return nextPageNumber-1 >=1
-    }
-    function legalInput(input: string): number{
-        const numberInput = Number(input)
-
-        if (numberInput) {
-            if (numberInput >=1) {
-                return numberInput; 
-        }}
-        return pageNumber
-    }
-
 
     return(
         <>
@@ -42,7 +43,10 @@ export default function PageNumberCounter():JSX.Element {
             </Button>
             <p aria-label={"Current Page Number " + pageNumber}>{pageNumber}</p>
             <Button aria-label=", Next Page button," onClick={() => {
-                dispatch(incrementPageNumber(pageNumber))
+                if (isIncPageNumberLegal(pageNumber)){
+                    dispatch(incrementPageNumber(pageNumber))
+                }
+                
                 }}> 
                 <NavigateNextIcon/>
             </Button>
@@ -53,7 +57,8 @@ export default function PageNumberCounter():JSX.Element {
                 label="Go to page"
                 variant="outlined" 
                 onChange={(event) => {
-                    dispatch(setPageNumber(legalInput(event.target.value)))
+                    const input = Number(event.target.value)
+                    dispatch(setPageNumber(legalInput(input)? input : pageNumber ))
                 }}
                 />
         </Toolbar>
