@@ -32224,7 +32224,11 @@ use('it2810');
 );
  */
 //db.beers_test.findOneAndUpdate({id: 1}, {$set: {likes: 4}})
-db.beers_test.find({id: 1})
+//db.beers_test.find({id: 1})
+
+db.users.find()
+db.users.insertOne({email: "test@test.com", toke:"12313221312"})
+db.users.find()
 
 // Build an aggregation to view total sales for each product in 2014.
 

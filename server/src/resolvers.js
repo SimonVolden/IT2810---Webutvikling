@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+
 module.exports = {
   Query: {
     /* beers(_parent, { pageSize = 20, after = 0 }, _context, _info) {
@@ -37,6 +39,32 @@ module.exports = {
 
           return data;
         });
+    },
+    users: async (_parent, { email }, _context, _info) => {
+      return _context.db
+        .collection("users")
+        .find({ email: email })
+        .toArray()
+        .then((data) => {
+          console.log(data[0].email);
+          return data[0];
+        });
+    },
+    validToken: async (_parent, { token }, _context, _info) => {
+      const user = await _context.db
+        .collection("users")
+        .find({ token: token })
+        .toArray()
+        .then((data) => {
+          console.log(data[0]);
+          return data[0];
+        });
+      if (user) {
+        return true;
+      } else {
+        console.log("Invalid token");
+        return false;
+      }
     },
   },
 
@@ -91,6 +119,44 @@ module.exports = {
           .catch((err) =>
             console.error(`Failed to find and update document: ${err}`)
           );
+      }
+    },
+    login: async (_, { email, password }, _context, _info) => {
+      const token = crypto
+        .createHash("sha512")
+        .update(email + password)
+        .digest("hex");
+      const user = await _context.db
+        .collection("users")
+        .findOne({ email: email, token: token });
+      if (user) {
+        return user;
+      } else {
+        console.log(
+          "Found no users with that email, or the password is incorrect."
+        );
+      }
+      return user;
+    },
+    signup: async (_, { email, password }, _context, _info) => {
+      //Checks if user exsists
+      const user = await _context.db
+        .collection("users")
+        .findOne({ email: email });
+
+      if (!user) {
+        console.log("Found no users with that email, creating new");
+        const token = crypto
+          .createHash("sha512")
+          .update(email + password)
+          .digest("hex");
+        _context.db
+          .collection("users")
+          .insertOne({ email: email, token: token });
+        return true;
+      } else {
+        console.log("There already exsists a user with that email");
+        return false;
       }
     },
   },

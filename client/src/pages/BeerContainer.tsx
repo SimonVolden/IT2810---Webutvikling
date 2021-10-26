@@ -42,7 +42,7 @@ function BeerContainer(props: BeerContainerProps) {
                         paddingRight: 10
                     }}
                 ></img>
-                {console.log(props.beer)}
+
 
                 <ListItemText
                     disableTypography
