@@ -1,6 +1,6 @@
-import Amount from './Amount';
+import { Amount } from './Amount';
 
-export default interface Malt {
+export interface Malt {
     name: string;
     amount: Amount;
 }

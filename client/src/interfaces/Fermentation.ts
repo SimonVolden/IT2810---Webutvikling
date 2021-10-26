@@ -1,5 +1,5 @@
-import Temp from './Temp';
+import { Temp } from './Temp';
 
-export default interface Fermentation {
+export interface Fermentation {
     temp: Temp;
 }
