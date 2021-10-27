@@ -33,13 +33,17 @@ const typeDefs = gql`
 
   type Method {
     mash_temp: [Mash_Temp]
-    fermentation: Temperature
+    fermentation: temp
     twist: String
   }
 
   type Mash_Temp {
     temp: Temperature
     duration: Int
+  }
+
+  type temp {
+    temp: Temperature
   }
 
   type Temperature {
