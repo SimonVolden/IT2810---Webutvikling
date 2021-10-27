@@ -61,7 +61,7 @@ exports[`renders 1`] = `
       tabindex="0"
     >
       <div
-        aria-label="Beer info:tagline , "
+        aria-label="Beer info:tnaglie , "
         class="MuiListItemText-root css-tlelie-MuiListItemText-root"
       >
         <span

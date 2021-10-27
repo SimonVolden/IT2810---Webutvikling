@@ -5,7 +5,7 @@ import { isDecPageNumberLegal, isIncPageNumberLegal, legalInput } from '../PageN
 describe("testing pageNumberCounter helper functions", () => {
     //  Testing legalInput to check if input from TextField is in
     // the intervall 1-24
-    test("legalInput with too correct input", ()=>{
+    test("legalInput with correct input", ()=>{
         const inputNumber = 5;
         const isLegal =  legalInput(inputNumber);
         expect(isLegal).toBe(true)
