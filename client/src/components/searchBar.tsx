@@ -47,6 +47,7 @@ function SearchBar(): JSX.Element {
                 label="Beer search"
                 variant="outlined" 
                 placeholder={searchString}
+                size="small"
                 style={{ marginRight: 16 }}
                 onChange={(event) => {
                     dispatch(setSearch(event.target.value))

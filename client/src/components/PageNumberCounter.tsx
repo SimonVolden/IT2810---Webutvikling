@@ -72,6 +72,8 @@ export default function PageNumberCounter():JSX.Element {
                     aria-label={"Page Number Input Field,"}
                     margin="dense"
                     label="Go to page"
+                    size="small"
+                    style = {{width: 100}}
                     variant="outlined" 
                     value={pageNumber}
                     type="number"
