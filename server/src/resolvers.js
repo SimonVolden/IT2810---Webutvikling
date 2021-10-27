@@ -159,5 +159,53 @@ module.exports = {
         return false;
       }
     },
+    like: async (_, { token, beerID }, _context, _info) => {
+      const user = await _context.db
+        .collection("users")
+        .find({ token: token })
+        .toArray()
+        .then((data) => {
+          return data[0];
+        });
+
+      if (user) {
+        _context.db
+          .collection("likes")
+          .findOne({
+            user: { email: user.email, token: user.token },
+            id: beerID,
+          })
+          .then((data) => {
+            console.log(data);
+          });
+
+        const like = await _context.db
+          .collection("likes")
+          .findOne({
+            user: { email: user.email, token: user.token },
+            id: beerID,
+          })
+          .then((data) => {
+            return data;
+          });
+
+        if (like == null) {
+          console.log("adding");
+          _context.db.collection("likes").insertOne({
+            user: { email: user.email, token: user.token },
+            id: beerID,
+          });
+          return true;
+        } else {
+          console.log("deleting");
+          _context.db.collection("likes").deleteOne({
+            user: { email: user.email, token: user.token },
+            id: beerID,
+          });
+          return false;
+        }
+      }
+      return false;
+    },
   },
 };

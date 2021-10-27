@@ -71,6 +71,11 @@ const typeDefs = gql`
     token: String
   }
 
+  type Like {
+    users: User!
+    beerID: Int!
+  }
+
   type Query {
     beers(pageSize: Int, after: Int, search: String): [Beer]!
     beer(id: Int!): Beer!
@@ -83,6 +88,7 @@ const typeDefs = gql`
     updateLikes(id: Int!, liked: Boolean): Beer
     login(email: String, password: String): User
     signup(email: String, password: String): Boolean
+    like(token: String, beerID: Int): Boolean
   }
 `;
 
