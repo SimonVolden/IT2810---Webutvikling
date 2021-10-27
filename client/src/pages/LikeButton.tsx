@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { IconButton } from "@material-ui/core";
 import React, { useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -14,23 +14,43 @@ mutation updateLikes( $id: Int!, $liked: Boolean!) {
 }
 `;
 
+export const LIKE = gql`
+mutation Like($token: String!, $beerID: Int!) {
+  like(token: $token, beerID: $beerID )
+}
+`
+
+
 export default function LikeButton(props: { id: number }): JSX.Element {
+
+
     const [updateLike] = useMutation(UPDATE_LIKES);
+    const [like] = useMutation(LIKE);
     const [liked, setLiked] = useState<boolean>((localStorage.getItem(String(props.id)) === "true"));
     function handleLiked() {
         localStorage.setItem(String(props.id), String(!liked))
         setLiked(!liked);
     }
+
+
     return (
         <div>
             <form
                 onSubmit={e => {
                     e.preventDefault();
                     updateLike({ variables: { id: props.id, liked: liked } }).then(result => {
-                        console.log(result)
+                        //console.log(result)
                     }).catch(error => {
                         console.log(error)
                     });
+
+                    like({ variables: { token: localStorage.getItem("access-token"), beerID: props.id } }).then(result => {
+                        //console.log(result)
+                    }).catch(error => {
+                        console.log(error)
+                    })
+
+
 
                 }}
             >

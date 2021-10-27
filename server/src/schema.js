@@ -82,13 +82,14 @@ const typeDefs = gql`
     getBeersByName(pageSize: Int, after: Int, search: String): [Beer]
     users(email: String): User
     validToken(token: String!): Boolean
+    getLikedByUser(token: String!): [Int]!
   }
 
   type Mutation {
     updateLikes(id: Int!, liked: Boolean): Beer
-    login(email: String, password: String): User
-    signup(email: String, password: String): Boolean
-    like(token: String, beerID: Int): Boolean
+    login(email: String!, password: String!): User
+    signup(email: String!, password: String!): Boolean
+    like(token: String!, beerID: Int!): Boolean
   }
 `;
 

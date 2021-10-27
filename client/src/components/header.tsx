@@ -30,11 +30,19 @@ export default function Header(): JSX.Element {
   const classes = useStyles();
   const pageThemeAria = pageTheme ? "Page Theme toggle, current theme is dark" : "Page Theme toggle, current theme is light"
 
+  const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1
+
+
+  console.log(pageNumber)
   return (
     <AppBar position="sticky">
       <Toolbar>
         <Button variant="outlined" className={classes.button} onClick={() => {
           localStorage.setItem("access-token", "");
+          for (let i: number = 1; i < 241; i++) {
+            localStorage.setItem(String(i), "false");
+          }
+
           history.push("/");
           window.location.reload()
         }}>Log out </Button>

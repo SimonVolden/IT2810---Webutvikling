@@ -56,15 +56,42 @@ module.exports = {
         .find({ token: token })
         .toArray()
         .then((data) => {
-          console.log(data[0]);
+          //console.log(data[0]);
           return data[0];
         });
       if (user) {
         return true;
       } else {
-        console.log("Invalid token");
+        //console.log("Invalid token");
         return false;
       }
+    },
+    getLikedByUser: async (_parent, { token }, _context, _info) => {
+      const user = await _context.db
+        .collection("users")
+        .find({ token: token })
+        .toArray()
+        .then((data) => {
+          return data[0];
+        });
+
+      const beers = [];
+      if (user) {
+        const liked = await _context.db
+          .collection("likes")
+          .find({
+            user: { email: user.email, token: user.token },
+          })
+          .toArray()
+          .then((data) => {
+            return data;
+          });
+
+        liked.map((beer) => beers.push(beer.id));
+        /* console.log(liked);
+        console.log(beers); */
+      }
+      return beers;
     },
   },
 
@@ -176,7 +203,7 @@ module.exports = {
             id: beerID,
           })
           .then((data) => {
-            console.log(data);
+            //console.log(data);
           });
 
         const like = await _context.db
@@ -190,14 +217,14 @@ module.exports = {
           });
 
         if (like == null) {
-          console.log("adding");
+          //console.log("adding");
           _context.db.collection("likes").insertOne({
             user: { email: user.email, token: user.token },
             id: beerID,
           });
           return true;
         } else {
-          console.log("deleting");
+          //console.log("deleting");
           _context.db.collection("likes").deleteOne({
             user: { email: user.email, token: user.token },
             id: beerID,
