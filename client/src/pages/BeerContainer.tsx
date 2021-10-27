@@ -1,64 +1,39 @@
-import React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import BeerListCollapse from './BeerListCollapse';
-import Divider from '@mui/material/Divider';
-import { Typography } from '@material-ui/core';
-import { Description } from '@material-ui/icons';
-import { getCollapseUtilityClass } from '@mui/material';
+import React, { Fragment } from 'react';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
 import { Beer } from '../interfaces/Beer';
+import Typography from '@mui/material/Typography';
+import BeerDescription from './BeerDescription';
+import BeerMethods from './BeerMethods';
+import BeerIngredients from './BeerIngredients';
 
 interface BeerContainerProps {
     beer: Beer
 }
 
-function BeerContainer(props: BeerContainerProps) {
+function BeerContainer(props: BeerContainerProps): JSX.Element {
 
     return (
-        <List
-            component="nav"
-            aria-label=''
-        >
-            <ListItem>
-                <img
-                    aria-label="picture of beer,"
-                    alt="Image of beer"
-                    src={props.beer.image_url}
-                    style={{
-                        width: "7%",
-                        height: "auto",
-                        paddingRight: 10
-                    }}
-                ></img>
-                <ListItemText
-                    disableTypography
-                    primary={
-                        <Typography aria-label={"beer name:, " + props.beer.name + " , "} variant="h6">
-                            {props.beer.name}
-                        </Typography>
-                    }
-                    secondary={
-                        <Typography aria-label={"tagline:, " + props.beer.tagline + " , "} variant="subtitle2">
-                            {props.beer.tagline}
-                        </Typography>
-                    }
-                />
-                <ListItemText 
-                    disableTypography
-                    primary={
-                        <Typography aria-label={"alcohol by volume:, " + props.beer.abv + " , "} variant="subtitle1">
-                            ABV: {props.beer.abv}%
-                        </Typography>
-                    }
-                    sx={{
-                        textAlign: 'right'
-                    }}
-                />
-            </ListItem>
-            <BeerListCollapse name="Description" data={props.beer.description} />
-            <Divider />
-        </List>
+        <Card sx={{ marginBottom: "1vh" }} square={true} elevation={3}>
+            <CardHeader 
+                avatar={
+                    <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
+                }
+                title={
+                    <Typography variant="h6">{props.beer.name}</Typography>
+                }
+                subheader={
+                    <Fragment>
+                        <Typography variant="subtitle2">{props.beer.tagline}</Typography>
+                        <Typography variant="subtitle1">{props.beer.abv +"%"}</Typography>
+                    </Fragment>
+                }
+            />
+            <BeerDescription name="Description" desc={props.beer.description} food_pairing={props.beer.food_pairing} />
+            <BeerMethods name="Methods/Timings" method={props.beer.method} brewers_tips={props.beer.brewers_tips} />
+            <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
+        </Card>
     );
 }
 

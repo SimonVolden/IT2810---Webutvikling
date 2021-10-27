@@ -34,6 +34,7 @@ function Beers(): JSX.Element {
     return (
         <List
             component="nav"
+            sx={{ paddingTop: "10px" }}
         >
         {beers.map((beer: Beer) => {
             return (
@@ -56,6 +57,41 @@ export const GET_BEERS = gql`
     food_pairing
     brewers_tips
     abv
+    ingredients {
+      hops {
+        name
+        add
+        attribute
+        amount {
+          unit
+          value
+        }
+      }
+      malt {
+        name
+        amount {
+          unit
+          value
+        }
+      }
+      yeast
+    }
+    method {
+      mash_temp {
+        duration
+        temp {
+          unit
+          value
+        }
+      }
+      fermentation {
+        temp {
+            value
+            unit
+        }
+      }
+      twist
+    }
   }
 }
 `
