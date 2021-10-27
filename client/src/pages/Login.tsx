@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { gql, useMutation } from "@apollo/client";
 import { Redirect, useHistory } from 'react-router';
+import { useState } from 'react';
 
 
 function Copyright(props: any) {
@@ -40,9 +41,12 @@ mutation Mutation($email: String!, $password: String!) {
 }
 `;
 
-export default function SignIn() {
+export default function Login() {
     const [login] = useMutation(LOGIN);
     const history = useHistory();
+    const [errorMessage, setErrorMessage] = useState<String>("Email Address");
+    const [error, setError] = useState<boolean>(false);
+
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -53,13 +57,16 @@ export default function SignIn() {
             password: data.get('password'),
         });
         login({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
-            console.log(user.data)
+            console.log(user.data.login)
             if (user) {
-                /* console.log("logged in")
-                console.log(user.data.login.token) */
                 localStorage.setItem("access-token", user.data.login.token)
+                console.log("access-token")
                 history.push("/")
-                //localStorage.setItem("user", user.data.login.email)
+                window.location.reload()
+
+            } else {
+                setError(true);
+                setErrorMessage("Incorrect email or password")
             }
         })
             .catch(error => {
@@ -90,11 +97,12 @@ export default function SignIn() {
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
+                            error={error}
                             margin="normal"
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label={errorMessage}
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -115,6 +123,9 @@ export default function SignIn() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={() => {
+
+                            }}
                         >
                             Sign In
                         </Button>

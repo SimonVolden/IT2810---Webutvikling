@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-ro
 import Login from "../pages/Login";
 import { DocumentNode, gql, useQuery } from '@apollo/client';
 import Loading from "./loading";
+import Header from "./header";
 
 const VALID_TOKEN: DocumentNode = gql`
     query Query ($token: String!) {
@@ -24,11 +25,10 @@ interface TokenData {
 
 
 export default function App(): JSX.Element {
-
-    const { data, loading, error } = useQuery<TokenData, TokenVars>(VALID_TOKEN, { variables: { token: String(localStorage.getItem("access-token")) } })
+    const data = useQuery<TokenData, TokenVars>(VALID_TOKEN, { variables: { token: String(localStorage.getItem("access-token")) } }).data
 
     console.log(localStorage.getItem("access-token"))
-    if (!data) return <p>Not found</p>;
+    if (!data) return <p>Not found. Please connect to VPN</p>;
     const valid = data.validToken;
 
     console.log(valid)
@@ -45,7 +45,8 @@ export default function App(): JSX.Element {
                     <Provider store={store}>
                         <Mainpage />
                     </Provider>
-                    : <Redirect to="/login" />
+                    : <Login />
+
                 }
                 </Route>
                 <Route path="/signup">
@@ -54,7 +55,6 @@ export default function App(): JSX.Element {
                 <Route path="/login">
                     <Login />
                 </Route>
-
             </Switch>
         </Router>
     )

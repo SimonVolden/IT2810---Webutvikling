@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Redirect, useHistory } from 'react-router';
 import { gql, useMutation } from '@apollo/client';
+import { useState } from 'react';
 
 function Copyright(props: any) {
     return (
@@ -39,6 +40,9 @@ const theme = createTheme();
 export default function SignUp() {
     const [signup] = useMutation(SIGNUP);
     const history = useHistory();
+    const [errorMessage, setErrorMessage] = useState<String>("Email Address");
+    const [error, setError] = useState<boolean>(false);
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -50,6 +54,8 @@ export default function SignUp() {
                 history.push("/login")
             } else {
                 console.log("Account already exists")
+                setErrorMessage("Account already exists")
+                setError(true);
             }
         }).catch((error) => {
             console.log(error)
@@ -79,10 +85,11 @@ export default function SignUp() {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
+                                    error={error}
                                     required
                                     fullWidth
                                     id="email"
-                                    label="Email Address"
+                                    label={errorMessage}
                                     name="email"
                                     autoComplete="email"
                                 />
