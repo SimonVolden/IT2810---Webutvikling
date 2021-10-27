@@ -52,15 +52,9 @@ export default function Login() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
         login({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
-            console.log(user.data.login)
             if (user) {
                 localStorage.setItem("access-token", user.data.login.token)
-                console.log("access-token")
                 history.push("/")
                 window.location.reload()
 

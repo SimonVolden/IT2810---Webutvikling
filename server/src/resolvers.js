@@ -2,18 +2,6 @@ const crypto = require("crypto");
 
 module.exports = {
   Query: {
-    /* beers(_parent, { pageSize = 20, after = 0 }, _context, _info) {
-      return _context.db
-        .collection("beers_test")
-        .find({
-          id: { $gt: after * pageSize, $lt: after * pageSize + pageSize + 1 },
-        })
-        .toArray()
-        .then((data) => {
-          if (pageSize < 1) return [];
-          return data;
-        });
-    }, */
     beer(_parent, { id }, _context, _info) {
       return _context.db
         .collection("beers_test")
@@ -46,7 +34,6 @@ module.exports = {
         .find({ email: email })
         .toArray()
         .then((data) => {
-          console.log(data[0].email);
           return data[0];
         });
     },
@@ -56,13 +43,11 @@ module.exports = {
         .find({ token: token })
         .toArray()
         .then((data) => {
-          //console.log(data[0]);
           return data[0];
         });
       if (user) {
         return true;
       } else {
-        //console.log("Invalid token");
         return false;
       }
     },
@@ -88,8 +73,6 @@ module.exports = {
           });
 
         liked.map((beer) => beers.push(beer.id));
-        /* console.log(liked);
-        console.log(beers); */
       }
       return beers;
     },
@@ -105,27 +88,18 @@ module.exports = {
         })
         .toArray()
         .then((data) => {
-          console.log("Likes: " + data[0].likes);
           likes = data[0].likes;
         });
 
-      console.log(typeof likes);
       if (typeof likes !== "number") {
-        console.log("Not a number!");
         likes = 0;
       }
 
-      console.log(id, likes, liked);
       if (liked) {
         return _context.db
           .collection("beers_test")
           .findOneAndUpdate({ id: id }, { $set: { likes: likes + 1 } })
           .then((updatedDocument) => {
-            if (updatedDocument) {
-              console.log(`Successfully updated document: ${updatedDocument}.`);
-            } else {
-              console.log("No document matches the provided query.");
-            }
             return updatedDocument[0];
           })
           .catch((err) =>
@@ -136,11 +110,6 @@ module.exports = {
           .collection("beers_test")
           .findOneAndUpdate({ id: id }, { $set: { likes: likes - 1 } })
           .then((updatedDocument) => {
-            if (updatedDocument) {
-              console.log(`Successfully updated document: ${updatedDocument}.`);
-            } else {
-              console.log("No document matches the provided query.");
-            }
             return updatedDocument[0];
           })
           .catch((err) =>
@@ -202,9 +171,7 @@ module.exports = {
             user: { email: user.email, token: user.token },
             id: beerID,
           })
-          .then((data) => {
-            //console.log(data);
-          });
+          .then((data) => {});
 
         const like = await _context.db
           .collection("likes")
@@ -217,14 +184,12 @@ module.exports = {
           });
 
         if (like == null) {
-          //console.log("adding");
           _context.db.collection("likes").insertOne({
             user: { email: user.email, token: user.token },
             id: beerID,
           });
           return true;
         } else {
-          //console.log("deleting");
           _context.db.collection("likes").deleteOne({
             user: { email: user.email, token: user.token },
             id: beerID,

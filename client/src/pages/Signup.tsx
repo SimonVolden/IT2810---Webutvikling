@@ -48,12 +48,9 @@ export default function SignUp() {
         const data = new FormData(event.currentTarget);
 
         signup({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
-            console.log(user.data.signup)
             if (user.data.signup) {
-                console.log("Account successfully created")
                 history.push("/login")
             } else {
-                console.log("Account already exists")
                 setErrorMessage("Account already exists")
                 setError(true);
             }

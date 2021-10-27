@@ -52,13 +52,9 @@ export default function App(): JSX.Element {
         localStorage.setItem(String(beer), "true");
     })
 
-    console.log(localStorage.getItem("access-token"))
     if (!data) return <p>Not found. Please connect to VPN</p>;
     const valid = data.validToken;
 
-    console.log(valid)
-    console.log(data)
-    console.log(typeof (data?.validToken))
 
 
     //const [loggedIn, setLoggedIn] = useState<boolean>(false);
