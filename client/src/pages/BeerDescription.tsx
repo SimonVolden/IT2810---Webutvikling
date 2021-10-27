@@ -8,27 +8,38 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
+import { useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
+import { withStyles } from '@material-ui/core';
 
 interface BeerDescriptionProps {
     desc: string
     food_pairing: string[]
 }
+//jeg fjernet " component="div"  " fra linje 41, var det viktig?
 
 function BeerDescription(props: BeerDescriptionProps): JSX.Element {
+    const pageTheme = useSelector((state: AppState) => state.theme)
+    
+    const ColorTextTypography = withStyles({
+        root: {
+            color: pageTheme ? "#ffffff" : "#000000",
+        }
+      })(Typography);
 
     return (
         <CardContent>
-            <Typography paragraph>
+            <ColorTextTypography paragraph>
                 {props.desc}
-            </Typography>
+            </ColorTextTypography>
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <Typography variant="body1" component="div">
+                                <ColorTextTypography variant="body1" >
                                     Food pairings
-                                </Typography>
+                                </ColorTextTypography>
                             </TableCell>
                         </TableRow>
                     </TableHead>
@@ -37,9 +48,9 @@ function BeerDescription(props: BeerDescriptionProps): JSX.Element {
                             return (
                                 <TableRow key={food}>
                                     <TableCell>
-                                        <Typography paragraph variant="body2">
+                                        <ColorTextTypography paragraph variant="body2">
                                             {food}
-                                        </Typography>
+                                        </ColorTextTypography>
                                     </TableCell>
                                 </TableRow>
                             )

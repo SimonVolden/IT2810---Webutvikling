@@ -7,15 +7,31 @@ import Typography from '@mui/material/Typography';
 import BeerDescription from './BeerDescription';
 import BeerMethods from './BeerMethods';
 import BeerIngredients from './BeerIngredients';
+import { useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 interface BeerContainerProps {
     beer: Beer
 }
 
+
 function BeerContainer(props: BeerContainerProps): JSX.Element {
+    
+    
+    const pageTheme = useSelector((state: AppState) => state.theme)
+    const cardTheme = pageTheme ? "#424242" :"#ffffff"
+
+    const theme = createTheme({
+        palette: {
+            mode: pageTheme ? "dark" : "light",
+        }
+    })
+
 
     return (
-        <Card sx={{ marginBottom: "1vh" }} square={true} elevation={3}>
+        <ThemeProvider theme={theme}>
+        <Card sx={{ marginBottom: "1vh", }} square={true} elevation={3} style={{ backgroundColor: cardTheme }}>
             <CardHeader 
                 avatar={
                     <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
@@ -30,10 +46,13 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
                     </Fragment>
                 }
             />
-            <BeerDescription name="Description" desc={props.beer.description} food_pairing={props.beer.food_pairing} />
-            <BeerMethods name="Methods/Timings" method={props.beer.method} brewers_tips={props.beer.brewers_tips} />
-            <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
+            
+                <BeerDescription name="Description" desc={props.beer.description} food_pairing={props.beer.food_pairing} />
+                <BeerMethods name="Methods/Timings" method={props.beer.method} brewers_tips={props.beer.brewers_tips} />
+                <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
+            
         </Card>
+        </ThemeProvider>
     );
 }
 

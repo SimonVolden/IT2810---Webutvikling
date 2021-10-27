@@ -10,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import withCollapseContainer from './CollapseContainer';
 import { Method } from '../interfaces/Method';
 import { MashTemp } from '../interfaces/Temp';
+import { withStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
 
 interface BeerMethodsProps {
     method: Method
@@ -17,6 +20,14 @@ interface BeerMethodsProps {
 }
 
 function BeerMethods(props: BeerMethodsProps): JSX.Element {
+    const pageTheme = useSelector((state: AppState) => state.theme)
+    
+    const ColorTextTypography = withStyles({
+        root: {
+            color: pageTheme ? "#ffffff" : "#000000",
+        }
+      })(Typography);
+
 
     // Antar celsius ettersom eneste enhet brukt I dataen er celsius selv om det er definert enhet og en mer komplett løsning ville vær å ta høyde for begge
     function celsiusToFahrenheit(c: number): number {
@@ -31,9 +42,9 @@ function BeerMethods(props: BeerMethodsProps): JSX.Element {
     return (
         <CardContent>
             <Toolbar >
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" > {/*component="div">*/}
                     Mash Temp
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
@@ -51,9 +62,9 @@ function BeerMethods(props: BeerMethodsProps): JSX.Element {
                 </Table>
             </TableContainer>
             <Toolbar >
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" > {/*component="div">*/}
                     Fermentation
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
@@ -68,18 +79,18 @@ function BeerMethods(props: BeerMethodsProps): JSX.Element {
             {props.method.twist !== null &&
                 <Fragment>
                     <Toolbar>
-                        <Typography variant="body1" component="div">
+                        <ColorTextTypography variant="body1" > {/*component="div">*/}
                             Twist
-                        </Typography>
+                        </ColorTextTypography>
                     </Toolbar>
                     <TableContainer>
                         <Table>
                             <TableBody>
                                 <TableRow>
                                     <TableCell>
-                                        <Typography paragraph>
+                                        <ColorTextTypography paragraph>
                                             {props.method.twist}
-                                        </Typography>
+                                        </ColorTextTypography>
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -88,18 +99,18 @@ function BeerMethods(props: BeerMethodsProps): JSX.Element {
                 </Fragment>
             }
             <Toolbar>
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" > {/*component="div">*/}
                     Brewers tips
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
                     <TableBody>
                         <TableRow>
                             <TableCell>
-                                <Typography variant="body1" component="div">
+                                <ColorTextTypography variant="body1" > {/*component="div">*/}
                                     {props.brewers_tips}
-                                </Typography>
+                                </ColorTextTypography>
                             </TableCell>
                         </TableRow>
                     </TableBody>

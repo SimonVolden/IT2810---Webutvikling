@@ -12,14 +12,24 @@ import { Ingredients } from '../interfaces/Ingredients';
 import { Malt } from '../interfaces/Malt';
 import { Hop } from '../interfaces/Hop';
 import { Amount } from '../interfaces/Amount';
-import { TableHead } from '@material-ui/core';
+import { TableHead, withStyles } from '@material-ui/core';
 import Box from '@mui/system/Box';
+import { useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
 
 interface BeerIngredientsProps {
     ingredients: Ingredients
 }
 
 function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
+
+    const pageTheme = useSelector((state: AppState) => state.theme)
+    
+    const ColorTextTypography = withStyles({
+        root: {
+            color: pageTheme ? "#ffffff" : "#000000",
+        }
+      })(Typography);
 
     function displayAmount(amount: Amount, imperial: boolean): string {
         if (amount.unit === "grams") {
@@ -36,9 +46,9 @@ function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
     return (
         <CardContent>
             <Toolbar variant="dense">
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" > {/*component="div"*/}
                     Malt
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
@@ -56,9 +66,9 @@ function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
                 </Table>
             </TableContainer>
             <Toolbar variant="dense">
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" >  {/*component="div"*/}
                     Hop
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
@@ -86,18 +96,18 @@ function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
             </TableContainer>
             <Box>
             <Toolbar variant="dense">
-                <Typography variant="body1" component="div">
+                <ColorTextTypography variant="body1" >  {/*component="div"*/}
                     Yeast
-                </Typography>
+                </ColorTextTypography>
             </Toolbar>
             <TableContainer>
                 <Table>
                     <TableBody>
                         <TableRow>
                             <TableCell>
-                                <Typography align="center" variant="body1" component="div">
+                                <ColorTextTypography align="center" variant="body1">  {/*component="div"*/}
                                     {props.ingredients.yeast}
-                                </Typography>
+                                </ColorTextTypography>
                             </TableCell>
                         </TableRow>
                     </TableBody>
