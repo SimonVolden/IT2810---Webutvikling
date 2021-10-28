@@ -1,53 +1,8 @@
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
-const { createStore } = require("./utils");
-const BeerAPI = require("./datasources/beer");
-//const resolvers = require("./resolvers");
+const resolvers = require("./resolvers");
 const MongoClient = require("mongodb").MongoClient;
-//import { makeExecutableSchema } from "graphql-tools";
-const { makeExecutableSchema } = require("graphql-tools");
-const { paginateResults } = require("./utils");
 require("dotenv").config();
-
-const resolvers = {
-  Query: {
-    beers(_parent, { pageSize = 20, after = 0, search }, _context, _info) {
-      return _context.db
-        .collection("beers_test")
-        .find({
-          name: { $regex: search, $options: "i" },
-        })
-        .limit(pageSize)
-        .skip(after * pageSize)
-        .toArray()
-        .then((data) => {
-          if (pageSize < 1) return [];
-
-          return data;
-        });
-    },
-    beer(_parent, { id }, _context, _info) {
-      return _context.db
-        .collection("beers")
-        .findOne()
-        .then((data) => {
-          console.log(id);
-          if (241 > id > 0) {
-            return data.beers[id - 1];
-          }
-          //console.log(data.beers.slice(0, 3));
-          else {
-            console.error("ID must be between 1 and 240");
-          }
-        });
-    },
-  },
-};
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
 
 let db;
 const uri =
@@ -59,13 +14,10 @@ const server = new ApolloServer({
   context: async () => {
     if (!db) {
       try {
-        const dbClient = new MongoClient(
-          "mongodb://it2810:it2810@it2810-44.idi.ntnu.no:27017/?authSource=it2810",
-          {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          }
-        );
+        const dbClient = new MongoClient(uri, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
 
         if (!dbClient.isConnected) await dbClient.connect();
         db = dbClient.db("it2810"); // database name
@@ -84,12 +36,3 @@ server.listen().then(() => {
     Explore at https://studio.apollographql.com/sandbox
   `);
 });
-
-/* 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  dataSources: () => ({
-    beerAPI: new BeerAPI(),
-  }),
-}); */

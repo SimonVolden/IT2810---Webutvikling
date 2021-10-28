@@ -1,36 +1,62 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from "../stateManagement/types";
-import { Button, Toolbar, TextField } from "@mui/material";
+import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/material";
 import { setPageNumber, setSearch } from "../stateManagement/actions";
+
+
 
 
 function SearchBar(): JSX.Element {
     const searchString = useSelector((state: AppState) => state.search)
+    const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
+
+    const theme = createTheme({
+        components: {
+            MuiInputBase: {
+                styleOverrides: {
+                    input: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            },
+            MuiInputLabel: {
+                styleOverrides: {
+                    outlined: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            }
+        }
+    })
+
+
 
     return(
         <>
         <Toolbar sx={{
           justifyContent: "center",
         }}>
+            <ThemeProvider theme={theme}>
             <TextField 
+                value={searchString}
                 id="Search for beer" 
                 aria-label="Beer search input field" 
                 margin="dense"
                 label="Beer search"
                 variant="outlined" 
                 placeholder={searchString}
+                size="small"
                 style={{ marginRight: 16 }}
                 onChange={(event) => {
                     dispatch(setSearch(event.target.value))
                     dispatch(setPageNumber(1))
                 }}
                 />
-                <Button aria-label="Seach for beer button" style={{ marginRight: 16 }} 
-                variant="outlined" onClick={() => {}}> Search </Button>
+                </ThemeProvider>
                 <Button aria-label="Remove seach for beer"  
-                variant="outlined" onClick={() => {
+                variant="contained" onClick={() => {
                     dispatch(setSearch(""))
                     dispatch(setPageNumber(1))
                 }}> Clear </Button>

@@ -24,6 +24,7 @@ const typeDefs = gql`
     food_pairing: [String]
     brewers_tips: String
     contributed_by: String
+    likes: Int
   }
 
   type Volume {
@@ -65,10 +66,30 @@ const typeDefs = gql`
     attribute: String
   }
 
+  type User {
+    email: String
+    token: String
+  }
+
+  type Like {
+    users: User!
+    beerID: Int!
+  }
+
   type Query {
     beers(pageSize: Int, after: Int, search: String): [Beer]!
     beer(id: Int!): Beer!
     getBeersByName(pageSize: Int, after: Int, search: String): [Beer]
+    users(email: String): User
+    validToken(token: String!): Boolean
+    getLikedByUser(token: String!): [Int]!
+  }
+
+  type Mutation {
+    updateLikes(id: Int!, liked: Boolean): Beer
+    login(email: String!, password: String!): User
+    signup(email: String!, password: String!): Boolean
+    like(token: String!, beerID: Int!): Boolean
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Button, Toolbar, TextField } from "@mui/material"
+import { Button, Toolbar, TextField, createTheme, ThemeProvider, Typography } from "@mui/material"
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
@@ -23,17 +23,52 @@ export function legalInput(input: number): boolean{
     return false
 }
 
+
+
 export default function PageNumberCounter():JSX.Element {
     const pageNumber = useSelector((state: AppState) => state.pageNumber)
+    const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
+
+    const theme = createTheme({
+        components: {
+            MuiInputBase: {
+                styleOverrides: {
+                    input: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            },
+            MuiInputLabel: {
+                styleOverrides: {
+                    outlined: {
+                        color: pageTheme? "white" : "black"
+                    }
+                }
+            }
+        }
+    })
+
+    function isDecPageNumberLegal(nextPageNumber: number){
+        return nextPageNumber-1 >=1
+    }
+    function legalInput(input: string): number{
+        const numberInput = Number(input)
+
+        if (numberInput) {
+            if (numberInput >=1) {
+                return numberInput; 
+        }}
+        return pageNumber
+    }
+
 
     return(
         <>
         <Toolbar sx={{
             justifyContent: "center"
         }}>
-
-            <p aria-label="pageNumber,"> Page: </p>  
+            <Typography aria-label="page Number">Page:</Typography>
             <Button aria-label="Last Page button," onClick={() => {
                 if (isDecPageNumberLegal(pageNumber)) {
                         dispatch(decrementPageNumber(pageNumber))
@@ -41,7 +76,7 @@ export default function PageNumberCounter():JSX.Element {
                 }}> 
                 <NavigateBeforeIcon/>
             </Button>
-            <p aria-label={"Current Page Number " + pageNumber}>{pageNumber}</p>
+            <Typography aria-label={"Current Page Number " + pageNumber}>{pageNumber}</Typography>
             <Button aria-label=", Next Page button," onClick={() => {
                 if (isIncPageNumberLegal(pageNumber)){
                     dispatch(incrementPageNumber(pageNumber))
@@ -50,17 +85,24 @@ export default function PageNumberCounter():JSX.Element {
                 }}> 
                 <NavigateNextIcon/>
             </Button>
-            <TextField 
-                id="page-number-input" 
-                aria-label={"Page Number Input Field,"}
-                margin="dense"
-                label="Go to page"
-                variant="outlined" 
-                onChange={(event) => {
-                    const input = Number(event.target.value)
-                    dispatch(setPageNumber(legalInput(input)? input : pageNumber ))
-                }}
-                />
+            <ThemeProvider theme={theme}>
+                <TextField 
+                    id="page-number-input" 
+                    aria-label={"Page Number Input Field,"}
+                    margin="dense"
+                    label="Go to page"
+                    size="small"
+                    style = {{width: 100}}
+                    variant="outlined" 
+                    value={pageNumber}
+                    type="number"
+                    InputLabelProps={{ color: "primary" }}
+                    inputProps={{ color: "primary", inputMode: 'numeric', pattern: '[0-9]*' }} 
+                    onChange={(event) => {
+                        dispatch(setPageNumber(legalInput(event.target.value)))
+                    }}
+                    />
+                </ThemeProvider>
         </Toolbar>
         </>
     )

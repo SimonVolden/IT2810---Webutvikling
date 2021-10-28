@@ -1,4 +1,19 @@
-[
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('it2810');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+
+
+// Insert a few documents into the sales collection.
+
+// Run a find command to view items sold on April 4th, 2014.
+/* db.beers_test.insertMany([
             {
               "id": 1,
               "name": "Buzz",
@@ -32206,3 +32221,21 @@
               }
             
             ]
+);
+ */
+//db.beers_test.findOneAndUpdate({id: 1}, {$set: {likes: 4}})
+//db.beers_test.find({id: 1})
+
+/* db.users.find()
+db.users.insertOne({email: "test@test.com", toke:"12313221312"})
+db.users.find() */
+
+db.likes.find({user: {email: 'xxxx@email.com', token: '01d27136c9bf5e7170299ebe3e17616d3308302e834213ba6f9d99aa034b50eb8ac19028a3e4762f95eb3012eb4ff6c60f7eb16dbdb6eff99c8139a46610b445'}})
+
+// Build an aggregation to view total sales for each product in 2014.
+
+
+// Run the aggregation and open a cursor to the results.
+// Use toArray() to exhaust the cursor to return the whole result set.
+// You can use hasNext()/next() to iterate through the cursor page by page.
+

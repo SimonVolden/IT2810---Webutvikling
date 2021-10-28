@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import BeerListCollapse from './BeerListCollapse';
 import Divider from '@mui/material/Divider';
-import { Typography } from '@material-ui/core';
-import { Description } from '@material-ui/icons';
-import { getCollapseUtilityClass } from '@mui/material';
+import { IconButton, Typography } from '@material-ui/core';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Beer } from './beers';
+import LikeButton from './LikeButton';
+import { gql, useMutation } from '@apollo/client';
 
-interface BeerContainerProps {
+export interface BeerContainerProps {
     beer: Beer
 }
 
+export const UPDATE_LIKES = gql`
+mutation updateLikes($likes: Int!, $id: Int!) {
+    updateLikes(likes: $likes, id: $id){
+        likes
+        id
+    }
+}
+`;
+
 function BeerContainer(props: BeerContainerProps) {
+
 
     return (
         <List
@@ -30,6 +42,8 @@ function BeerContainer(props: BeerContainerProps) {
                         paddingRight: 10
                     }}
                 ></img>
+
+
                 <ListItemText
                     disableTypography
                     primary={
@@ -41,6 +55,9 @@ function BeerContainer(props: BeerContainerProps) {
             </ListItem>
             <BeerListCollapse name="Description" data={props.beer.description} />
             <BeerListCollapse name="Tagline" data={props.beer.tagline} />
+
+            <LikeButton id={Number(props.beer.id)} />
+
             <Divider />
         </List>
     );

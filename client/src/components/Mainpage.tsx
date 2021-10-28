@@ -8,6 +8,9 @@ import PageContainer from './page-container';
 import PageNumberCounter from './PageNumberCounter';
 import SearchBar from './searchBar';
 
+
+
+
 function Mainpage(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
     const theme = createTheme({
