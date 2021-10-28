@@ -5,15 +5,7 @@ import { DocumentNode, gql, useQuery } from '@apollo/client';
 import { Loading } from '../components';
 import List from '@mui/material/List';
 import BeerContainer from './BeerContainer';
-
-export interface Beer {
-    id: number
-    name: string
-    tagline: string
-    description: string
-    image_url: string
-    likes: number
-}
+import { IBeer } from '../interfaces/Beer';
 
 interface BeersVars {
     pageSize: number
@@ -22,7 +14,7 @@ interface BeersVars {
 }
 
 interface BeersData {
-    beers: Beer[]
+    beers: IBeer[]
 }
 
 function Beers(): JSX.Element {
@@ -45,8 +37,9 @@ function Beers(): JSX.Element {
         <List
             component="nav"
             aria-label=""
+            sx={{ paddingTop: "10px" }}
         >
-            {beers.map((beer: Beer) => {
+            {beers.map((beer: IBeer) => {
                 return (
                     <BeerContainer beer={beer} key={beer.id} />
                 );
@@ -64,6 +57,44 @@ export const GET_BEERS: DocumentNode = gql`
     description
     image_url
     first_brewed
+    food_pairing
+    brewers_tips
+    abv
+    ingredients {
+      hops {
+        name
+        add
+        attribute
+        amount {
+          unit
+          value
+        }
+      }
+      malt {
+        name
+        amount {
+          unit
+          value
+        }
+      }
+      yeast
+    }
+    method {
+      mash_temp {
+        duration
+        temp {
+          unit
+          value
+        }
+      }
+      fermentation {
+        temp {
+            value
+            unit
+        }
+      }
+      twist
+    }
     likes
   }
 }

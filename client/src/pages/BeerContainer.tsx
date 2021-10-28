@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import BeerListCollapse from './BeerListCollapse';
-import Divider from '@mui/material/Divider';
-import { IconButton, Typography } from '@material-ui/core';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import { Beer } from './beers';
+import React, { Fragment, useState } from 'react';
 import LikeButton from './LikeButton';
 import { gql, useMutation } from '@apollo/client';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import Card from '@mui/material/Card';
+import { IBeer } from '../interfaces/Beer';
+import Typography from '@mui/material/Typography';
+import BeerDescription from './BeerDescription';
+import BeerMethods from './BeerMethods';
+import BeerIngredients from './BeerIngredients';
+import { useSelector } from 'react-redux';
+import { AppState } from '../stateManagement/types';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 export interface BeerContainerProps {
-    beer: Beer
+    beer: IBeer
 }
 
 export const UPDATE_LIKES = gql`
@@ -24,42 +26,46 @@ mutation updateLikes($likes: Int!, $id: Int!) {
 }
 `;
 
-function BeerContainer(props: BeerContainerProps) {
+
+function BeerContainer(props: BeerContainerProps): JSX.Element {
+    
+    
+    const pageTheme = useSelector((state: AppState) => state.theme)
+    const cardTheme = pageTheme ? "#424242" :"#ffffff"
+
+    const theme = createTheme({
+        palette: {
+            mode: pageTheme ? "dark" : "light",
+        }
+    })
+
 
 
     return (
-        <List
-            component="nav"
-            aria-label=''
-        >
-            <ListItem>
-                <img
-                    aria-label="picture of beer,"
-                    src={props.beer.image_url}
-                    style={{
-                        width: "7%",
-                        height: "auto",
-                        paddingRight: 10
-                    }}
-                ></img>
-
-
-                <ListItemText
-                    disableTypography
-                    primary={
-                        <Typography aria-label={"beer name:, " + props.beer.name + " , "} variant="h6">
-                            {props.beer.name}
-                        </Typography>
-                    }
-                />
-            </ListItem>
-            <BeerListCollapse name="Description" data={props.beer.description} />
-            <BeerListCollapse name="Tagline" data={props.beer.tagline} />
-
-            <LikeButton id={Number(props.beer.id)} />
-
-            <Divider />
-        </List>
+        <ThemeProvider theme={theme}>
+        <Card sx={{ marginBottom: "1vh", }} square={true} elevation={3} style={{ backgroundColor: cardTheme }}>
+            <CardHeader 
+                avatar={
+                    <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
+                }
+                title={
+                    <Typography variant="h6">{props.beer.name}</Typography>
+                }
+                subheader={
+                    <Fragment>
+                        <Typography variant="subtitle2">{props.beer.tagline}</Typography>
+                        <Typography variant="subtitle1">{props.beer.abv +"%"}</Typography>
+                        <LikeButton id={Number(props.beer.id)}/>
+                    </Fragment>
+                }
+            />
+            
+                <BeerDescription name="Description" desc={props.beer.description} food_pairing={props.beer.food_pairing} />
+                <BeerMethods name="Methods/Timings" method={props.beer.method} brewers_tips={props.beer.brewers_tips} />
+                <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
+            
+        </Card>
+        </ThemeProvider>
     );
 }
 
