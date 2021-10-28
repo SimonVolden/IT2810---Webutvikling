@@ -46,13 +46,13 @@
         // toggling theme state from redux-store. 
         // check both states.
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         cy.get("[id=themeToggle]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: true,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: true,pageNumber: 1, search: "", field: "id", order: 1 })
         cy.get("[id=themeToggle]").click()    
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         })
 
     it("Test Page Number Counter", () => {
@@ -60,34 +60,34 @@
         // checks for both legal and illegal entries.
         // checks is redux-store changes state.
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         cy.get("[id=incPageNumber]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 2, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 2, search: "", field: "id", order: 1 })
         cy.get("[id=decPageNumber]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         cy.get("[id=decPageNumber]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         cy.get("[id=inputPageNumber]").click().type('{selectall}23')
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 23, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 23, search: "", field: "id", order: 1 })
         cy.get("[id=incPageNumber]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 24, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 24, search: "", field: "id", order: 1 })
         cy.get("[id=incPageNumber]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 24, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 24, search: "", field: "id", order: 1 })
         cy.get("[id=inputPageNumber]").click().type('{selectall}10')
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 10, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 10, search: "", field: "id", order: 1 })
         cy.get("[id=inputPageNumber]").click().type('{selectall}asfasfd100')
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 10, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 10, search: "", field: "id", order: 1 })
         cy.get("[id=clear]").click()
         cy.window().its('store').invoke('getState')
-            .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
         })
 
 
@@ -107,6 +107,7 @@
         cy.findByText("Buzz").should("exist")
         cy.findByText("Movember").should("not.exist")
         })
+
 
 
   })

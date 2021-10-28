@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from "../stateManagement/types";
 import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/material";
-import { setPageNumber, setSearch } from "../stateManagement/actions";
+import { setField, setOrder, setPageNumber, setSearch } from "../stateManagement/actions";
 import FilterMenu from "./filterMenu";
 
 /**
@@ -64,6 +64,8 @@ function SearchBar(): JSX.Element {
                     variant="contained" onClick={() => {
                         dispatch(setSearch(""))
                         dispatch(setPageNumber(1))
+                        dispatch(setOrder(1))
+                        dispatch(setField("id"))
                     }}
                     style={{ marginRight: 16 }}
                 > Clear </Button>
