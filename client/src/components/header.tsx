@@ -37,7 +37,7 @@ export default function Header(): JSX.Element {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Button variant="outlined" className={classes.button} onClick={() => {
+        <Button id="LogoutButton" variant="outlined" className={classes.button} onClick={() => {
           localStorage.setItem("access-token", "");
           for (let i: number = 1; i < 241; i++) {
             localStorage.setItem(String(i), "false");
@@ -46,12 +46,12 @@ export default function Header(): JSX.Element {
           history.push("/");
           window.location.reload()
         }}>Log out </Button>
-        <Typography variant="h6" align="center" className={classes.title}>
+        <Typography id="headerTitle" variant="h6" align="center" className={classes.title}>
           Beer API
         </Typography>
 
         <FormGroup>
-          <FormControlLabel aria-label={pageThemeAria} control={<Switch
+          <FormControlLabel id="themeToggle" aria-label={pageThemeAria} control={<Switch
             checked={pageTheme} onChange={() => {
               dispatch(changeTheme(pageTheme))
               window.localStorage.setItem('pageTheme', String(!pageTheme))

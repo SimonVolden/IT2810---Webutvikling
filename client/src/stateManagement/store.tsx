@@ -5,6 +5,12 @@ import { AppState } from "./types";
 
 function configureStore(): Store<AppState> {
     const store = createStore(rootReducer, undefined);
+    // expose store when run in Cypress
+    // @ts-ignore
+if (window.Cypress) {
+    // @ts-ignore
+    window.store = store
+  }
     return store;
 }
 //Hvis du vil bruke redux dev tools kan du erstatte undefined med

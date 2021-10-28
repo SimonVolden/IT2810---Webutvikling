@@ -113,6 +113,7 @@ export default function Login() {
                         />
 
                         <Button
+                            id="SignIn"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -125,7 +126,7 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link id="signUp" href="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

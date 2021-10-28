@@ -41,7 +41,7 @@ function SearchBar(): JSX.Element {
             <ThemeProvider theme={theme}>
             <TextField 
                 value={searchString}
-                id="Search for beer" 
+                id="searchField" 
                 aria-label="Beer search input field" 
                 margin="dense"
                 label="Beer search"
@@ -55,7 +55,7 @@ function SearchBar(): JSX.Element {
                 }}
                 />
                 </ThemeProvider>
-                <Button aria-label="Remove seach for beer"  
+                <Button id="clear" aria-label="Remove seach for beer"  
                 variant="contained" onClick={() => {
                     dispatch(setSearch(""))
                     dispatch(setPageNumber(1))

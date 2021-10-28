@@ -55,7 +55,7 @@ export default function PageNumberCounter():JSX.Element {
             justifyContent: "center"
         }}>
             <Typography aria-label="page Number">Page:</Typography>
-            <Button aria-label="Last Page button," onClick={() => {
+            <Button id="decPageNumber" aria-label="Last Page button," onClick={() => {
                 if (isDecPageNumberLegal(pageNumber)) {
                         dispatch(decrementPageNumber(pageNumber))
                     }
@@ -63,7 +63,7 @@ export default function PageNumberCounter():JSX.Element {
                 <NavigateBeforeIcon/>
             </Button>
             <Typography aria-label={"Current Page Number " + pageNumber}>{pageNumber}</Typography>
-            <Button aria-label=", Next Page button," onClick={() => {
+            <Button id="incPageNumber" aria-label=", Next Page button," onClick={() => {
                 if (isIncPageNumberLegal(pageNumber)){
                     dispatch(incrementPageNumber(pageNumber))
                 }
@@ -73,7 +73,7 @@ export default function PageNumberCounter():JSX.Element {
             </Button>
             <ThemeProvider theme={theme}>
                 <TextField 
-                    id="page-number-input" 
+                    id="inputPageNumber"
                     aria-label={"Page Number Input Field,"}
                     margin="dense"
                     label="Go to page"
