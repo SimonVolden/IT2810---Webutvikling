@@ -81,7 +81,13 @@ const typeDefs = gql`
   }
 
   type Query {
-    beers(pageSize: Int, after: Int, search: String): [Beer]!
+    beers(
+      pageSize: Int
+      after: Int
+      search: String
+      field: String
+      order: Int
+    ): [Beer]!
     beer(id: Int!): Beer!
     getBeersByName(pageSize: Int, after: Int, search: String): [Beer]
     users(email: String): User

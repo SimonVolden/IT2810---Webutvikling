@@ -13,12 +13,24 @@ module.exports = {
           return data[0];
         });
     },
-    beers(_parent, { pageSize = 20, after = 0, search }, _context, _info) {
+    beers(
+      _parent,
+      { pageSize = 20, after = 0, search, field = "id", order = 1 },
+      _context,
+      _info
+    ) {
+      const sortBydict = {};
+
+      if (field && order) {
+        sortBydict[field] = order;
+      }
+
       return _context.db
         .collection("beers_test")
         .find({
           name: { $regex: search, $options: "i" },
         })
+        .sort(sortBydict)
         .limit(pageSize)
         .skip(after * pageSize)
         .toArray()

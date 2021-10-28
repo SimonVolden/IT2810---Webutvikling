@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Beers from '../pages/beers';
 import { AppState } from '../stateManagement/types';
+import FilterMenu from './filterMenu';
 import Header from './header';
 import PageContainer from './page-container';
 import PageNumberCounter from './PageNumberCounter';

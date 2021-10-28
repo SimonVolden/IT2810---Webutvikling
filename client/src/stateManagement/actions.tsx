@@ -32,5 +32,18 @@ export function setSearch(search: string) {
     return {
         type: "SET_SEARCH",
         payload: search
-    }  as const;
+    } as const;
+}
+
+export function setOrder(order: number) {
+    return {
+        type: "SET_ORDER",
+        payload: order
+    } as const;
+}
+export function setField(field: string) {
+    return {
+        type: "SET_FIELD",
+        payload: field
+    } as const;
 }

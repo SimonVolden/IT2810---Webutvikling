@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { changeTheme, incrementPageNumber, decrementPageNumber, setPageNumber, setSearch} from './actions'
+import { changeTheme, incrementPageNumber, decrementPageNumber, setPageNumber, setSearch, setOrder, setField } from './actions'
 import { AppState } from './types'
 
 type ThemeActions = ReturnType<typeof changeTheme>;
@@ -9,8 +9,13 @@ type PageNumberActions = ReturnType<typeof incrementPageNumber> | ReturnType<typ
 
 type SearchActions = ReturnType<typeof setSearch>;
 
+type FieldActions = ReturnType<typeof setField>;
+
+type OrderActions = ReturnType<typeof setOrder>;
+
+
 //used to show correct theme when opening the page
-function getSavedTheme(): boolean{
+function getSavedTheme(): boolean {
     const savedTheme = localStorage.getItem('pageTheme')
     switch (savedTheme) {
         case ('true'):
@@ -32,7 +37,7 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     }
 }
 
-function  getSavedPageNumber(): number{
+function getSavedPageNumber(): number {
     const savedPageNumber = sessionStorage.getItem('pageNumber');
     if (savedPageNumber === null) {
         return 1
@@ -40,26 +45,44 @@ function  getSavedPageNumber(): number{
     return parseInt(savedPageNumber)
 }
 
-function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions){
+function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions) {
     switch (action.type) {
         case "INCREMENT_PAGE_NUMBER":
-            sessionStorage.setItem('pageNumber', String(state+1))
+            sessionStorage.setItem('pageNumber', String(state + 1))
             return ++state;
         case "DECREMENT_PAGE_NUMBER":
-            sessionStorage.setItem('pageNumber', String(state-1))
+            sessionStorage.setItem('pageNumber', String(state - 1))
             return --state;
         case "SET_PAGE_NUMBER":
             sessionStorage.setItem('pageNumber', String(action.payload))
             return action.payload;
-            
+
         default:
             return state;
     }
 }
 
-function searchReducer(state: string = "", action: SearchActions){
+function searchReducer(state: string = "", action: SearchActions) {
     switch (action.type) {
         case "SET_SEARCH":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+function fieldReducer(state: string = "id", action: FieldActions) {
+    switch (action.type) {
+        case "SET_FIELD":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+function orderReducer(state: number = 1, action: OrderActions) {
+    switch (action.type) {
+        case "SET_ORDER":
             return action.payload;
         default:
             return state;
@@ -71,4 +94,6 @@ export const rootReducer = combineReducers<AppState>({
     theme: themeReducer,
     pageNumber: pageNumberReducer,
     search: searchReducer,
+    field: fieldReducer,
+    order: orderReducer,
 });
