@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { Provider, useSelector } from 'react-redux';
-import { store } from "../stateManagement/store";
+import React from "react";
 import Mainpage from "./Mainpage";
 import SignUp from "../pages/Signup";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import { DocumentNode, gql, useQuery } from '@apollo/client';
-import Loading from "./loading";
-import Header from "./header";
-import { AppState } from "../stateManagement/types";
+
 
 const VALID_TOKEN: DocumentNode = gql`
     query Query ($token: String!) {
@@ -46,7 +42,6 @@ export default function App(): JSX.Element {
 
     if (!likeData) return <p>Not found. Please connect to VPN</p>;
 
-
     const beers = likeData.getLikedByUser
     beers.map(beer => {
         localStorage.setItem(String(beer), "true");
@@ -55,9 +50,6 @@ export default function App(): JSX.Element {
     if (!data) return <p>Not found. Please connect to VPN</p>;
     const valid = data.validToken;
 
-
-
-    //const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
     return (
         <Router>

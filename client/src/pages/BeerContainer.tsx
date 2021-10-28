@@ -1,6 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import LikeButton from './LikeButton';
-import { gql, useMutation } from '@apollo/client';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
@@ -17,21 +16,11 @@ export interface BeerContainerProps {
     beer: IBeer
 }
 
-export const UPDATE_LIKES = gql`
-mutation updateLikes($likes: Int!, $id: Int!) {
-    updateLikes(likes: $likes, id: $id){
-        likes
-        id
-    }
-}
-`;
-
 
 function BeerContainer(props: BeerContainerProps): JSX.Element {
-    
-    
+
     const pageTheme = useSelector((state: AppState) => state.theme)
-    const cardTheme = pageTheme ? "#424242" :"#ffffff"
+    const cardTheme = pageTheme ? "#424242" : "#ffffff"
 
     const theme = createTheme({
         palette: {
@@ -39,32 +28,30 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
         }
     })
 
-
-
     return (
         <ThemeProvider theme={theme}>
-        <Card sx={{ marginBottom: "1vh", }} square={true} elevation={3} style={{ backgroundColor: cardTheme }}>
-            <CardHeader 
-                avatar={
-                    <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
-                }
-                title={
-                    <Typography variant="h6">{props.beer.name}</Typography>
-                }
-                subheader={
-                    <Fragment>
-                        <Typography variant="subtitle2">{props.beer.tagline}</Typography>
-                        <Typography variant="subtitle1">{props.beer.abv +"%"}</Typography>
-                        <LikeButton id={Number(props.beer.id)}/>
-                    </Fragment>
-                }
-            />
-            
+            <Card sx={{ marginBottom: "1vh", }} square={true} elevation={3} style={{ backgroundColor: cardTheme }}>
+                <CardHeader
+                    avatar={
+                        <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
+                    }
+                    title={
+                        <Typography variant="h6">{props.beer.name}</Typography>
+                    }
+                    subheader={
+                        <Fragment>
+                            <Typography variant="subtitle2">{props.beer.tagline}</Typography>
+                            <Typography variant="subtitle1">{props.beer.abv + "%"}</Typography>
+                            <LikeButton id={Number(props.beer.id)} />
+                        </Fragment>
+                    }
+                />
+
                 <BeerDescription name="Description" desc={props.beer.description} food_pairing={props.beer.food_pairing} />
                 <BeerMethods name="Methods/Timings" method={props.beer.method} brewers_tips={props.beer.brewers_tips} />
                 <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
-            
-        </Card>
+
+            </Card>
         </ThemeProvider>
     );
 }

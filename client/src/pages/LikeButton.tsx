@@ -1,9 +1,8 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { IconButton } from "@material-ui/core";
 import React, { useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-
 
 
 export const UPDATE_LIKES = gql`
@@ -20,7 +19,6 @@ mutation Like($token: String!, $beerID: Int!) {
 }
 `
 
-
 export default function LikeButton(props: { id: number }): JSX.Element {
 
 
@@ -31,7 +29,6 @@ export default function LikeButton(props: { id: number }): JSX.Element {
         localStorage.setItem(String(props.id), String(!liked))
         setLiked(!liked);
     }
-
 
     return (
         <div>
@@ -49,8 +46,6 @@ export default function LikeButton(props: { id: number }): JSX.Element {
                     }).catch(error => {
                         console.log(error)
                     })
-
-
 
                 }}
             >
