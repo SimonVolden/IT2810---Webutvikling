@@ -20,9 +20,13 @@ mutation Like($token: String!, $beerID: Int!) {
 }
 `
 
-
+/**
+ * LikeButton that changes visuals depending on if the user has liked the beer or not.
+ * Updates the Database when the user likes a beer.
+ * @param props id of beer.
+ * @returns IconButton
+ */
 export default function LikeButton(props: { id: number }): JSX.Element {
-
 
     const [updateLike] = useMutation(UPDATE_LIKES);
     const [like] = useMutation(LIKE);
@@ -36,7 +40,7 @@ export default function LikeButton(props: { id: number }): JSX.Element {
     return (
         <div>
             <form
-                onSubmit={e => {
+                onSubmit={e => { //for useMutation, sending to the database.
                     e.preventDefault();
                     updateLike({ variables: { id: props.id, liked: liked } }).then(result => {
                         //console.log(result)
@@ -53,7 +57,7 @@ export default function LikeButton(props: { id: number }): JSX.Element {
 
 
                 }}
-            >
+            > {/** The actual button */}
                 <IconButton 
                     id={"LikeButton"+props.id} 
                     onClick={handleLiked} type="submit">{liked ? 

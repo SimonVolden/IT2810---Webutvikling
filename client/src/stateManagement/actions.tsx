@@ -1,4 +1,4 @@
-//Funksjoner som returnerer action-objekter
+//All the actions we use, wrapped in function
 
 export function changeTheme(theme: boolean) {
     return {

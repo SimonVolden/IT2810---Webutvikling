@@ -10,10 +10,14 @@ import SearchBar from './searchBar';
 
 
 
-
+/**
+ * The main web application. 
+ * If the user logs in, this is where he ends up.
+ * @returns The Page
+ */
 function Mainpage(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
-    const theme = createTheme({
+    const theme = createTheme({ //the main theme for the application
         palette: {
             type: pageTheme ? "dark" : "light",
         }

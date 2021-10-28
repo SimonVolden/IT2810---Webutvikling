@@ -17,6 +17,11 @@ interface BeersData {
     beers: IBeer[]
 }
 
+/**
+ * Beers collects the data from the database with Apollo. Makes a map of beers.
+ * Each beer is presented with the JSX.Element BeerContainer. 
+ * @returns Cards of Beers
+ */
 function Beers(): JSX.Element {
     const search = useSelector((state: AppState) => state.search)
     const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1;

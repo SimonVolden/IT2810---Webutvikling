@@ -3,13 +3,15 @@ import { combineReducers } from "redux";
 import { changeTheme, incrementPageNumber, decrementPageNumber, setPageNumber, setSearch} from './actions'
 import { AppState } from './types'
 
+//types of Actions from ./actions
+
 type ThemeActions = ReturnType<typeof changeTheme>;
 
 type PageNumberActions = ReturnType<typeof incrementPageNumber> | ReturnType<typeof decrementPageNumber> | ReturnType<typeof setPageNumber>;
 
 type SearchActions = ReturnType<typeof setSearch>;
 
-//used to show correct theme when opening the page
+//Helper, used to show correct theme when opening the page
 function getSavedTheme(): boolean{
     const savedTheme = localStorage.getItem('pageTheme')
     switch (savedTheme) {
@@ -23,6 +25,7 @@ function getSavedTheme(): boolean{
     }
 }
 
+//Toggles the theme
 function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     switch (action.type) {
         case "CHANGE_THEME":
@@ -32,6 +35,7 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     }
 }
 
+//Helper, used to get the saved page from localstorage.
 function  getSavedPageNumber(): number{
     const savedPageNumber = sessionStorage.getItem('pageNumber');
     if (savedPageNumber === null) {
@@ -40,6 +44,7 @@ function  getSavedPageNumber(): number{
     return parseInt(savedPageNumber)
 }
 
+//Inc, Dec or sets the pageNumber
 function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions){
     switch (action.type) {
         case "INCREMENT_PAGE_NUMBER":
@@ -57,6 +62,7 @@ function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNum
     }
 }
 
+//Sets the search-string, "" as default
 function searchReducer(state: string = "", action: SearchActions){
     switch (action.type) {
         case "SET_SEARCH":
@@ -66,7 +72,7 @@ function searchReducer(state: string = "", action: SearchActions){
     }
 }
 
-//Utility-funksjon for å kombinere flere reducere
+//Utility-function to combine all reducers
 export const rootReducer = combineReducers<AppState>({
     theme: themeReducer,
     pageNumber: pageNumberReducer,

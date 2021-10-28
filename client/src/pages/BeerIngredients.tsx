@@ -21,16 +21,22 @@ interface BeerIngredientsProps {
     ingredients: Ingredients
 }
 
+/**
+ * The dropdown menu with the Beer Ingredient elements presented in a Table
+ * @param props Beer Ingredients elements
+ * @returns JSX.Element
+ */
 function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
 
     const pageTheme = useSelector((state: AppState) => state.theme)
-    
+    //subclass that inherits from Typograpyh, changes font color
     const ColorTextTypography = withStyles({
         root: {
             color: pageTheme ? "#ffffff" : "#000000",
         }
       })(Typography);
 
+    //Helper function, display The Amount in lbs and kg.
     function displayAmount(amount: Amount, imperial: boolean): string {
         if (amount.unit === "grams") {
             return imperial ? metricToImperial(amount.value / 1000) + "lbs" : (amount.value / 1000) + "kg";
@@ -39,12 +45,13 @@ function BeerIngredients(props: BeerIngredientsProps): JSX.Element {
         }
     }
 
+    //Converts metric to imperial
     function metricToImperial(kg: number): number {
         return +(kg * 2.2).toFixed(2);
     }
 
     return (
-        <CardContent>
+        <CardContent> {/** Main Card element */}
             <Toolbar variant="dense">
                 <ColorTextTypography variant="body1" > {/*component="div"*/}
                     Malt
