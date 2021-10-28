@@ -9,8 +9,8 @@
         // log in to user 1234@1234.no with correct credentials.
         // clearing saved filters and searches.
         cy.visit('http://localhost:3000')
-        cy.get("[id=email]").should("exist").type("1234@1234.no")
-        cy.get("[id=password]").should("exist").type(1234)
+        cy.get("[id=email]").should("exist").type("cypress@cypress.no")
+        cy.get("[id=password]").should("exist").type("cypress")
         cy.get("[id=SignIn]").should("exist").click()
         cy.get("[id=clear]").click()
 
@@ -34,8 +34,8 @@
         cy.get("[id=LogoutButton]").click()
         cy.get("[id=headerTitle]").should("not.exist")
         cy.get("[id=signUp]").should("exist").click()
-        cy.get("[id=email]").should("exist").type("1234@1234.no")
-        cy.get("[id=password]").should("exist").type("1234")
+        cy.get("[id=email]").should("exist").type("cypress@cypress.no")
+        cy.get("[id=password]").should("exist").type("cypress")
         cy.get("[id=signUpButton]").click().should("exist").click()
         //since it wont redirect us with a used name
         cy.get("[id=signUp]").should("not.exist") 
@@ -107,6 +107,81 @@
         cy.findByText("Buzz").should("exist")
         cy.findByText("Movember").should("not.exist")
         })
+        
+    it("Test Change of sorting by name", () =>{
+        //sort by name
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("#Mashtag 2013").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+        cy.get("[id=FilterButton]").should("exist").click()
+        cy.get("[id=name-menu-item]").should("exist").click()
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "name", order: 1 })
+        cy.findByText("#Mashtag 2013").should("exist")
+        cy.findByText("Buzz").should("not.exist")
+        cy.get("[id=clear]").click()
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("#Mashtag 2013").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+    })
+
+    it("Test Change of sorting by Alcohol precentage", () => {
+        //sort by alcohol percentage
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("Nanny State").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+        cy.get("[id=FilterButton]").should("exist").click()
+        cy.get("[id=abv-menu-item]").should("exist").click()
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "abv", order: 1 })
+        cy.findByText("Buzz").should("not.exist")
+        cy.findByText("Nanny State").should("exist")
+        cy.get("[id=clear]").click()
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("Nanny State").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+    })
+
+    it("Test Change of sorting by Likes", ()=> {
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("Russian Doll – India Pale Ale").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+        cy.get("[id=FilterButton]").should("exist").click()
+        cy.get("[id=likes-menu-item]").should("exist").click()
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "likes", order: 1 })
+        cy.findByText("Buzz").should("not.exist")
+        cy.findByText("Russian Doll – India Pale Ale").should("exist")
+        cy.get("[id=clear]").click()
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("Russian Doll – India Pale Ale").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+
+    })
+
+    it("Test Change of order functions", ()=>{
+        //testing sorting by id, changing order to dec.
+        cy.findByText("Buzz").should("exist")
+        cy.findByText("Blitz Saison").should("not.exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: 1 })
+        cy.get("[id=FilterButton]").should("exist").click()
+        cy.get("[id=id-menu-item]").should("exist").click()
+        cy.findByText("Buzz").should("not.exist")
+        cy.findByText("Blitz Saison").should("exist")
+        cy.window().its('store').invoke('getState')
+            .should("deep.equal", {  theme: false,pageNumber: 1, search: "", field: "id", order: -1 })
+    })
+
+
+        
+
 
 
 

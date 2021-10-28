@@ -39,7 +39,7 @@ export default function FilterMenu(): JSX.Element {
             <div>
                 <Button
                     className={classes.button}
-                    id="basic-button"
+                    id="FilterButton"
                     aria-controls="basic-menu"
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
@@ -48,7 +48,7 @@ export default function FilterMenu(): JSX.Element {
                     <MenuIcon />
                 </Button>
                 <Menu
-                    id="basic-menu"
+                    id="FilterMenu"
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
@@ -57,7 +57,7 @@ export default function FilterMenu(): JSX.Element {
                     }}
                 >
                     <MenuItem
-                        id="label-menu-item"
+                        id="id-menu-item"
                         onClick={() => {
                             handleClose();
                             if (field !== "id") {
@@ -67,7 +67,7 @@ export default function FilterMenu(): JSX.Element {
                         }}>ID
                     </MenuItem>
                     <MenuItem
-                        id="issue-menu-item"
+                        id="name-menu-item"
                         onClick={() => {
                             handleClose();
                             if (field !== "name") {
@@ -77,7 +77,7 @@ export default function FilterMenu(): JSX.Element {
 
                         }}>Name</MenuItem>
                     <MenuItem
-                        id="user-menu-item"
+                        id="abv-menu-item"
                         onClick={() => {
                             handleClose();
                             if (field !== "abv") {
@@ -86,7 +86,7 @@ export default function FilterMenu(): JSX.Element {
                             dispatch(setField("abv"));
                         }}>Alcohol Percentage</MenuItem>
                     <MenuItem
-                        id="branch-menu-item"
+                        id="likes-menu-item"
                         onClick={() => {
                             handleClose();
                             if (field !== "likes") {
