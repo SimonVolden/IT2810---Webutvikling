@@ -2,6 +2,10 @@ const crypto = require("crypto");
 
 module.exports = {
   Query: {
+    /**
+     * Query to get a single beer-object from id.
+     * @returns Beer
+     */
     beer(_parent, { id }, _context, _info) {
       return _context.db
         .collection("beers_test")
@@ -13,6 +17,16 @@ module.exports = {
           return data[0];
         });
     },
+
+    /**
+     * Query to get all beers matching the current parameters.
+     * @param {pageSize} pageSize default 20
+     * @param {after} after Page (How many items you skip)
+     * @param {*} search Beers with name matching search
+     * @param {*} field default "id", beers are sorted by field
+     * @param {*} order default 1, 1 for ASC, -1 for DESC
+     * @returns Array<Beer> matching the parameters.
+     */
     beers(
       _parent,
       { pageSize = 20, after = 0, search, field = "id", order = 1 },
@@ -40,6 +54,11 @@ module.exports = {
           return data;
         });
     },
+    /**
+     * Finds user with corresponding email
+     * @param {*} email Finds user with email matching input
+     * @returns user
+     */
     users: async (_parent, { email }, _context, _info) => {
       return _context.db
         .collection("users")
@@ -49,6 +68,11 @@ module.exports = {
           return data[0];
         });
     },
+    /**
+     * Query to check if token is valid
+     * @param {*} Token Checks if there is a user with the same token
+     * @returns boolean, true if there is a user with that token, else false.
+     */
     validToken: async (_parent, { token }, _context, _info) => {
       const user = await _context.db
         .collection("users")
@@ -63,6 +87,12 @@ module.exports = {
         return false;
       }
     },
+
+    /**
+     * Query to get all the likes of one user
+     * @param {*} token Users access token
+     * @returns Beer[]
+     */
     getLikedByUser: async (_parent, { token }, _context, _info) => {
       const user = await _context.db
         .collection("users")
@@ -91,6 +121,12 @@ module.exports = {
   },
 
   Mutation: {
+    /**
+     * Add 1 to likes if not already liked by the user, removes 1 if it has been liked.
+     * @param {*} id int
+     * @param {*} liked boolean
+     * @returns void
+     */
     updateLikes: async (_, { id, liked }, _context, _info) => {
       let likes;
       await _context.db
@@ -129,6 +165,15 @@ module.exports = {
           );
       }
     },
+    /**
+     * Mutation used when logging in. Takes in an email and password and 
+     * creates a SHA512 token based on said email and password and checks if
+     * there exists a user in the database with the corresponding email and token.
+     * @param {*} email
+     * @param {*} password 
+
+     * @returns user
+     */
     login: async (_, { email, password }, _context, _info) => {
       const token = crypto
         .createHash("sha512")
@@ -146,6 +191,14 @@ module.exports = {
       }
       return user;
     },
+
+    /**
+     * Creates a user with the given email and password.
+     * If there already exists a user with the given email, return false.
+     * @param {*} email
+     * @param {*} password
+     * @returns true or false
+     */
     signup: async (_, { email, password }, _context, _info) => {
       //Checks if user exsists
       const user = await _context.db
@@ -167,6 +220,14 @@ module.exports = {
         return false;
       }
     },
+
+    /**
+     * Creates a like-relation between user and beer.
+     * If such relation already exists, delete the relation
+     * @param {*} token String
+     * @param {*} beerID Int
+     * @returns true or false
+     */
     like: async (_, { token, beerID }, _context, _info) => {
       const user = await _context.db
         .collection("users")
