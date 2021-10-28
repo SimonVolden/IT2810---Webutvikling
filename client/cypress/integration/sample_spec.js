@@ -1,16 +1,13 @@
 // sample_spec.js created with Cypress
-//
-// Start writing your Cypress tests below!
-// If you're unfamiliar with how Cypress works,
-// check out the link below and learn how to write your first test:
-// https://on.cypress.io/writing-first-test
 
 // run from ./client/ with:
 // node_modules\.bin\cypress open
 
-  describe('User Test', () => {
+  describe('End To End test', () => {
     
     beforeEach('Log in to the Beer Webpage', () => {
+        // log in to user 1234@1234.no with correct credentials.
+        // clearing saved filters and searches.
         cy.visit('http://localhost:3000')
         cy.get("[id=email]").should("exist").type("1234@1234.no")
         cy.get("[id=password]").should("exist").type(1234)
@@ -20,6 +17,10 @@
     })
 
     it("Test Like Button", () => {
+        // looking for ulikebutton that should not exist
+        // liking a beer that should not be liked
+        // looking for likebutton that should not exist
+        // uliking a beer that should not be uliked
         cy.get("[id=ThumbUpButton8]").should("not.exist")
         cy.get("[id=ThumbUpOutlinedButton8]").should("exist").click()
         cy.get("[id=ThumbUpOutlinedButton8]").should("not.exist")
@@ -41,19 +42,9 @@
     })
 
 
-    /*
-    it("Test Logout and making new user", () =>{
-        cy.get("[id=headerTitle]").should("exist")
-        cy.get("[id=LogoutButton]").click()
-        cy.get("[id=headerTitle]").should("not.exist")
-        cy.get("[id=signUp]").should("exist").click()
-        cy.get("[id=email]").should("exist")
-        cy.get("[id=password]").should("exist")
-    })
-    */
-
-
     it("Test Theme Toggle", ()=> {
+        // toggling theme state from redux-store. 
+        // check both states.
         cy.window().its('store').invoke('getState')
             .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
         cy.get("[id=themeToggle]").click()
@@ -65,6 +56,9 @@
         })
 
     it("Test Page Number Counter", () => {
+        // Tries different usecases for checking page number, 
+        // checks for both legal and illegal entries.
+        // checks is redux-store changes state.
         cy.window().its('store').invoke('getState')
             .should("deep.equal", {  theme: false,pageNumber: 1, search: "" })
         cy.get("[id=incPageNumber]").click()
@@ -98,6 +92,9 @@
 
 
     it("Test Search function", () => {
+        // checking different usecases for the search bar.
+        // checks if the correct items shows up.
+        // checks if the clear button works as intended.
         cy.findByText("Buzz").should("exist")
         cy.findByText("Trashy Blonde").should("exist")
         cy.get("[id=searchField]").type("Buzz")
