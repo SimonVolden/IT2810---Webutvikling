@@ -1,6 +1,6 @@
 import { Button, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setOrder } from "../stateManagement/actions";
 import { AppState } from "../stateManagement/types";
@@ -29,7 +29,7 @@ export default function FilterMenu(): JSX.Element {
     };
     function handleClose() {
         setAnchorEl(null);
-        dispatch(setOrder(order == 1 ? -1 : 1))
+        dispatch(setOrder(order === 1 ? -1 : 1))
         console.log(order)
     }
 
@@ -60,7 +60,7 @@ export default function FilterMenu(): JSX.Element {
                         id="label-menu-item"
                         onClick={() => {
                             handleClose();
-                            if (field != "id") {
+                            if (field !== "id") {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("id"));
@@ -70,7 +70,7 @@ export default function FilterMenu(): JSX.Element {
                         id="issue-menu-item"
                         onClick={() => {
                             handleClose();
-                            if (field != "name") {
+                            if (field !== "name") {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("name"));
@@ -80,7 +80,7 @@ export default function FilterMenu(): JSX.Element {
                         id="user-menu-item"
                         onClick={() => {
                             handleClose();
-                            if (field != "abv") {
+                            if (field !== "abv") {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("abv"));
@@ -89,7 +89,7 @@ export default function FilterMenu(): JSX.Element {
                         id="branch-menu-item"
                         onClick={() => {
                             handleClose();
-                            if (field != "likes") {
+                            if (field !== "likes") {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("likes"));
