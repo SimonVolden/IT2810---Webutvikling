@@ -49,20 +49,6 @@ export default function PageNumberCounter():JSX.Element {
         }
     })
 
-    function isDecPageNumberLegal(nextPageNumber: number){
-        return nextPageNumber-1 >=1
-    }
-    function legalInput(input: string): number{
-        const numberInput = Number(input)
-
-        if (numberInput) {
-            if (numberInput >=1) {
-                return numberInput; 
-        }}
-        return pageNumber
-    }
-
-
     return(
         <>
         <Toolbar sx={{
@@ -99,8 +85,14 @@ export default function PageNumberCounter():JSX.Element {
                     InputLabelProps={{ color: "primary" }}
                     inputProps={{ color: "primary", inputMode: 'numeric', pattern: '[0-9]*' }} 
                     onChange={(event) => {
-                        dispatch(setPageNumber(legalInput(event.target.value)))
-                    }}
+                        if (legalInput(Number(event.target.value))){
+                            dispatch(setPageNumber(Number(event.target.value)))
+                            }
+                        else {
+                            dispatch(setPageNumber(pageNumber))
+                            }   
+                        }
+                    }
                     />
                 </ThemeProvider>
         </Toolbar>
