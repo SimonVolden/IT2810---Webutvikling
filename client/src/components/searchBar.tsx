@@ -5,14 +5,18 @@ import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/mat
 import { setPageNumber, setSearch } from "../stateManagement/actions";
 import FilterMenu from "./filterMenu";
 
-
-
-
+/**
+ * The searchbar with a TextField for search input and a clear 
+ * button that resets the search, filters and pageNumber states.
+ * 
+ * @returns The Search Bar as a JSX.Element
+ */
 function SearchBar(): JSX.Element {
     const searchString = useSelector((state: AppState) => state.search)
     const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
 
+    //used to get better readable colors on the TextField entries
     const theme = createTheme({
         components: {
             MuiInputBase: {
@@ -34,7 +38,7 @@ function SearchBar(): JSX.Element {
 
 
 
-    return (
+    return ( //Themeprovider is used to input correct theme format (@mui, not @material-ui)
         <>
             <Toolbar sx={{
                 justifyContent: "center",
@@ -42,7 +46,7 @@ function SearchBar(): JSX.Element {
                 <ThemeProvider theme={theme}>
                     <TextField
                         value={searchString}
-                        id="Search for beer"
+                        id="searchField" 
                         aria-label="Beer search input field"
                         margin="dense"
                         label="Beer search"
@@ -56,7 +60,7 @@ function SearchBar(): JSX.Element {
                         }}
                     />
                 </ThemeProvider >
-                <Button aria-label="Remove seach for beer"
+                <Button id="clear" aria-label="Remove seach for beer"
                     variant="contained" onClick={() => {
                         dispatch(setSearch(""))
                         dispatch(setPageNumber(1))

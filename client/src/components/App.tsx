@@ -35,7 +35,10 @@ interface QueryData {
     getLikedByUser: [Number]
 }
 
-
+/**
+ * Sends the user to the correct page.
+ * @returns Login page, or Signup page, or Mainpage
+ */
 export default function App(): JSX.Element {
     const likeData = useQuery<QueryData, QueryVars>(GET_LIKED_BY_USER, { variables: { token: String(localStorage.getItem("access-token")) } }).data
     const data = useQuery<TokenData, TokenVars>(VALID_TOKEN, { variables: { token: String(localStorage.getItem("access-token")) } }).data
@@ -64,7 +67,7 @@ export default function App(): JSX.Element {
                     <SignUp />
                 </Route>
                 <Route path="/login">
-                    <Login />
+                    <Login /> 
                 </Route>
             </Switch>
         </Router>

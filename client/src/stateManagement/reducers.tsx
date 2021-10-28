@@ -3,6 +3,8 @@ import { combineReducers } from "redux";
 import { changeTheme, incrementPageNumber, decrementPageNumber, setPageNumber, setSearch, setOrder, setField } from './actions'
 import { AppState } from './types'
 
+//types of Actions from ./actions
+
 type ThemeActions = ReturnType<typeof changeTheme>;
 
 type PageNumberActions = ReturnType<typeof incrementPageNumber> | ReturnType<typeof decrementPageNumber> | ReturnType<typeof setPageNumber>;
@@ -13,9 +15,8 @@ type FieldActions = ReturnType<typeof setField>;
 
 type OrderActions = ReturnType<typeof setOrder>;
 
-
-//used to show correct theme when opening the page
-function getSavedTheme(): boolean {
+//Helper, used to show correct theme when opening the page
+function getSavedTheme(): boolean{
     const savedTheme = localStorage.getItem('pageTheme')
     switch (savedTheme) {
         case ('true'):
@@ -28,6 +29,7 @@ function getSavedTheme(): boolean {
     }
 }
 
+//Toggles the theme
 function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     switch (action.type) {
         case "CHANGE_THEME":
@@ -37,7 +39,8 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
     }
 }
 
-function getSavedPageNumber(): number {
+//Helper, used to get the saved page from localstorage.
+function  getSavedPageNumber(): number{
     const savedPageNumber = sessionStorage.getItem('pageNumber');
     if (savedPageNumber === null) {
         return 1
@@ -45,7 +48,8 @@ function getSavedPageNumber(): number {
     return parseInt(savedPageNumber)
 }
 
-function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions) {
+//Inc, Dec or sets the pageNumber
+function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions){
     switch (action.type) {
         case "INCREMENT_PAGE_NUMBER":
             sessionStorage.setItem('pageNumber', String(state + 1))
@@ -62,7 +66,8 @@ function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNum
     }
 }
 
-function searchReducer(state: string = "", action: SearchActions) {
+//Sets the search-string, "" as default
+function searchReducer(state: string = "", action: SearchActions){
     switch (action.type) {
         case "SET_SEARCH":
             return action.payload;
@@ -71,6 +76,7 @@ function searchReducer(state: string = "", action: SearchActions) {
     }
 }
 
+//Sets the filter field
 function fieldReducer(state: string = "id", action: FieldActions) {
     switch (action.type) {
         case "SET_FIELD":
@@ -80,6 +86,7 @@ function fieldReducer(state: string = "id", action: FieldActions) {
     }
 }
 
+//Sets the order
 function orderReducer(state: number = 1, action: OrderActions) {
     switch (action.type) {
         case "SET_ORDER":

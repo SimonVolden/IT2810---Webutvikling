@@ -9,9 +9,12 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { AppState } from '../stateManagement/types';
 import { useSelector } from 'react-redux';
 
-// TODO Add typing (how to?)
+/**
+ * Card Components wrapped to be Collabsable 
+ * @param WrappedComponent 
+ * @returns The prop Component as a Collabsable Element
+ */
 function withCollapseContainer(WrappedComponent: any) {
-
 
     return function Wrapped(props: any) {
 
@@ -21,8 +24,9 @@ function withCollapseContainer(WrappedComponent: any) {
             e.preventDefault();
             setExpanded(!isExpanded);
         }
-        const pageTheme = useSelector((state: AppState) => state.theme)
 
+        //correctly sets the pageTheme with the right ThemeProvider
+        const pageTheme = useSelector((state: AppState) => state.theme)
         const theme = createTheme({
             palette: {
                 mode: pageTheme ? "dark" : "light",

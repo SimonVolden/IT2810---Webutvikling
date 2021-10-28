@@ -15,7 +15,8 @@ import { useHistory } from 'react-router';
 import { useState } from 'react';
 
 
-function Copyright(props: any) {
+function Copyright(props: any) { //Collected from material-ui, dont press link
+    //https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
@@ -39,6 +40,11 @@ mutation Mutation($email: String!, $password: String!) {
 }
 `;
 
+/**
+ * The login page, from material-ui template
+ * https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+ * @returns The login page
+ */
 export default function Login() {
     const [login] = useMutation(LOGIN);
     const history = useHistory();
@@ -111,6 +117,7 @@ export default function Login() {
                         />
 
                         <Button
+                            id="SignIn"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -123,7 +130,7 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link id="signUp" href="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

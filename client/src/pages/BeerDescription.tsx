@@ -18,10 +18,17 @@ interface BeerDescriptionProps {
 }
 //jeg fjernet " component="div"  " fra linje 41, var det viktig?
 
+
+/**
+ * The dropdown menu with the Description elements presented in a Table
+ * @param props Beer Description elements
+ * @returns JSX.Element
+ */
 function BeerDescription(props: BeerDescriptionProps): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
     
-    const ColorTextTypography = withStyles({
+    //subclass that inherits from Typograpyh, changes font color
+    const ColorTextTypography = withStyles({ 
         root: {
             color: pageTheme ? "#ffffff" : "#000000",
         }

@@ -7,6 +7,7 @@ import { changeTheme } from "../stateManagement/actions";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  //styles for certain page elements
   root: {
     flexGrow: 1,
   },
@@ -23,21 +24,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 }));
 
+/**
+ * The Header where the dark Mode toggle, Title and logout button exists.
+ * @returns Returns the header Bar
+ */
 export default function Header(): JSX.Element {
   const history = useHistory();
   const pageTheme = useSelector((state: AppState) => state.theme)
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const classes = useStyles(); //styles for certain page elements
   const pageThemeAria = pageTheme ? "Page Theme toggle, current theme is dark" : "Page Theme toggle, current theme is light"
 
-  const pageNumber = useSelector((state: AppState) => state.pageNumber) - 1
 
-
-  console.log(pageNumber)
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <FormGroup>
+        <FormGroup> {/**Theme toggle */}
           <FormControlLabel aria-label={pageThemeAria} control={<Switch
             checked={pageTheme} onChange={() => {
               dispatch(changeTheme(pageTheme))
@@ -45,9 +47,11 @@ export default function Header(): JSX.Element {
             }
             } />} label={"Dark Mode"} />
         </FormGroup>
+        {/**page Title */}
         <Typography variant="h6" align="center" className={classes.title}>
           Beer API
         </Typography>
+        {/** Logout button */}
         <Button variant="outlined" className={classes.button} onClick={() => {
           localStorage.setItem("access-token", "");
           for (let i: number = 1; i < 241; i++) {

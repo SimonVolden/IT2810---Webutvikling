@@ -19,6 +19,11 @@ interface BeerMethodsProps {
     brewers_tips: string
 }
 
+/**
+ * The dropdown menu with the Beer Method elements presented in a Table
+ * @param props Beer Method elements
+ * @returns JSX.Element
+ */
 function BeerMethods(props: BeerMethodsProps): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
     
@@ -29,11 +34,12 @@ function BeerMethods(props: BeerMethodsProps): JSX.Element {
       })(Typography);
 
 
-    // Antar celsius ettersom eneste enhet brukt I dataen er celsius selv om det er definert enhet og en mer komplett løsning ville vær å ta høyde for begge
+    //All data is saved as celsius, this converts it to Fahrenheit
     function celsiusToFahrenheit(c: number): number {
         return Math.round(((c + 40) * 1.8) - 40);
     }
 
+    //adds minutes to number
     function getMinutes(m: number): string {
         if (m === null) return "N/A";
         return m + " minutes";

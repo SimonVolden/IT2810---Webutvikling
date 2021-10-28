@@ -15,6 +15,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useState } from 'react';
 
 function Copyright(props: any) {
+    //https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
@@ -35,6 +36,12 @@ mutation SignupMutation ($email: String!, $password: String!) {
 
 const theme = createTheme();
 
+/** 
+ * Lets the user create a user.
+ * users is saved in the database.
+ * https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up
+ * @returns 
+ */
 export default function SignUp() {
     const [signup] = useMutation(SIGNUP);
     const history = useHistory();
@@ -102,6 +109,7 @@ export default function SignUp() {
                             </Grid>
                         </Grid>
                         <Button
+                            id="signUpButton"
                             type="submit"
                             fullWidth
                             variant="contained"
