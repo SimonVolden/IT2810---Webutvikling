@@ -5,6 +5,9 @@
 // check out the link below and learn how to write your first test:
 // https://on.cypress.io/writing-first-test
 
+// run from ./client/ with:
+// node_modules\.bin\cypress open
+
   describe('User Test', () => {
     
     beforeEach('Log in to the Beer Webpage', () => {
