@@ -14,7 +14,8 @@ import { store } from './stateManagement/store';
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
-  uri: 'http://localhost:4000/graphql'
+  //uri: 'http://localhost:4000/graphql'
+  uri: 'http://it2810-44.idi.ntnu.no:4000'
 });
 
 injectStyles();
