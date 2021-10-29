@@ -53,15 +53,15 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
             {/** Header with Picture, Title, tagline and alcohol level */}
             <CardHeader 
                 avatar={
-                    <Avatar alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
+                    <Avatar aria-label="picture of beer" alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
                 }
                 title={
-                    <Typography variant="h6">{props.beer.name}</Typography>
+                    <Typography aria-label={"Beer name: " + props.beer.name} variant="h6">{props.beer.name}</Typography>
                 }
                 subheader={
                     <Fragment>
-                        <Typography variant="subtitle2">{props.beer.tagline}</Typography>
-                        <Typography variant="subtitle1">{props.beer.abv +"%"}</Typography>
+                        <Typography aria-label={"Tagline: " + props.beer.tagline} variant="subtitle2">{props.beer.tagline}</Typography>
+                        <Typography aria-label={"Alcohol percentage: " + props.beer.abv} variant="subtitle1">{props.beer.abv +"%"}</Typography>
                         <LikeButton id={Number(props.beer.id)}/>
                     </Fragment>
                 }
