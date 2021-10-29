@@ -24,4 +24,5 @@ export interface IBeer {
     food_pairing: string[];
     brewers_tips: string;
     contributed_by: string;
+    likes: number
 }

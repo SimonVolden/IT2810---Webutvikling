@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Mainpage from "./Mainpage";
 import SignUp from "../pages/Signup";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -46,12 +46,12 @@ export default function App(): JSX.Element {
     const data = useQuery<TokenData, TokenVars>(VALID_TOKEN, { variables: { token: String(localStorage.getItem("access-token")) } }).data
 
     const signup = useSelector((state: AppState) => state.signup)
-    
+
 
     if (!likeData) return <p>Not found. Please connect to VPN</p>;
 
     const beers = likeData.getLikedByUser
-    beers.map(beer => {
+    beers.forEach(beer => {
         localStorage.setItem(String(beer), "true");
     })
 
@@ -71,7 +71,7 @@ export default function App(): JSX.Element {
                     <SignUp />
                 </Route>
                 <Route exact path="/prosjekt3/login">
-                    <Login /> 
+                    <Login />
                 </Route>
             </Switch>
         </Router>

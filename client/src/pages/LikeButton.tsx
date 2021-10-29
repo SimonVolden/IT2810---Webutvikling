@@ -1,8 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Toolbar } from "@material-ui/core";
 import React, { useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+
 
 
 export const UPDATE_LIKES = gql`
@@ -25,14 +26,17 @@ mutation Like($token: String!, $beerID: Int!) {
  * @param props id of beer.
  * @returns IconButton
  */
-export default function LikeButton(props: { id: number }): JSX.Element {
+export default function LikeButton(props: { id: number, likes: number }): JSX.Element {
 
+    const [likes, setLikes] = useState<number>(props.likes)
     const [updateLike] = useMutation(UPDATE_LIKES);
     const [like] = useMutation(LIKE);
     const [liked, setLiked] = useState<boolean>((localStorage.getItem(String(props.id)) === "true"));
     function handleLiked() {
         localStorage.setItem(String(props.id), String(!liked))
+        liked ? setLikes(likes - 1) : setLikes(likes + 1)
         setLiked(!liked);
+
     }
 
     return (
@@ -54,11 +58,14 @@ export default function LikeButton(props: { id: number }): JSX.Element {
 
                 }}
             > {/** The actual button */}
-                <IconButton 
-                    id={"LikeButton"+props.id} 
-                    onClick={handleLiked} type="submit">{liked ? 
-                        <ThumbUpIcon aria-label="unlike beer" id={"ThumbUpButton"+props.id}/> : 
-                        <ThumbUpOutlinedIcon aria-label="Like beer" id={"ThumbUpOutlinedButton"+props.id} />}</IconButton>
+                <Toolbar>
+                    <IconButton
+                        id={"LikeButton" + props.id}
+                        onClick={handleLiked} type="submit">{liked ?
+                            <ThumbUpIcon aria-label="unlike beer" id={"ThumbUpButton" + props.id} /> :
+                            <ThumbUpOutlinedIcon aria-label="Like beer" id={"ThumbUpOutlinedButton" + props.id} />}</IconButton>
+                    {likes}
+                </Toolbar>
             </form>
         </div>
     )

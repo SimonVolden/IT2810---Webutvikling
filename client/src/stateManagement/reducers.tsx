@@ -18,7 +18,7 @@ type OrderActions = ReturnType<typeof setOrder>;
 type SignupActions = ReturnType<typeof setSignup>;
 
 //Helper, used to show correct theme when opening the page
-function getSavedTheme(): boolean{
+function getSavedTheme(): boolean {
     const savedTheme = localStorage.getItem('pageTheme')
     switch (savedTheme) {
         case ('true'):
@@ -42,7 +42,7 @@ function themeReducer(state: boolean = getSavedTheme(), action: ThemeActions) {
 }
 
 //Helper, used to get the saved page from localstorage.
-function  getSavedPageNumber(): number{
+function getSavedPageNumber(): number {
     const savedPageNumber = sessionStorage.getItem('pageNumber');
     if (savedPageNumber === null) {
         return 1
@@ -51,7 +51,7 @@ function  getSavedPageNumber(): number{
 }
 
 //Inc, Dec or sets the pageNumber
-function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions){
+function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNumberActions) {
     switch (action.type) {
         case "INCREMENT_PAGE_NUMBER":
             sessionStorage.setItem('pageNumber', String(state + 1))
@@ -69,7 +69,7 @@ function pageNumberReducer(state: number = getSavedPageNumber(), action: PageNum
 }
 
 //Sets the search-string, "" as default
-function searchReducer(state: string = "", action: SearchActions){
+function searchReducer(state: string = "", action: SearchActions) {
     switch (action.type) {
         case "SET_SEARCH":
             return action.payload;
