@@ -58,7 +58,7 @@ export default function Header(): JSX.Element {
             localStorage.setItem(String(i), "false");
           }
 
-          history.push("/");
+          history.push("/prosjekt3");
           window.location.reload()
         }}>Log out </Button>
       </Toolbar>

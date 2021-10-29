@@ -13,6 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router';
 import { gql, useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSignup } from '../stateManagement/actions';
 
 function Copyright(props: any) {
     //https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up
@@ -47,6 +49,7 @@ export default function SignUp() {
     const history = useHistory();
     const [errorMessage, setErrorMessage] = useState<String>("Email Address");
     const [error, setError] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -54,7 +57,7 @@ export default function SignUp() {
 
         signup({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
             if (user.data.signup) {
-                history.push("/login")
+                history.push("/prosjekt3/login")
             } else {
                 setErrorMessage("Account already exists")
                 setError(true);
@@ -119,7 +122,7 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="/login" variant="body2">
+                                <Link  variant="body2" onClick={() => dispatch(setSignup(false))}>
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

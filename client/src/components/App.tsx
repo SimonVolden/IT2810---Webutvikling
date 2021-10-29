@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Mainpage from "./Mainpage";
 import SignUp from "../pages/Signup";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from "../pages/Login";
 import { DocumentNode, gql, useQuery } from '@apollo/client';
+import { useSelector } from "react-redux";
+import { AppState } from "../stateManagement/types";
 
 
 const VALID_TOKEN: DocumentNode = gql`
@@ -43,6 +45,9 @@ export default function App(): JSX.Element {
     const likeData = useQuery<QueryData, QueryVars>(GET_LIKED_BY_USER, { variables: { token: String(localStorage.getItem("access-token")) } }).data
     const data = useQuery<TokenData, TokenVars>(VALID_TOKEN, { variables: { token: String(localStorage.getItem("access-token")) } }).data
 
+    const signup = useSelector((state: AppState) => state.signup)
+    
+
     if (!likeData) return <p>Not found. Please connect to VPN</p>;
 
     const beers = likeData.getLikedByUser
@@ -57,16 +62,15 @@ export default function App(): JSX.Element {
     return (
         <Router>
             <Switch>
-                <Route exact path="/">{valid ?
+                <Route exact path="/prosjekt3">{valid ?
                     <Mainpage />
-                    : <Login />
-
+                    : (signup ? <SignUp /> : <Login />)
                 }
                 </Route>
-                <Route path="/signup">
+                <Route exact path="/prosjekt3/signup">
                     <SignUp />
                 </Route>
-                <Route path="/login">
+                <Route exact path="/prosjekt3/login">
                     <Login /> 
                 </Route>
             </Switch>

@@ -5,4 +5,5 @@ export type AppState = {
     search: string;
     field: string;
     order: number;
+    signup: boolean;
 };

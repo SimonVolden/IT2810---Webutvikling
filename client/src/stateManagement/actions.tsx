@@ -47,3 +47,10 @@ export function setField(field: string) {
         payload: field
     } as const;
 }
+
+export function setSignup(signup: boolean) {
+    return {
+        type: "SET_SIGNUP",
+        payload: signup
+    } as const;
+}

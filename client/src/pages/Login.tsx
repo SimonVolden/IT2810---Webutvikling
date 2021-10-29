@@ -13,6 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from 'react-router';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSignup } from '../stateManagement/actions';
 
 
 function Copyright(props: any) { //Collected from material-ui, dont press link
@@ -50,7 +52,7 @@ export default function Login() {
     const history = useHistory();
     const [errorMessage, setErrorMessage] = useState<String>("Email Address");
     const [error, setError] = useState<boolean>(false);
-
+    const dispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -59,7 +61,7 @@ export default function Login() {
         login({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
             if (user) {
                 localStorage.setItem("access-token", user.data.login.token)
-                history.push("/")
+                history.push("/prosjekt3")
                 window.location.reload()
 
             } else {
@@ -130,7 +132,7 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link id="signUp" href="/signup" variant="body2">
+                                <Link id="signUp" variant="body2" onClick={() => dispatch(setSignup(true))}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
