@@ -36,3 +36,8 @@ npm start
 ```
 
 # Introduksjon
+Beer API er en interaktiv webapplikasjon som lar brukeren lete etter ulike øltyper. Applikasjonen laster inn data fra en Mongodb database. Databasen asksesseres fra backend med MongoClient. Backend er en Apollo Server som kjører kall med GraphQL. 
+
+Interaksjonen med backend skjer via client sin beers.tsx. Her hentes all ønskelig data.
+
+Det er også laget enhetstester med Jest og End-2-End tester med Cypress
