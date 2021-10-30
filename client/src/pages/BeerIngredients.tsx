@@ -17,7 +17,7 @@ import Box from '@mui/system/Box';
 import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
 
-interface BeerIngredientsProps {
+export interface BeerIngredientsProps {
     ingredients: Ingredients
 }
 
