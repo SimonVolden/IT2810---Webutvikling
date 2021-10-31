@@ -33,13 +33,15 @@ function withCollapseContainer(WrappedComponent: any) {
             }
         })
 
+        const collapseName = props.name;
+
         return (
             <ThemeProvider theme={theme}>
             <Fragment>
                 <CardActions>
-                    <Button onClick={handleExpandClick} fullWidth size="large">
+                    <Button onClick={handleExpandClick} fullWidth size="large" data-testid={collapseName + "-card-button"}>
                         <Box sx={{ textAlign: "left", flexGrow: 1 }}>
-                            {props.name}
+                            {collapseName}
                         </Box>
                         <Box>
                             {isExpanded ? <ExpandLess /> : <ExpandMore />}

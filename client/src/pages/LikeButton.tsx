@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { IconButton, Toolbar } from "@material-ui/core";
+import { IconButton, Toolbar, Typography} from "@material-ui/core";
 import React, { useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
@@ -64,7 +64,7 @@ export default function LikeButton(props: { id: number, likes: number }): JSX.El
                         onClick={handleLiked} type="submit">{liked ?
                             <ThumbUpIcon aria-label="unlike beer" id={"ThumbUpButton" + props.id} /> :
                             <ThumbUpOutlinedIcon aria-label="Like beer" id={"ThumbUpOutlinedButton" + props.id} />}</IconButton>
-                    {likes}
+                    <Typography id="numberOfLikes" variant="h6" aria-label={"number of likes, "+ likes}>{likes}</Typography>
                 </Toolbar>
             </form>
         </div>

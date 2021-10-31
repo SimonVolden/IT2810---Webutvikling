@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
 import { withStyles } from '@material-ui/core';
 
-interface BeerDescriptionProps {
+export interface BeerDescriptionProps {
     desc: string
     food_pairing: string[]
 }
@@ -36,7 +36,7 @@ function BeerDescription(props: BeerDescriptionProps): JSX.Element {
 
     return (
         <CardContent>
-            <ColorTextTypography paragraph>
+            <ColorTextTypography data-testid="card-description" paragraph>
                 {props.desc}
             </ColorTextTypography>
             <TableContainer>
@@ -54,7 +54,7 @@ function BeerDescription(props: BeerDescriptionProps): JSX.Element {
                         {props.food_pairing.map((food: string) => {
                             return (
                                 <TableRow key={food}>
-                                    <TableCell>
+                                    <TableCell data-testid="card-food-pairing">
                                         <ColorTextTypography paragraph variant="body2">
                                             {food}
                                         </ColorTextTypography>
