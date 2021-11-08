@@ -61,6 +61,7 @@ export default function LikeButton(props: { id: number, likes: number }): JSX.El
                 <Toolbar>
                     <IconButton
                         id={"LikeButton" + props.id}
+                        aria-label={liked ? "unlike beer": "like beer"}
                         onClick={handleLiked} type="submit">{liked ?
                             <ThumbUpIcon aria-label="unlike beer" id={"ThumbUpButton" + props.id} /> :
                             <ThumbUpOutlinedIcon aria-label="Like beer" id={"ThumbUpOutlinedButton" + props.id} />}</IconButton>
