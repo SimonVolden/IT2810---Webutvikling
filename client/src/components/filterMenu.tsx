@@ -40,6 +40,7 @@ export default function FilterMenu(): JSX.Element {
                 <Button
                     className={classes.button}
                     id="FilterButton"
+                    aria-label="filter menu"
                     aria-controls="basic-menu"
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
