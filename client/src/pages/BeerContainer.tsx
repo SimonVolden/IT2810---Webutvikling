@@ -53,7 +53,7 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
                 {/** Header with Picture, Title, tagline and alcohol level */}
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="picture of beer" alt={props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
+                        <Avatar aria-label="picture of beer" alt={"image of," + props.beer.name} src={props.beer.image_url} variant="square" sx={{ width: "25px !important", height: "auto !important" }} />
                     }
                     title={
                         <Typography aria-label={"Beer name: " + props.beer.name} variant="h6">{props.beer.name}</Typography>
