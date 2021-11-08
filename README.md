@@ -1,4 +1,4 @@
-# Prosjekt 3 - Gruppe 44 - Dokumentasjon:
+# Prosjekt 4 d) - Gruppe 44 - Web Accessibility:
 
 ## Mappeinndeling:
 
