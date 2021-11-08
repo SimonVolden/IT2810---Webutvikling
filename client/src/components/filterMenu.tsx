@@ -29,7 +29,6 @@ export default function FilterMenu(): JSX.Element {
     };
     function handleClose() {
         setAnchorEl(null);
-        dispatch(setOrder(order === 1 ? -1 : 1))
         console.log(order)
     }
 
@@ -64,6 +63,8 @@ export default function FilterMenu(): JSX.Element {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("id"));
+                            dispatch(setOrder(order === 1 ? -1 : 1))
+
                         }}>ID
                     </MenuItem>
                     <MenuItem
@@ -74,6 +75,7 @@ export default function FilterMenu(): JSX.Element {
                                 dispatch(setOrder(1))
                             }
                             dispatch(setField("name"));
+                            dispatch(setOrder(order === 1 ? -1 : 1))
 
                         }}>Name</MenuItem>
                     <MenuItem
@@ -82,6 +84,7 @@ export default function FilterMenu(): JSX.Element {
                             handleClose();
                             if (field !== "abv") {
                                 dispatch(setOrder(1))
+                                dispatch(setOrder(order === 1 ? -1 : 1))
                             }
                             dispatch(setField("abv"));
                         }}>Alcohol Percentage</MenuItem>
@@ -91,6 +94,7 @@ export default function FilterMenu(): JSX.Element {
                             handleClose();
                             if (field !== "likes") {
                                 dispatch(setOrder(1))
+                                dispatch(setOrder(order === 1 ? -1 : 1))
                             }
                             dispatch(setField("likes"));
                         }}>Likes</MenuItem>
