@@ -84,9 +84,9 @@ export default function FilterMenu(): JSX.Element {
                             handleClose();
                             if (field !== "abv") {
                                 dispatch(setOrder(1))
-                                dispatch(setOrder(order === 1 ? -1 : 1))
                             }
                             dispatch(setField("abv"));
+                            dispatch(setOrder(order === 1 ? -1 : 1))
                         }}>Alcohol Percentage</MenuItem>
                     <MenuItem
                         id="likes-menu-item"
@@ -94,9 +94,9 @@ export default function FilterMenu(): JSX.Element {
                             handleClose();
                             if (field !== "likes") {
                                 dispatch(setOrder(1))
-                                dispatch(setOrder(order === 1 ? -1 : 1))
                             }
                             dispatch(setField("likes"));
+                            dispatch(setOrder(order === 1 ? -1 : 1))
                         }}>Likes</MenuItem>
 
                 </Menu>
