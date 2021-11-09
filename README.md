@@ -133,6 +133,7 @@ I oppgave 4d) er oppgaven å utforme nettsiden slik at den opprettholder kravene
       - **Target Size**: Alle input-targets (knapper o.l.) har en størrelse på over 44x44 piksler.
 
 3. **Understandable**:
+
    1. **Readable**:
       - **Language of Page**: Default-språket er bestemt: Engelsk
       - **Abbreviations**: Vi har ingen forkortelser.
@@ -150,13 +151,18 @@ I oppgave 4d) er oppgaven å utforme nettsiden slik at den opprettholder kravene
       - **Error Prevention (Legal, Financial, Data)**: Ikke nødvendig i vårt tilfelle. Dette kravet er for sider som fører til juridiske forpliktelser eller finansielle transaksjoner.
       - **Hjelp**: Kompleksiteten til nettsiden er ikke stor nok til at en hjelp-knapp vil føre til mer aksessibilitet.
       - **Error Prevention (All)**: Alle brukerhandlinger er reversible med de samme handlingene som er brukt til å utføre de. Det eneste unntaket er logout-knappen, men denne er godt synlig i høyre hjørne.
-   4. **Robust**:
-      1. **Compatible**:
-         - **Parsing**: Det er ikke brukt ren HTML i nettsiden, og alle React-Elementer er indeksert med unike ID'er.
-         - **Name, Role, Value**: Alle komponenter er lablet med ARIA-name og role. "NOTE
-           This success criterion is primarily for Web authors who develop or script their own user interface components. For example, standard HTML controls already meet this success criterion when used according to specification." Vi har brukt Material-UI for alle våre komponenter, og denne funksjonaliteten er innebygd.
-         - **Status Messages**: Ikke relevant i forhold til nettsiden vår.
-   5. **Conformance**: 2. **Conformance Requirements**:
+
+4. **Robust**:
+
+   1. **Compatible**:
+      - **Parsing**: Det er ikke brukt ren HTML i nettsiden, og alle React-Elementer er indeksert med unike ID'er.
+      - **Name, Role, Value**: Alle komponenter er lablet med ARIA-name og role. "NOTE
+        This success criterion is primarily for Web authors who develop or script their own user interface components. For example, standard HTML controls already meet this success criterion when used according to specification." Vi har brukt Material-UI for alle våre komponenter, og denne funksjonaliteten er innebygd.
+      - **Status Messages**: Ikke relevant i forhold til nettsiden vår.
+
+5. **Conformance**:
+
+   2. **Conformance Requirements**:
       - **Conformance Level**: Ettersom at nettsiden tilfredstiller alle suksesskriteriene merket A og AA, kan vi si at nettsiden er på nivå AA. Den er derimot ikke i samsvar med absolutt alle krav merket med AAA, og dermed kan ikke være på dette nivået. Det er ikke anbefalt å kreve samsvar med alle krav på AAA for hele nettsider da det for enkelte typer innhold ikke er mulig å oppfylle alle kravene, og det mener vi er i overensstemmelse med nettsiden vår.
       - **Complete Processes**: Dette punktet betyr at nettsiden må opprettholde kravene til suksesskriteriene gjennom hele prosessen når en bruker gjør en aktivitet på nettsiden. I vår nettside vil dette bety at en bruker logger inn/ lager bruker og så går inn på nettsiden og f.eks. ser på oppskrifter. Hele denne prosessen må opprettholde kravene, til AA (samme som for hele nettsiden), noe vi mener den gjør.
       - **Only Accessibility-Supported Ways of Using Technologies**: Vi har ingen alternativ versjon av nettsiden for personer med alternative behov, men den er lagt opp slik at hvem som helst kan bruke den samme versjonen.
