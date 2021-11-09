@@ -89,16 +89,16 @@ I oppgave 4d) er oppgaven å utforme nettsiden slik at den opprettholder kravene
 
 1. **Presentasjon:**
 
-   1. Text Alternatives:
+   1. **Text Alternatives**:
       - **"All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for situations like: Controls, Input, Time-Based-Media, Test, Sensory, CAPTCHA, Decoration, Formatting, Invisible"**:
       - Dette har vi utført ved å gi alle knapper og tekstbokser Aria-labels som beskriver funksjonen til det objektet.
-   2. Time-based Media:
+   2. **Time-based Media**:
       - Urelevant da nettsiden vår ikke inneholder noen form for media
-   3. Adaptable:
+   3. **Adaptable**:
       - **Sensory Characteristics**: Grensesnittet baserer seg på flere karakteristikker som tekst, farge, og ikoner, og er ikke begrenset til kun 1 av de.
       - **Orientation**: Nettsiden er også fullt brukbar i landskapsmodus
       - **Input function**: Alle tekstfelt er lablet med deres funksjon, samt at innloggingsfeltene bruker auto-complete for både email-adresse og passord.
-   4. Distinguishable:
+   4. **Distinguishable**:
       - **Use of color**: Farge er ikke det eneste visuelle måten å frembringe informasjon på, da farge ikke blir brukt for det formålet. All informasjon er enten gitt gjennom tekst eller labels.
       - **Contrast**: SKAL GJØRES NOE MED DETTE !!!!!!!! IKKE GLEM
       - **Resize Text**: Tekst skalerer brukbart opp til 500% (maksgrense) og nettsiden er fremdeles funskjonell, må gjøres noe med søkeboksen. Kriteriet er forsåvidt for opp til 200%.
