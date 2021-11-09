@@ -14,22 +14,26 @@ export default function TextSizeChanger():JSX.Element {
         switch (value) {
             case (14):
                 dispatch(setTextSize(16));
+                localStorage.setItem("textSize", "16")
                 break
             case (16):
                 dispatch(setTextSize(18));
+                localStorage.setItem("textSize", "18")
                 break
             case (18):
                 dispatch(setTextSize(14));
+                localStorage.setItem("textSize", "14")
                 break
             default:
                 dispatch(setTextSize(14));
+                localStorage.setItem("textSize", "14")
         }
                 
     }
 
     return(
         <>
-        <IconButton onClick={() => {changeFontSize()}}>
+        <IconButton onClick={() => {changeFontSize()}} aria-label="font changer">
             <FormatSizeRoundedIcon style={{fill: "white"}}/>
         </IconButton>
         </>

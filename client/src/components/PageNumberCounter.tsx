@@ -80,8 +80,10 @@ export default function PageNumberCounter():JSX.Element {
     return(
         <>
         <Toolbar sx={{
-            justifyContent: "center"
-        }}> {/* Text, page: */}
+            justifyContent: "center"}}> 
+            
+            <ThemeProvider theme={theme}>
+            {/* Text, page: */}
             <Typography aria-label="page Number" variant="h6" >Page:</Typography>
             {/* Button, decrement pageNumber */}
             <Button id="decPageNumber" aria-label="Last Page button," onClick={() => {
@@ -103,7 +105,7 @@ export default function PageNumberCounter():JSX.Element {
                 <NavigateNextIcon/>
             </Button>
             {/* Themeprovider is used to input correct theme format (@mui, not @material-ui) */}
-            <ThemeProvider theme={theme}>
+            
                 {/* Textfield that only takes numbers */}
                 <TextField 
                     id="inputPageNumber"
