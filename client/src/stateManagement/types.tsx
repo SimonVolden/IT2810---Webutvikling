@@ -6,4 +6,5 @@ export type AppState = {
     field: string;
     order: number;
     signup: boolean;
+    textSize: number;
 };

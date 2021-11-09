@@ -54,3 +54,10 @@ export function setSignup(signup: boolean) {
         payload: signup
     } as const;
 }
+
+export function setTextSize(textSize: number) {
+    return {
+        type: "SET_TEXTSIZE",
+        payload: textSize
+    } as const;
+}

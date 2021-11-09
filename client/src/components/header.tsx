@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../stateManagement/types";
 import { changeTheme } from "../stateManagement/actions";
 import { useHistory } from "react-router";
+import TextSizeChanger from "./TextSizeChanger";
 
 const useStyles = makeStyles((theme: Theme) => ({
   //styles for certain page elements
@@ -39,6 +40,10 @@ export default function Header(): JSX.Element {
   return (
     <AppBar position="sticky">
       <Toolbar>
+        
+        {/** change text size */}
+        <TextSizeChanger/>
+
         <FormGroup> {/**Theme toggle */}
           <FormControlLabel id="themeToggle" aria-label={pageThemeAria} control={<Switch
             checked={pageTheme} onChange={() => {
@@ -47,10 +52,12 @@ export default function Header(): JSX.Element {
             }
             } />} label={"Dark Mode"} />
         </FormGroup>
+
         {/**page Title */}
-        <Typography id="headerTitle" variant="h6" align="center" className={classes.title}>
+        <Typography id="headerTitle" variant="h5" align="center" className={classes.title}>
           Beer API
         </Typography>
+
         {/** Logout button */}
         <Button id="LogoutButton" variant="outlined" className={classes.button} onClick={() => {
           localStorage.setItem("access-token", "");

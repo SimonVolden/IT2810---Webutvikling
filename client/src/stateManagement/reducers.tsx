@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
 
-import { changeTheme, incrementPageNumber, decrementPageNumber, setPageNumber, setSearch, setOrder, setField, setSignup } from './actions'
+import { changeTheme, incrementPageNumber, 
+        decrementPageNumber, setPageNumber, 
+        setSearch, setOrder, setField, setSignup,
+        setTextSize } from './actions'
 import { AppState } from './types'
 
 //types of Actions from ./actions
@@ -16,6 +19,8 @@ type FieldActions = ReturnType<typeof setField>;
 type OrderActions = ReturnType<typeof setOrder>;
 
 type SignupActions = ReturnType<typeof setSignup>;
+
+type TextSizeActions = ReturnType<typeof setTextSize>;
 
 //Helper, used to show correct theme when opening the page
 function getSavedTheme(): boolean {
@@ -107,6 +112,27 @@ function signupReducer(state: boolean = false, action: SignupActions) {
     }
 }
 
+//gets the saved text size
+function getSavedTextSize() {
+    const textSize = localStorage.getItem("textSize")
+    if (textSize === null){
+        localStorage.setItem("textSize", "14")
+        return 14
+    }
+    const size = Number(textSize)
+    return size
+}
+
+//Sets the text size
+function textSizeReducer(state: number = getSavedTextSize(), action: TextSizeActions) {
+    switch (action.type) {
+        case "SET_TEXTSIZE":
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 //Utility-funksjon for å kombinere flere reducere
 export const rootReducer = combineReducers<AppState>({
     theme: themeReducer,
@@ -114,5 +140,6 @@ export const rootReducer = combineReducers<AppState>({
     search: searchReducer,
     field: fieldReducer,
     order: orderReducer,
-    signup: signupReducer
+    signup: signupReducer,
+    textSize: textSizeReducer
 });

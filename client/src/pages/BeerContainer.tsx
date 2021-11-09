@@ -35,11 +35,16 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
 
     //PageTheme, used to get the correct theme state, to update themes.
     const pageTheme = useSelector((state: AppState) => state.theme)
+    const textSize = useSelector((state: AppState) => state.textSize)
     //Card backgroundColor
+    //424242
     const cardTheme = pageTheme ? "#424242" : "#ffffff"
 
     //MUI theme
     const theme = createTheme({
+        typography: {
+            fontSize: textSize,
+        },
         palette: {
             mode: pageTheme ? "dark" : "light",
         }
@@ -48,7 +53,7 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
     return (
         <ThemeProvider theme={theme}>
             {/**Parent Card, contains the whole Beer */}
-            <Card sx={{ marginBottom: "1vh", }} square={true} elevation={3} style={{ backgroundColor: cardTheme }}>
+            <Card sx={{ marginBottom: "1vh", }} elevation={3} style={{ backgroundColor: cardTheme }}>
 
                 {/** Header with Picture, Title, tagline and alcohol level */}
                 <CardHeader

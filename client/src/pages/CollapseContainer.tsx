@@ -19,6 +19,7 @@ function withCollapseContainer(WrappedComponent: any) {
     return function Wrapped(props: any) {
 
         const [isExpanded, setExpanded] = useState(false);
+        const textSize = useSelector((state: AppState) => state.textSize)
 
         function handleExpandClick(e: React.MouseEvent<HTMLButtonElement>) {
             e.preventDefault();
@@ -28,6 +29,9 @@ function withCollapseContainer(WrappedComponent: any) {
         //correctly sets the pageTheme with the right ThemeProvider
         const pageTheme = useSelector((state: AppState) => state.theme)
         const theme = createTheme({
+            typography: {
+                fontSize: textSize,
+            },
             palette: {
                 mode: pageTheme ? "dark" : "light",
             }

@@ -14,10 +14,14 @@ import FilterMenu from "./filterMenu";
 function SearchBar(): JSX.Element {
     const searchString = useSelector((state: AppState) => state.search)
     const pageTheme = useSelector((state: AppState) => state.theme)
+    const textSize = useSelector((state: AppState) => state.textSize)
     const dispatch = useDispatch();
 
     //used to get better readable colors on the TextField entries
     const theme = createTheme({
+        typography: {
+            fontSize: textSize,
+        },
         components: {
             MuiInputBase: {
                 styleOverrides: {

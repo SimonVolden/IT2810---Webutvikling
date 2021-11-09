@@ -17,9 +17,13 @@ import SearchBar from './searchBar';
  */
 function Mainpage(): JSX.Element {
     const pageTheme = useSelector((state: AppState) => state.theme)
+    const textSize = useSelector((state: AppState) => state.textSize)
     const theme = createTheme({ //the main theme for the application
         palette: {
             type: pageTheme ? "dark" : "light",
+        },
+        typography: {
+            fontSize: textSize,
         }
     })
 
@@ -29,6 +33,7 @@ function Mainpage(): JSX.Element {
             <Paper>
                 <Grid container direction="column">
                     <Header />
+
                     <PageContainer>
                         <PageNumberCounter />
                         <SearchBar />

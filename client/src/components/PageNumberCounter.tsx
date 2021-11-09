@@ -51,10 +51,14 @@ export function legalInput(input: number): boolean{
 export default function PageNumberCounter():JSX.Element {
     const pageNumber = useSelector((state: AppState) => state.pageNumber)
     const pageTheme = useSelector((state: AppState) => state.theme)
+    const textSize = useSelector((state: AppState) => state.textSize)
     const dispatch = useDispatch();
 
     //used to get better readable colors on the TextField entries
     const theme = createTheme({
+        typography: {
+            fontSize: textSize,
+        },
         components: {
             MuiInputBase: {
                 styleOverrides: {
@@ -78,7 +82,7 @@ export default function PageNumberCounter():JSX.Element {
         <Toolbar sx={{
             justifyContent: "center"
         }}> {/* Text, page: */}
-            <Typography aria-label="page Number">Page:</Typography>
+            <Typography aria-label="page Number" variant="h6" >Page:</Typography>
             {/* Button, decrement pageNumber */}
             <Button id="decPageNumber" aria-label="Last Page button," onClick={() => {
                 if (isDecPageNumberLegal(pageNumber)) {
