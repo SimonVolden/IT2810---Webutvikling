@@ -59,22 +59,18 @@ export default function Login() {
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
         login({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
-            if (user) {
+            if (user.data.login.token) {
+                setError(false)
                 localStorage.setItem("access-token", user.data.login.token)
                 history.push("/prosjekt3")
                 window.location.reload()
-
-            } else {
-                setError(true);
-                setErrorMessage("Incorrect email or password")
             }
         })
             .catch(error => {
                 console.log(error)
+                setError(true);
+                setErrorMessage("Incorrect email or password")
             })
-
-
-
     };
 
     return (
