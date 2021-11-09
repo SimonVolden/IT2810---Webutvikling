@@ -97,7 +97,7 @@ const typeDefs = gql`
 
   type Mutation {
     updateLikes(id: Int!, liked: Boolean): Beer
-    login(email: String!, password: String!): User
+    login(email: String!, password: String!): user: User
     signup(email: String!, password: String!): Boolean
     like(token: String!, beerID: Int!): Boolean
   }
