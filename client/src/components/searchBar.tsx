@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from "../stateManagement/types";
-import { Button, Toolbar, TextField, createTheme, ThemeProvider } from "@mui/material";
+import { Button, Toolbar, TextField, createTheme, ThemeProvider, Typography } from "@mui/material";
 import { setField, setOrder, setPageNumber, setSearch } from "../stateManagement/actions";
 import FilterMenu from "./filterMenu";
 
@@ -18,28 +18,6 @@ function SearchBar(): JSX.Element {
     const dispatch = useDispatch();
 
     //used to get better readable colors on the TextField entries
-    const theme = createTheme({
-        typography: {
-            fontSize: textSize,
-        },
-        components: {
-            MuiInputBase: {
-                styleOverrides: {
-                    input: {
-                        color: pageTheme ? "white" : "black"
-                    }
-                }
-            },
-            MuiInputLabel: {
-                styleOverrides: {
-                    outlined: {
-                        color: pageTheme ? "white" : "black"
-                    }
-                }
-            }
-        }
-    })
-
 
 
     return ( //Themeprovider is used to input correct theme format (@mui, not @material-ui)
@@ -47,7 +25,6 @@ function SearchBar(): JSX.Element {
             <Toolbar sx={{
                 justifyContent: "center",
             }}>
-                <ThemeProvider theme={theme}>
                     <TextField
                         value={searchString}
                         id="searchField" 
@@ -57,22 +34,38 @@ function SearchBar(): JSX.Element {
                         variant="outlined"
                         placeholder={searchString}
                         size="small"
+                        sx={{  "& .MuiOutlinedInput-root": {
+                            "& > fieldset": {
+                              borderColor: "lightgrey"
+                            }
+                          }, 
+                          "& .MuiInputBase-input": { color: pageTheme ? "white" : "black" },
+                          "& .MuiInputLabel-outlined": { color: pageTheme ? "white" : "black" }
+                          
+
+                        }}
                         style={{ marginRight: 16 }}
                         onChange={(event) => {
                             dispatch(setSearch(event.target.value))
                             dispatch(setPageNumber(1))
                         }}
                     />
-                </ThemeProvider >
-                <Button id="clear" aria-label="Remove seach for beer"
-                    variant="contained" onClick={() => {
+                <Button 
+                    id="clear"
+                    aria-label="Remove seach for beer"
+                    variant="contained"
+                    sx={{bgcolor: pageTheme? "#3f51b5":"#1976D2"}}
+                    style={{ marginRight: 16 }} 
+                    onClick={() => {
                         dispatch(setSearch(""))
                         dispatch(setPageNumber(1))
                         dispatch(setOrder(1))
                         dispatch(setField("id"))
                     }}
-                    style={{ marginRight: 16 }}
-                > Clear </Button>
+                >
+                    <Typography variant="button"> Clear </Typography> 
+                </Button>
+
                 <FilterMenu />
             </Toolbar>
         </>

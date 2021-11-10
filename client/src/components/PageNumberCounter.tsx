@@ -1,5 +1,5 @@
 import { Button, Toolbar, TextField, createTheme, ThemeProvider, Typography } from "@mui/material"
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementPageNumber, incrementPageNumber, setPageNumber } from "../stateManagement/actions";
 import { AppState } from "../stateManagement/types";
@@ -49,40 +49,16 @@ export function legalInput(input: number): boolean{
  * @returns The Search Bar as a JSX.Element
  */
 export default function PageNumberCounter():JSX.Element {
+    const [error, setError] = useState(false);
     const pageNumber = useSelector((state: AppState) => state.pageNumber)
     const pageTheme = useSelector((state: AppState) => state.theme)
     const textSize = useSelector((state: AppState) => state.textSize)
     const dispatch = useDispatch();
-
-    //used to get better readable colors on the TextField entries
-    const theme = createTheme({
-        typography: {
-            fontSize: textSize,
-        },
-        components: {
-            MuiInputBase: {
-                styleOverrides: {
-                    input: {
-                        color: pageTheme? "white" : "black"
-                    }
-                }
-            },
-            MuiInputLabel: {
-                styleOverrides: {
-                    outlined: {
-                        color: pageTheme? "white" : "black"
-                    }
-                }
-            }
-        }
-    })
-
     return(
         <>
         <Toolbar sx={{
             justifyContent: "center"}}> 
             
-            <ThemeProvider theme={theme}>
             {/* Text, page: */}
             <Typography aria-label="page Number" variant="h6" >Page:</Typography>
             {/* Button, decrement pageNumber */}
@@ -91,10 +67,10 @@ export default function PageNumberCounter():JSX.Element {
                         dispatch(decrementPageNumber(pageNumber))
                     }
                 }}> 
-                <NavigateBeforeIcon/>
+                <NavigateBeforeIcon sx={{fill: pageTheme? "white":"#1976D2"}}/>
             </Button>
             {/* Text, current page: */}
-            <Typography aria-label={"Current Page Number " + pageNumber}>{pageNumber}</Typography>
+            <Typography variant="h5" aria-label={"Current Page Number " + pageNumber}>{pageNumber}</Typography>
             {/* Button increment pageNumber */}
             <Button id="incPageNumber" aria-label=", Next Page button," onClick={() => {
                 if (isIncPageNumberLegal(pageNumber)){
@@ -102,7 +78,7 @@ export default function PageNumberCounter():JSX.Element {
                 }
                 
                 }}> 
-                <NavigateNextIcon/>
+                <NavigateNextIcon sx={{fill: pageTheme? "white":"#1976D2"}}/>
             </Button>
             {/* Themeprovider is used to input correct theme format (@mui, not @material-ui) */}
             
@@ -113,23 +89,34 @@ export default function PageNumberCounter():JSX.Element {
                     margin="dense"
                     label="Go to page"
                     size="small"
-                    style = {{width: 100}}
+                    style = {{width: 120}}
+                    sx={{  "& .MuiOutlinedInput-root": {
+                        "& > fieldset": {
+                          borderColor: "lightgrey"
+                        }
+                      }, 
+                      "& .MuiInputBase-input": { color: pageTheme ? "white" : "black" },
+                      "& .MuiInputLabel-outlined": { color: pageTheme ? "white" : "black" }
+                      
+
+                    }}
                     variant="outlined" 
-                    value={pageNumber}
                     type="number"
                     InputLabelProps={{ color: "primary" }}
                     inputProps={{ color: "primary", inputMode: 'numeric', pattern: '[0-9]*' }} 
-                    onChange={(event) => {
+                    error={error}
+                    onChange={event => {
+
                         if (legalInput(Number(event.target.value))){
+                            setError(false)
                             dispatch(setPageNumber(Number(event.target.value)))
                             }
                         else {
-                            dispatch(setPageNumber(pageNumber))
+                            setError(true)
                             }   
                         }
                     }
                     />
-                </ThemeProvider>
         </Toolbar>
         </>
     )

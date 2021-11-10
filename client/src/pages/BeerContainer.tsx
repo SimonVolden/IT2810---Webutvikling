@@ -11,7 +11,7 @@ import BeerMethods from './BeerMethods';
 import BeerIngredients from './BeerIngredients';
 import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
-import { createTheme, ThemeProvider, Toolbar } from '@mui/material';
+import { Toolbar } from '@mui/material';
 
 export interface BeerContainerProps {
     beer: IBeer
@@ -35,24 +35,12 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
 
     //PageTheme, used to get the correct theme state, to update themes.
     const pageTheme = useSelector((state: AppState) => state.theme)
-    const textSize = useSelector((state: AppState) => state.textSize)
     //Card backgroundColor
-    //424242
     const cardTheme = pageTheme ? "#424242" : "#ffffff"
 
-    //MUI theme
-    const theme = createTheme({
-        typography: {
-            fontSize: textSize,
-        },
-        palette: {
-            mode: pageTheme ? "dark" : "light",
-        }
-    })
+
 
     return (
-        <ThemeProvider theme={theme}>
-            {/**Parent Card, contains the whole Beer */}
             <Card sx={{ marginBottom: "1vh", }} elevation={3} style={{ backgroundColor: cardTheme }}>
 
                 {/** Header with Picture, Title, tagline and alcohol level */}
@@ -81,7 +69,6 @@ function BeerContainer(props: BeerContainerProps): JSX.Element {
                 <BeerIngredients name="Ingredients" ingredients={props.beer.ingredients} />
 
             </Card>
-        </ThemeProvider>
     );
 }
 

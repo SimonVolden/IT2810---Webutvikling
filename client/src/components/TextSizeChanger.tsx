@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTextSize } from "../stateManagement/actions";
@@ -7,7 +7,9 @@ import FormatSizeRoundedIcon from '@mui/icons-material/FormatSizeRounded';
 
 export default function TextSizeChanger():JSX.Element {
     const textSize = useSelector((state: AppState) => state.textSize)
+    const pageTheme = useSelector((state: AppState) => state.theme)
     const dispatch = useDispatch();
+
 
     function changeFontSize(){
         const value = textSize

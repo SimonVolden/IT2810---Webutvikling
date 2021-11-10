@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { IconButton, Toolbar, Typography } from "@material-ui/core";
+import { IconButton, Toolbar, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';

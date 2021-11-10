@@ -1,4 +1,5 @@
 import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-ui/core';
+import { ThemeProvider as MuiTheme } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Beers from '../pages/beers';
@@ -25,6 +26,7 @@ function Mainpage(): JSX.Element {
         typography: {
             fontSize: textSize,
         }
+        
     })
 
     return (
@@ -32,13 +34,14 @@ function Mainpage(): JSX.Element {
             <CssBaseline />
             <Paper>
                 <Grid container direction="column">
+                    <MuiTheme theme={theme}>
                     <Header />
-
                     <PageContainer>
                         <PageNumberCounter />
                         <SearchBar />
                         <Beers />
                     </PageContainer>
+                    </MuiTheme>
                 </Grid>
             </Paper>
         </ThemeProvider>

@@ -28,13 +28,14 @@ function withCollapseContainer(WrappedComponent: any) {
 
         //correctly sets the pageTheme with the right ThemeProvider
         const pageTheme = useSelector((state: AppState) => state.theme)
+        const textColor = pageTheme ? "white" : "black"
         const theme = createTheme({
             typography: {
                 fontSize: textSize,
             },
             palette: {
                 mode: pageTheme ? "dark" : "light",
-            }
+            },
         })
 
         const collapseName = props.name;
@@ -44,7 +45,7 @@ function withCollapseContainer(WrappedComponent: any) {
             <Fragment>
                 <CardActions>
                     <Button onClick={handleExpandClick} fullWidth size="large" data-testid={collapseName + "-card-button"}>
-                        <Box sx={{ textAlign: "left", flexGrow: 1 }}>
+                        <Box sx={{ textAlign: "left", flexGrow: 1, color: textColor }}>
                             {collapseName}
                         </Box>
                         <Box>

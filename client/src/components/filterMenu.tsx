@@ -1,26 +1,15 @@
-import { Button, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Button, Menu, MenuItem, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setField, setOrder } from "../stateManagement/actions";
 import { AppState } from "../stateManagement/types";
 
 
-//Styles for the header line
-const useStyles = makeStyles(() => ({
-    button: {
-        color: "white",
-        background: "#1976d2",
-        spacing: 16
-    }
-}));
-
-
 export default function FilterMenu(): JSX.Element {
     const dispatch = useDispatch()
-    const classes = useStyles();
     const order = useSelector((state: AppState) => state.order);
     const field = useSelector((state: AppState) => state.field);
+    const pageTheme = useSelector((state: AppState) => state.theme);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -37,7 +26,8 @@ export default function FilterMenu(): JSX.Element {
         <>
             <div>
                 <Button
-                    className={classes.button}
+                    sx={{bgcolor: pageTheme? "#3f51b5":"#1976D2"}}
+                    variant="contained"
                     id="FilterButton"
                     aria-label="filter menu"
                     aria-controls="basic-menu"
@@ -45,7 +35,7 @@ export default function FilterMenu(): JSX.Element {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    <MenuIcon />
+                    <Typography variant="button"> Sort by</Typography>
                 </Button>
                 <Menu
                     id="FilterMenu"
