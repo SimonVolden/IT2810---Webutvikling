@@ -48,6 +48,7 @@ export default function FilterMenu(): JSX.Element {
                 >
                     <MenuItem
                         id="id-menu-item"
+                        aria-label="sort by beer id"
                         onClick={() => {
                             handleClose();
                             if (field !== "id") {
@@ -63,6 +64,7 @@ export default function FilterMenu(): JSX.Element {
                     </MenuItem>
                     <MenuItem
                         id="name-menu-item"
+                        aria-label="sort by beer name"
                         onClick={() => {
                             handleClose();
                             if (field !== "name") {
@@ -76,6 +78,7 @@ export default function FilterMenu(): JSX.Element {
                         }}>Name</MenuItem>
                     <MenuItem
                         id="abv-menu-item"
+                        aria-label="sort by alcohol percentage"
                         onClick={() => {
                             handleClose();
                             if (field !== "abv") {
@@ -88,6 +91,7 @@ export default function FilterMenu(): JSX.Element {
                         }}>Alcohol Percentage</MenuItem>
                     <MenuItem
                         id="likes-menu-item"
+                        aria-label="sort by number of likes"
                         onClick={() => {
                             handleClose();
                             if (field !== "likes") {

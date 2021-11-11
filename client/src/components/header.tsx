@@ -40,7 +40,7 @@ export default function Header(): JSX.Element {
         </FormGroup>
 
         {/**page Title */}
-        <Typography id="headerTitle" variant="h5" align="center" sx={{flexGrow: 1}}>
+        <Typography id="headerTitle" aria-label="Page title" variant="h5" align="center" sx={{flexGrow: 1}}>
           Beer Viewer
         </Typography>
 
@@ -60,7 +60,7 @@ export default function Header(): JSX.Element {
           history.push("/prosjekt3");
           window.location.reload()
         }}> 
-          <Typography variant="button" sx={{ fontWeight: 'bold' }} >Log ut</Typography> 
+          <Typography variant="button" sx={{ fontWeight: 'bold' }} >Log out</Typography> 
         </Button>
       </Toolbar>
     </AppBar>

@@ -94,6 +94,7 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     id="email"
+                                    aria-label='email text field'
                                     label={errorMessage}
                                     name="email"
                                     autoComplete="email"
@@ -107,12 +108,14 @@ export default function SignUp() {
                                     label="Password"
                                     type="password"
                                     id="password"
+                                    aria-label='password text field'
                                     autoComplete="new-password"
                                 />
                             </Grid>
                         </Grid>
                         <Button
                             id="signUpButton"
+                            aria-label="signup button"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -122,7 +125,7 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link  variant="body2" onClick={() => dispatch(setSignup(false))}>
+                                <Link  variant="body2" aria-label="link to sign in page" onClick={() => dispatch(setSignup(false))}>
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

@@ -65,7 +65,7 @@ export default function LikeButton(props: { id: number, likes: number }): JSX.El
                         onClick={handleLiked} type="submit">{liked ?
                             <ThumbUpIcon aria-label="unlike beer" id={"ThumbUpButton" + props.id} /> :
                             <ThumbUpOutlinedIcon aria-label="Like beer" id={"ThumbUpOutlinedButton" + props.id} />}</IconButton>
-                    <Typography id="numberOfLikes" variant="h6" aria-label={"number of likes, " + likes}>{likes}</Typography>
+                    <Typography id="numberOfLikes" variant="h6" aria-label={likes + ",likes"}>{likes}</Typography>
                 </Toolbar>
             </form>
         </div>

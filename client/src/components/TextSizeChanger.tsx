@@ -35,7 +35,7 @@ export default function TextSizeChanger():JSX.Element {
 
     return(
         <>
-        <IconButton onClick={() => {changeFontSize()}} aria-label="font changer">
+        <IconButton onClick={() => {changeFontSize()}} aria-label="change font size">
             <FormatSizeRoundedIcon style={{fill: "white"}}/>
         </IconButton>
         </>

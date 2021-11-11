@@ -99,6 +99,7 @@ export default function Login() {
                             fullWidth
                             id="email"
                             label={errorMessage}
+                            aria-label="email text field"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -109,6 +110,7 @@ export default function Login() {
                             fullWidth
                             name="password"
                             label="Password"
+                            aria-label='password text field'
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -116,6 +118,7 @@ export default function Login() {
 
                         <Button
                             id="SignIn"
+                            aria-label="Sign in button"
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -128,7 +131,7 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link id="signUp" variant="body2" onClick={() => dispatch(setSignup(true))}>
+                                <Link id="signUp" aria-label="link to signup page" variant="body2" onClick={() => dispatch(setSignup(true))}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

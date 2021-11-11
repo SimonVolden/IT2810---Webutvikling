@@ -52,7 +52,7 @@ function SearchBar(): JSX.Element {
                     />
                 <Button 
                     id="clear"
-                    aria-label="Remove seach for beer"
+                    aria-label="Remove search for beer"
                     variant="contained"
                     sx={{bgcolor: pageTheme? "#3f51b5":"#1976D2"}}
                     style={{ marginRight: 16 }} 
