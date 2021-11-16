@@ -2,12 +2,12 @@ import { createTheme, ThemeProvider, CssBaseline, Paper, Grid } from '@material-
 import { ThemeProvider as MuiTheme } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Beers from '../pages/beers';
+import Beers from '../components/beers';
 import { AppState } from '../stateManagement/types';
-import Header from './header';
-import PageContainer from './page-container';
-import PageNumberCounter from './PageNumberCounter';
-import SearchBar from './searchBar';
+import Header from '../components/header';
+import PageContainer from '../components/page-container';
+import PageNumberCounter from '../components/PageNumberCounter';
+import SearchBar from '../components/searchBar';
 
 
 

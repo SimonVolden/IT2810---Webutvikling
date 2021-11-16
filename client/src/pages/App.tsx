@@ -1,8 +1,8 @@
 import React from "react";
 import Mainpage from "./Mainpage";
-import SignUp from "../pages/Signup";
+import SignUp from "./Signup";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Login from "../pages/Login";
+import Login from "./Login";
 import { DocumentNode, gql, useQuery } from '@apollo/client';
 import { useSelector } from "react-redux";
 import { AppState } from "../stateManagement/types";

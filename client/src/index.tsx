@@ -4,7 +4,7 @@ import {
 import React from 'react';
 import ReactDOM from 'react-dom';
 import injectStyles from './styles';
-import App from './components/App'
+import App from './pages/App'
 import { Provider } from 'react-redux';
 import { store } from './stateManagement/store';
 import { client } from './client';

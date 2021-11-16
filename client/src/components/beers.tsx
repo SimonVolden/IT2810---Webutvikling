@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../stateManagement/types';
 import { DocumentNode, gql, useQuery } from '@apollo/client';
-import { Loading } from '../components';
+import { Loading } from '.';
 import List from '@mui/material/List';
 import BeerContainer from './BeerContainer';
 import { IBeer } from '../interfaces/Beer';
