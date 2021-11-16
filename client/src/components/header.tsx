@@ -57,7 +57,7 @@ export default function Header(): JSX.Element {
               localStorage.setItem(String(i), "false");
             }
 
-          history.push("/prosjekt3");
+          history.push("/prosjekt4");
           window.location.reload()
         }}> 
           <Typography variant="button" sx={{ fontWeight: 'bold' }} >Log out</Typography> 

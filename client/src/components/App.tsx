@@ -62,15 +62,15 @@ export default function App(): JSX.Element {
     return (
         <Router>
             <Switch>
-                <Route exact path="/prosjekt3">{valid ?
+                <Route exact path="/prosjekt4">{valid ?
                     <Mainpage />
                     : (signup ? <SignUp /> : <Login />)
                 }
                 </Route>
-                <Route exact path="/prosjekt3/signup">
+                <Route exact path="/prosjekt4/signup">
                     <SignUp />
                 </Route>
-                <Route exact path="/prosjekt3/login">
+                <Route exact path="/prosjekt4/login">
                     <Login />
                 </Route>
             </Switch>

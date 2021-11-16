@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/prosjekt3",
+  "homepage": "/prosjekt4",
   "dependencies": {
     "@apollo/client": "^3.4.6",
     "@apollo/react-testing": "^4.0.0",

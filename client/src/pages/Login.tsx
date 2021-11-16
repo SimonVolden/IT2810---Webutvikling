@@ -62,7 +62,7 @@ export default function Login() {
             if (user.data.login.token) {
                 setError(false)
                 localStorage.setItem("access-token", user.data.login.token)
-                history.push("/prosjekt3")
+                history.push("/prosjekt4")
                 window.location.reload()
             }
         })

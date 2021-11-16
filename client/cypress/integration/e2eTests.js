@@ -8,8 +8,8 @@
     beforeEach('Log in to the Beer Webpage', () => {
         // log in to user 1234@1234.no with correct credentials.
         // clearing saved filters and searches.
-        cy.visit('http://localhost:3000/prosjekt3')
-        //cy.visit('http://it2810-44.idi.ntnu.no/prosjekt3')
+        cy.visit('http://localhost:3000/prosjekt4')
+        //cy.visit('http://it2810-44.idi.ntnu.no/prosjekt4')
         cy.get("[id=email]").should("exist").type("cypress@cypress.no")
         cy.get("[id=password]").should("exist").type("cypress")
         cy.get("[id=SignIn]").should("exist").click()

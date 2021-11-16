@@ -57,7 +57,7 @@ export default function SignUp() {
 
         signup({ variables: { email: data.get("email"), password: data.get("password") } }).then((user) => {
             if (user.data.signup) {
-                history.push("/prosjekt3/login")
+                history.push("/prosjekt4/login")
             } else {
                 setErrorMessage("Account already exists")
                 setError(true);
