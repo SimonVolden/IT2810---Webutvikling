@@ -100,7 +100,7 @@ I oppgave 4d) er oppgaven å utforme nettsiden slik at den opprettholder kravene
       - **Input function**: Alle tekstfelt er lablet med deres funksjon, samt at innloggingsfeltene bruker auto-complete for både email-adresse og passord.
    4. **Distinguishable**:
       - **Use of color**: Farge er ikke det eneste visuelle måten å frembringe informasjon på, da farge ikke blir brukt for det formålet. All informasjon er enten gitt gjennom tekst eller labels.
-      - **Contrast**: SKAL GJØRES NOE MED DETTE !!!!!!!! IKKE GLEM
+      - **Contrast**: Kontrast på tekst oppfyller kravene til AA, men ikke AAA, da kontrasten mellom vanlig tekst og bakgrunnen er mellom 4.6:1 og 5:1, men AAA krever en kontrast på 7:1. AA krever kun 4.5:1 på vanlig tekst og 3:1 på stor tekst.
       - **Resize Text**: Tekst skalerer brukbart opp til 500% (maksgrense) og nettsiden er fremdeles funskjonell, må gjøres noe med søkeboksen. Kriteriet er forsåvidt for opp til 200%.
       - **Images of text**: Vi har ingen bilder som inneholder tekst, utenom etiketten på øl-flaskene, og logoer er utelatt fra dette kriteriet.
       - **Low or no background audio**: Vi har ingen bakgrunnslyd.
