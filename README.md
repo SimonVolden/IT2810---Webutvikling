@@ -55,12 +55,12 @@ Det er også laget enhetstester med Jest og End-2-End tester med Cypress
 
 Gruppen valgte å ta i bruk Redux da bruken minnet om State funksjonaliteten man allerede finner i React. Dette krevde selvsagt litt boilerplate code som måtte skrives, men gruppen opplevde ikke dette som krevende.
 
-Redux er implementert i mappen [stateManagement](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-3/-/tree/master/client/src/stateManagement). Her er strukturen delt opp i:
+Redux er implementert i mappen [stateManagement](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-4/-/tree/master/client/src/stateManagement). Her er strukturen delt opp i:
 
-- [actions.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-3/-/blob/master/client/src/stateManagement/actions.tsx)
-- [reducers.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-3/-/blob/master/client/src/stateManagement/reducers.tsx)
-- [store.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-3/-/blob/master/client/src/stateManagement/store.tsx)
-- [types.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-3/-/blob/master/client/src/stateManagement/types.tsx)
+- [actions.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-4/-/blob/master/client/src/stateManagement/actions.tsx)
+- [reducers.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-4/-/blob/master/client/src/stateManagement/reducers.tsx)
+- [store.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-4/-/blob/master/client/src/stateManagement/store.tsx)
+- [types.tsx](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-44/prosjekt-4/-/blob/master/client/src/stateManagement/types.tsx)
 
 Dette for å gjøre det mer oversiktlig. vi har i hovedsak kun en type: Appstate, der alle nødvendige states ligger. Gruppen har vært fornøyd med valget av State Manager.
 
