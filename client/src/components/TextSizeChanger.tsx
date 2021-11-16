@@ -28,7 +28,7 @@ export default function TextSizeChanger():JSX.Element {
                 break
             default:
                 dispatch(setTextSize(14));
-                localStorage.setItem("textSize", "14")
+                localStorage.setItem("textSize", "16")
         }
                 
     }

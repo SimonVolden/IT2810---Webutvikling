@@ -116,8 +116,8 @@ function signupReducer(state: boolean = false, action: SignupActions) {
 function getSavedTextSize() {
     const textSize = localStorage.getItem("textSize")
     if (textSize === null){
-        localStorage.setItem("textSize", "14")
-        return 14
+        localStorage.setItem("textSize", "16")
+        return 16
     }
     const size = Number(textSize)
     return size
